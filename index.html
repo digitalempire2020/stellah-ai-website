@@ -75,6 +75,172 @@ body { overflow-x: hidden; }
       <p class="sm:text-xl lg:text-2xl max-w-3xl text-lg font-light text-stone-700 mt-6 mr-auto ml-auto">
         Here's how medical chains handle unlimited leads for 68% less than staff costs – while their teams finally focus on patient care
       </p>
+
+      <!-- Live Calendar Demo Section -->
+      <div class="mt-16 lg:mt-20">
+        <div class="relative rounded-2xl">
+          <!-- subtle glow -->
+          <div class="absolute inset-0 -m-px rounded-2xl" style="background: linear-gradient(120deg, rgba(99,102,241,.22), rgba(56,189,248,.22), rgba(16,185,129,.22)); filter: blur(12px); opacity: .6;"></div>
+
+          <div class="relative rounded-2xl bg-white ring-1 ring-black/5 shadow-xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 md:px-6 py-3 border-b border-neutral-200/70 bg-neutral-50">
+              <div class="flex items-center gap-3">
+                <div class="flex gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                </div>
+                <div class="hidden sm:flex items-center gap-2 text-sm text-neutral-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                  <span>Dashboard</span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-neutral-700">
+                <div class="hidden md:flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-neutral-500"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                  <input class="outline-none bg-transparent placeholder-neutral-400 text-sm w-40" placeholder="Search patients…">
+                </div>
+                <button class="hidden sm:inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 hover:bg-neutral-50 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  <span class="text-sm">Export</span>
+                </button>
+                <button class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-neutral-900 text-white hover:bg-neutral-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 px-4 md:px-6 py-4">
+              <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3">
+                <span class="inline-flex p-2 rounded-lg bg-emerald-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-emerald-600"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+                </span>
+                <div class="min-w-0">
+                  <p class="text-xs text-neutral-500">Booked today</p>
+                  <p id="bookedToday" class="text-xl font-semibold tracking-tight">0</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3">
+                <span class="inline-flex p-2 rounded-lg bg-indigo-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-indigo-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 21-3-3m1-4a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>
+                </span>
+                <div class="min-w-0 w-full">
+                  <p class="text-xs text-neutral-500">Show-up rate (rolling)</p>
+                  <div class="flex items-center gap-2">
+                    <p id="showRate" class="text-xl font-semibold tracking-tight">0%</p>
+                    <span class="text-xs text-emerald-600 bg-emerald-50 rounded-full px-2 py-0.5">+3.2%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3">
+                <span class="inline-flex p-2 rounded-lg bg-sky-50">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-sky-600"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+                </span>
+                <div class="min-w-0 w-full">
+                  <p class="text-xs text-neutral-500">Capacity today</p>
+                  <div class="flex items-center gap-3">
+                    <div class="relative w-full h-2 bg-neutral-100 rounded-full overflow-hidden">
+                      <div id="capacityBar" class="absolute inset-y-0 left-0 w-0 rounded-full bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500"></div>
+                    </div>
+                    <span id="capacityPct" class="text-sm font-medium">0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="px-2 sm:px-4 md:px-6 pb-6">
+              <div class="rounded-xl border border-neutral-200 overflow-hidden">
+                <div class="grid grid-cols-7 gap-px bg-neutral-200">
+                  <div class="col-span-7 grid grid-cols-7 gap-px">
+                    <div id="dayHeader0" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Mon</p>
+                      <p class="text-sm font-medium tracking-tight">12</p>
+                    </div>
+                    <div id="dayHeader1" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Tue</p>
+                      <p class="text-sm font-medium tracking-tight">13</p>
+                    </div>
+                    <div id="dayHeader2" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Wed</p>
+                      <p class="text-sm font-medium tracking-tight">14</p>
+                    </div>
+                    <div id="dayHeader3" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Thu</p>
+                      <p class="text-sm font-medium tracking-tight">15</p>
+                    </div>
+                    <div id="dayHeader4" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Fri</p>
+                      <p class="text-sm font-medium tracking-tight">16</p>
+                    </div>
+                    <div id="dayHeader5" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Sat</p>
+                      <p class="text-sm font-medium tracking-tight">17</p>
+                    </div>
+                    <div id="dayHeader6" class="bg-white py-3 text-center">
+                      <p class="text-xs text-neutral-500">Sun</p>
+                      <p class="text-sm font-medium tracking-tight">18</p>
+                    </div>
+                  </div>
+
+                  <div id="calendarGrid" class="relative col-span-7 bg-white">
+                    <!-- hour grid (horizontal lines) -->
+                    <div class="absolute inset-0">
+                      <div class="absolute inset-x-0 top-[8.33%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[16.66%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[25%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[33.33%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[41.66%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[50%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[58.33%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[66.66%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[75%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[83.33%] border-t border-neutral-100"></div>
+                      <div class="absolute inset-x-0 top-[91.66%] border-t border-neutral-100"></div>
+                    </div>
+
+                    <!-- vertical day dividers -->
+                    <div class="pointer-events-none absolute inset-y-0 left-0 right-0">
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 1);"></div>
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 2);"></div>
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 3);"></div>
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 4);"></div>
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 5);"></div>
+                      <div class="absolute top-0 bottom-0 border-l border-neutral-100" style="left: calc(100%/7 * 6);"></div>
+                    </div>
+
+                    <!-- today's column highlight -->
+                    <div id="todayColumnHighlight" class="pointer-events-none absolute top-0 bottom-0 bg-indigo-50/60"></div>
+
+                    <!-- time labels -->
+                    <div aria-hidden="true" class="pointer-events-none absolute -left-2 sm:-left-8 top-0 bottom-0 hidden md:flex md:flex-col justify-between text-xs text-neutral-500">
+                      <span>8:00</span>
+                      <span>10:00</span>
+                      <span>12:00</span>
+                      <span>2:00</span>
+                      <span>4:00</span>
+                      <span>6:00</span>
+                      <span>8:00</span>
+                    </div>
+
+                    <!-- events layer -->
+                    <div id="eventsLayer" class="relative h-[520px] md:h-[560px] lg:h-[600px]"></div>
+
+                    <!-- current time line (on today's column) -->
+                    <div id="currentTimeLine" class="pointer-events-none absolute h-px bg-red-500" style="opacity: .9;"></div>
+                    <div id="currentTimeDot" class="pointer-events-none absolute w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white shadow"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <p class="mt-4 text-center md:text-left text-sm text-stone-500">
+          Simulated FatFreeze bookings auto‑scheduled by Stellah AI. Actual data syncs from your EHR and call center in real time.
+        </p>
+      </div>
       <div class="flex flex-col sm:flex-row gap-3 mt-8 items-center justify-center">
         <a href="#" class="inline-flex items-center justify-center sm:text-base transition hover:bg-orange-700 text-sm font-semibold text-white bg-orange-600 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-sm">SEE IF YOU QUALIFY</a>
         <span class="text-sm text-stone-600">← We only onboard 3 high-volume clinics per month</span>
@@ -891,6 +1057,213 @@ document.getElementById('dashboard-modal').addEventListener('click', function(e)
   if (e.target === this) {
     hideDashboard();
   }
+});
+
+// Calendar simulation
+document.addEventListener('DOMContentLoaded', function() {
+  const capacity = 40; // target bookings for today
+  const days = 7;      // columns
+  const rows = 12;     // 8am - 8pm (12 blocks = 1h increments)
+  const eventsLayer = document.getElementById('eventsLayer');
+
+  if (!eventsLayer) return; // Exit if calendar elements don't exist
+
+  const bookedEl = document.getElementById('bookedToday');
+  const barEl = document.getElementById('capacityBar');
+  const pctEl = document.getElementById('capacityPct');
+  const showRateEl = document.getElementById('showRate');
+
+  const dayHeaders = Array.from({ length: 7 }, (_, i) => document.getElementById('dayHeader' + i));
+  const todayHighlight = document.getElementById('todayColumnHighlight');
+  const currentTimeLine = document.getElementById('currentTimeLine');
+  const currentTimeDot = document.getElementById('currentTimeDot');
+  const calendarGrid = document.getElementById('calendarGrid');
+
+  // Generate pseudo-random bookings for FatFreeze
+  const firstNames = ["James","Ava","Liam","Mia","Noah","Ella","Lucas","Grace","Ethan","Zoe","Henry","Nora","Amelia","Leo","Sofia","Logan","Maya","Owen","Lily","Wyatt","Hazel","Jack","Isla","Caleb","Ruby","Ryan","Ivy"];
+  const services = ["FatFreeze Treatment"];
+  const rand = (min,max) => Math.floor(Math.random()*(max-min+1))+min;
+
+  const events = Array.from({length: capacity}, (_,i) => {
+    const d = rand(0, days-1);
+    const start = rand(0, rows-2);
+    const dur = rand(1, Math.min(3, rows-start));
+    return {
+      id: i+1,
+      day: d,
+      start,
+      dur,
+      name: `${services[0]} — ${firstNames[rand(0,firstNames.length-1)]} ${String.fromCharCode(65+rand(0,25))}.`,
+    }
+  }).sort((a,b)=> (a.day - b.day) || (a.start - b.start));
+
+  let placed = 0;
+  let showRate = 0;
+
+  function layoutEvents() {
+    const rect = eventsLayer.getBoundingClientRect();
+    const colW = rect.width / days;
+    const rowH = rect.height / rows;
+
+    [...eventsLayer.children].forEach(node => {
+      if (!node._data) return; // skip non-event nodes
+      const e = node._data;
+      node.style.left = `${e.day * colW + 2}px`;
+      node.style.top = `${e.start * rowH + 2}px`;
+      node.style.width = `${colW - 4}px`;
+      node.style.height = `${e.dur * rowH - 4}px`;
+    });
+
+    positionTodayHighlight();
+    positionCurrentTime();
+  }
+
+  function addEvent(e, delay) {
+    setTimeout(() => {
+      const node = document.createElement('div');
+      node.className = "absolute rounded-lg shadow-sm ring-1 ring-black/5 overflow-hidden bg-gradient-to-br from-indigo-500/90 via-sky-500/90 to-emerald-500/90 text-white hover:shadow-md transition-shadow";
+      node.style.opacity = '0';
+      node.style.transform = 'scale(.98)';
+      node._data = e;
+
+      node.innerHTML = `
+        <div class="h-full w-full p-2.5 flex flex-col justify-between">
+          <div class="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M2 6h20l-2 12H4z"/><path d="M8 14 2 8"/><path d="m16 14 6-6"/></svg>
+            <p class="text-xs font-medium leading-tight tracking-tight line-clamp-1">${e.name}</p>
+          </div>
+          <div class="flex items-center justify-between text-[11px]">
+            <span class="inline-flex items-center gap-1 opacity-90">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              ${8 + e.start}:00
+            </span>
+            <span class="inline-flex items-center gap-1 opacity-90">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Room ${1 + (e.id % 6)}
+            </span>
+          </div>
+          <span class="absolute top-1 right-1 inline-flex items-center gap-1 rounded-full bg-white/90 text-neutral-800 px-1.5 py-0.5 text-[10px] ring-1 ring-black/5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 text-indigo-600"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            Stellah AI
+          </span>
+        </div>
+      `;
+
+      eventsLayer.appendChild(node);
+
+      layoutEvents();
+
+      // Animate in
+      requestAnimationFrame(() => {
+        node.style.transition = 'opacity .4s ease, transform .4s ease';
+        node.style.opacity = '1';
+        node.style.transform = 'scale(1)';
+      });
+
+      placed++;
+      bookedEl.textContent = placed;
+      const pct = Math.min(100, Math.round((placed / capacity) * 100));
+      barEl.style.width = pct + '%';
+      pctEl.textContent = pct + '%';
+
+      const targetShow = 84; // %
+      if (showRate < targetShow) {
+        showRate = Math.min(targetShow, showRate + (Math.random() * 2));
+        showRateEl.textContent = Math.round(showRate) + '%';
+      }
+    }, delay);
+  }
+
+  // Today mapping and visuals
+  function getTodayIndex() {
+    const d = new Date().getDay(); // 0 Sun - 6 Sat
+    return (d + 6) % 7; // 0 Mon - 6 Sun
+  }
+
+  function highlightDayHeader() {
+    const idx = getTodayIndex();
+    dayHeaders.forEach((el, i) => {
+      if (!el) return;
+      el.classList.remove('bg-indigo-50');
+      el.classList.remove('ring-1','ring-inset','ring-indigo-200');
+      const badge = el.querySelector('.today-badge');
+      if (badge) badge.remove();
+      if (i === idx) {
+        el.classList.add('bg-indigo-50','ring-1','ring-inset','ring-indigo-200');
+        const b = document.createElement('div');
+        b.className = "today-badge mx-auto mt-1 w-fit rounded-full bg-indigo-600/90 text-white px-2 py-0.5 text-[10px]";
+        b.textContent = "Today";
+        el.appendChild(b);
+      }
+    });
+  }
+
+  function positionTodayHighlight() {
+    const rect = calendarGrid.getBoundingClientRect();
+    const colW = rect.width / days;
+    const idx = getTodayIndex();
+    todayHighlight.style.left = `${idx * colW}px`;
+    todayHighlight.style.width = `${colW}px`;
+  }
+
+  function positionCurrentTime() {
+    // only visible during operating hours 8:00 - 20:00
+    const now = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const totalMinutes = (h * 60 + m);
+    const startMinutes = 8 * 60;
+    const endMinutes = 20 * 60;
+    const within = totalMinutes >= startMinutes && totalMinutes <= endMinutes;
+
+    const rect = eventsLayer.getBoundingClientRect();
+    const colW = rect.width / days;
+    const rowH = rect.height / rows;
+
+    if (!within) {
+      currentTimeLine.style.display = 'none';
+      currentTimeDot.style.display = 'none';
+      return;
+    }
+
+    currentTimeLine.style.display = 'block';
+    currentTimeDot.style.display = 'block';
+
+    const minutesIntoGrid = totalMinutes - startMinutes;
+    const y = (minutesIntoGrid / (endMinutes - startMinutes)) * rect.height;
+
+    const idx = getTodayIndex();
+    const left = idx * colW;
+
+    currentTimeLine.style.left = `${left}px`;
+    currentTimeLine.style.right = `calc(100% - ${left + colW}px)`;
+    currentTimeLine.style.top = `${y}px`;
+
+    currentTimeDot.style.left = `${left - 5}px`;
+    currentTimeDot.style.top = `${y - 4}px`;
+  }
+
+  const ro = new ResizeObserver(layoutEvents);
+  ro.observe(eventsLayer);
+
+  // Start simulation: shows "slots" filling automatically
+  let t = 400;
+  const step = 250;
+  events.forEach((e) => {
+    addEvent(e, t);
+    t += step + Math.round(Math.random() * 200);
+  });
+
+  // Initial calendar cosmetics
+  highlightDayHeader();
+  positionTodayHighlight();
+  positionCurrentTime();
+  // keep current time line in sync
+  setInterval(positionCurrentTime, 60 * 1000);
+  window.addEventListener('resize', () => {
+    positionTodayHighlight();
+    positionCurrentTime();
+  });
 });
 </script>
 
