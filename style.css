@@ -1,9 +1,10 @@
+html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
 
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html {
+    overflow-x: hidden;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: #333;
+    overflow-x: hidden;
 }
 
 /* Header styles */
@@ -88,6 +90,9 @@ main {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.18);
     margin-bottom: 2rem;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Hero section */
@@ -115,12 +120,22 @@ main {
     padding: 3px;
     border-radius: 20px;
     display: inline-block;
+    background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(234, 88, 12, 0.2));
+    padding: 1px;
+    border-radius: 16px;
 }
 
 .gradient-border .glass-card {
     margin: 0;
     background: rgba(255, 255, 255, 0.95);
     color: #333;
+}
+
+.gradient-border-inner {
+    background: white;
+    border-radius: 15px;
+    height: 100%;
+    width: 100%;
 }
 
 /* Dashboard controls */
@@ -334,11 +349,16 @@ main {
     transition: all 0.3s ease;
     opacity: 0;
     transform: scale(0.98);
+    animation: eventFadeIn 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .calendar-event:hover {
     transform: scale(1.02);
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .calendar-event.urgent {
@@ -347,6 +367,22 @@ main {
 
 .calendar-event.follow-up {
     background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+/* Animation for calendar events */
+.calendar-event-animate {
+    animation: eventFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes eventFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Credibility section */
@@ -374,6 +410,14 @@ main {
     color: #6b7280;
     line-height: 1.6;
     margin-bottom: 1rem;
+}
+
+.credibility-text {
+    transition: all 0.3s ease;
+}
+
+.credibility-text:hover {
+    text-shadow: 0 0 8px rgba(234, 88, 12, 0.6), 0 0 16px rgba(234, 88, 12, 0.4);
 }
 
 .credibility-features {
@@ -413,65 +457,55 @@ main {
 
 /* Animation classes */
 .fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .fade-in-delay-1 { animation-delay: 0.1s; }
 .fade-in-delay-2 { animation-delay: 0.2s; }
 .fade-in-delay-3 { animation-delay: 0.3s; }
 .fade-in-delay-4 { animation-delay: 0.4s; }
+.fade-in-delay-5 { animation-delay: 0.5s; }
+.fade-in-delay-6 { animation-delay: 0.6s; }
 
 .slide-in {
-    animation: slideIn 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInRight 0.8s ease-out forwards;
 }
 
-.slide-in-delay-1 { animation-delay: 0.1s; }
-.slide-in-delay-2 { animation-delay: 0.2s; }
-.slide-in-delay-3 { animation-delay: 0.3s; }
-.slide-in-delay-4 { animation-delay: 0.4s; }
+.slide-in-delay-1 { animation-delay: 0.2s; }
+.slide-in-delay-2 { animation-delay: 0.4s; }
 
 .blur-in {
-    animation: blurIn 0.8s ease-out forwards;
+    opacity: 0;
+    filter: blur(10px);
+    animation: blurIn 1s ease-out forwards;
 }
 
-.blur-in-delay-1 { animation-delay: 0.1s; }
-.blur-in-delay-2 { animation-delay: 0.2s; }
-.blur-in-delay-3 { animation-delay: 0.3s; }
-.blur-in-delay-4 { animation-delay: 0.4s; }
+.blur-in-delay-1 { animation-delay: 0.3s; }
+.blur-in-delay-2 { animation-delay: 0.6s; }
 
 /* Keyframes */
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@keyframes slideIn {
-    from { 
-        opacity: 0; 
-        transform: translateX(-30px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateX(0); 
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 @keyframes blurIn {
-    from { 
-        opacity: 0; 
-        filter: blur(5px); 
-        transform: scale(0.95); 
-    }
-    to { 
-        opacity: 1; 
-        filter: blur(0); 
-        transform: scale(1); 
+    to {
+        opacity: 1;
+        filter: blur(0);
     }
 }
 

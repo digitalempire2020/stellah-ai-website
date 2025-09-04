@@ -1,4 +1,3 @@
-
 // DOM Elements
 const calendarGrid = document.querySelector('.calendar-grid');
 const currentMonthElement = document.querySelector('.current-month');
@@ -49,10 +48,16 @@ const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    // Original initializations
     initializeAnimations();
     renderCalendar();
     setupEventListeners();
     updateStats();
+
+    // New initializations from edited snippet
+    initializeCalendarAnimations();
+    initializeInteractiveElements();
+    initializeMetricsUpdates();
 });
 
 // Initialize animations for page load
@@ -61,14 +66,14 @@ function initializeAnimations() {
     const fadeElements = document.querySelectorAll('.fade-in');
     const slideElements = document.querySelectorAll('.slide-in');
     const blurElements = document.querySelectorAll('.blur-in');
-    
+
     // Trigger animations after a short delay
     setTimeout(() => {
         fadeElements.forEach(el => el.style.animationPlayState = 'running');
         slideElements.forEach(el => el.style.animationPlayState = 'running');
         blurElements.forEach(el => el.style.animationPlayState = 'running');
     }, 100);
-    
+
     // Animate calendar events
     setTimeout(() => {
         animateCalendarEvents();
@@ -95,24 +100,24 @@ function setupEventListeners() {
             renderCalendar();
         });
     }
-    
+
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             currentDate.setMonth(currentDate.getMonth() + 1);
             renderCalendar();
         });
     }
-    
-    // Search functionality
+
+    // Search functionality - This will be overridden by initializeInteractiveElements
     if (searchInput) {
         searchInput.addEventListener('input', handleSearch);
     }
-    
-    // Export functionality
+
+    // Export functionality - This will be overridden by initializeInteractiveElements
     if (exportBtn) {
         exportBtn.addEventListener('click', handleExport);
     }
-    
+
     // View toggle
     viewToggleButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -127,15 +132,15 @@ function setupEventListeners() {
 // Render the calendar
 function renderCalendar() {
     if (!calendarGrid) return;
-    
+
     // Update current month display
     if (currentMonthElement) {
         currentMonthElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
     }
-    
+
     // Clear existing calendar
     calendarGrid.innerHTML = '';
-    
+
     // Add day headers
     dayNames.forEach(day => {
         const dayHeader = document.createElement('div');
@@ -143,22 +148,22 @@ function renderCalendar() {
         dayHeader.textContent = day;
         calendarGrid.appendChild(dayHeader);
     });
-    
+
     // Get first day of month and number of days
     const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
     const startDate = new Date(firstDay);
     startDate.setDate(startDate.getDate() - firstDay.getDay());
-    
+
     // Generate calendar days
     for (let i = 0; i < 42; i++) {
         const date = new Date(startDate);
         date.setDate(startDate.getDate() + i);
-        
+
         const dayElement = createDayElement(date, currentDate.getMonth());
         calendarGrid.appendChild(dayElement);
     }
-    
+
     // Re-animate events
     setTimeout(animateCalendarEvents, 100);
 }
@@ -167,17 +172,17 @@ function renderCalendar() {
 function createDayElement(date, currentMonth) {
     const dayElement = document.createElement('div');
     dayElement.className = 'calendar-day';
-    
+
     if (date.getMonth() !== currentMonth) {
         dayElement.classList.add('other-month');
     }
-    
+
     // Day number
     const dayNumber = document.createElement('div');
     dayNumber.className = 'day-number';
     dayNumber.textContent = date.getDate();
     dayElement.appendChild(dayNumber);
-    
+
     // Add appointments for this day
     const dateString = formatDate(date);
     if (appointments[dateString]) {
@@ -186,7 +191,7 @@ function createDayElement(date, currentMonth) {
             dayElement.appendChild(eventElement);
         });
     }
-    
+
     return dayElement;
 }
 
@@ -194,21 +199,21 @@ function createDayElement(date, currentMonth) {
 function createEventElement(appointment) {
     const eventElement = document.createElement('div');
     eventElement.className = 'calendar-event';
-    
+
     if (appointment.urgent) {
         eventElement.classList.add('urgent');
     } else if (appointment.type === 'Follow-up') {
         eventElement.classList.add('follow-up');
     }
-    
+
     eventElement.textContent = `${appointment.time} ${appointment.patient}`;
     eventElement.title = `${appointment.type} - ${appointment.patient} at ${appointment.time}`;
-    
+
     // Add click handler
     eventElement.addEventListener('click', () => {
         showAppointmentDetails(appointment);
     });
-    
+
     return eventElement;
 }
 
@@ -220,11 +225,11 @@ function formatDate(date) {
     return `${year}-${month}-${day}`;
 }
 
-// Handle search functionality
+// Handle search functionality (Original - will be replaced by new handleSearch)
 function handleSearch(event) {
     const searchTerm = event.target.value.toLowerCase();
     const events = document.querySelectorAll('.calendar-event');
-    
+
     events.forEach(event => {
         const text = event.textContent.toLowerCase();
         if (text.includes(searchTerm)) {
@@ -234,13 +239,13 @@ function handleSearch(event) {
             event.style.display = searchTerm ? 'none' : 'block';
         }
     });
-    
+
     // Highlight matching days
     const days = document.querySelectorAll('.calendar-day');
     days.forEach(day => {
         const hasVisibleEvents = Array.from(day.querySelectorAll('.calendar-event'))
             .some(event => event.style.display !== 'none');
-        
+
         if (searchTerm && hasVisibleEvents) {
             day.style.background = 'rgba(79, 70, 229, 0.2)';
         } else {
@@ -249,26 +254,26 @@ function handleSearch(event) {
     });
 }
 
-// Handle export functionality
+// Handle export functionality (Original - will be replaced by new handleExport)
 function handleExport() {
     const currentMonth = monthNames[currentDate.getMonth()];
     const currentYear = currentDate.getFullYear();
-    
+
     // Create CSV content
     let csvContent = `Medical Appointments - ${currentMonth} ${currentYear}\n`;
     csvContent += 'Date,Time,Patient,Type,Urgent\n';
-    
+
     Object.entries(appointments).forEach(([date, dayAppointments]) => {
         const appointmentDate = new Date(date);
-        if (appointmentDate.getMonth() === currentDate.getMonth() && 
+        if (appointmentDate.getMonth() === currentDate.getMonth() &&
             appointmentDate.getFullYear() === currentDate.getFullYear()) {
-            
+
             dayAppointments.forEach(appointment => {
                 csvContent += `${date},${appointment.time},${appointment.patient},${appointment.type},${appointment.urgent}\n`;
             });
         }
     });
-    
+
     // Download CSV
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
@@ -279,12 +284,12 @@ function handleExport() {
     a.click();
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
-    
+
     // Show success message
     showNotification('Appointments exported successfully!');
 }
 
-// Show appointment details
+// Show appointment details (Original)
 function showAppointmentDetails(appointment) {
     const modal = createModal(`
         <h3>${appointment.type}</h3>
@@ -293,11 +298,11 @@ function showAppointmentDetails(appointment) {
         <p><strong>Type:</strong> ${appointment.type}</p>
         <p><strong>Status:</strong> ${appointment.urgent ? 'Urgent' : 'Regular'}</p>
     `);
-    
+
     document.body.appendChild(modal);
 }
 
-// Create a modal
+// Create a modal (Original)
 function createModal(content) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
@@ -312,7 +317,7 @@ function createModal(content) {
         justify-content: center;
         z-index: 1000;
     `;
-    
+
     const modal = document.createElement('div');
     modal.style.cssText = `
         background: white;
@@ -322,21 +327,21 @@ function createModal(content) {
         width: 90%;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     `;
-    
+
     modal.innerHTML = content + '<button onclick="this.parentElement.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>';
-    
+
     overlay.appendChild(modal);
-    
+
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
             overlay.remove();
         }
     });
-    
+
     return overlay;
 }
 
-// Show notification
+// Show notification (Original)
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -351,35 +356,35 @@ function showNotification(message) {
         z-index: 1000;
         animation: slideInRight 0.3s ease-out;
     `;
-    
+
     notification.textContent = message;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-// Update statistics
+// Update statistics (Original)
 function updateStats() {
     // Calculate stats from appointments
     const today = new Date();
     const todayString = formatDate(today);
     const todayAppointments = appointments[todayString] || [];
-    
+
     // Update booked today
     const bookedTodayElement = document.querySelector('.stats-grid .stat-card:nth-child(1) h3');
     if (bookedTodayElement) {
         bookedTodayElement.textContent = todayAppointments.length;
     }
-    
+
     // Calculate show-up rate (mock data)
     const showUpRateElement = document.querySelector('.stats-grid .stat-card:nth-child(2) h3');
     if (showUpRateElement) {
         showUpRateElement.textContent = '89%';
     }
-    
+
     // Calculate capacity
     const capacityElement = document.querySelector('.stats-grid .stat-card:nth-child(3) h3');
     if (capacityElement) {
@@ -390,17 +395,252 @@ function updateStats() {
     }
 }
 
-// Add CSS for notifications
+// Add CSS for notifications (Original)
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
         from { transform: translateX(100%); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
     }
-    
+
     @keyframes slideOutRight {
         from { transform: translateX(0); opacity: 1; }
         to { transform: translateX(100%); opacity: 0; }
     }
 `;
 document.head.appendChild(style);
+
+
+// --- New functions from edited snippet ---
+
+function initializeCalendarAnimations() {
+    // Get all calendar events
+    const calendarEvents = document.querySelectorAll('#eventsLayer > div');
+
+    // Animate calendar events with staggered delays
+    calendarEvents.forEach((event, index) => {
+        setTimeout(() => {
+            event.style.opacity = '1';
+            event.style.transform = 'scale(1)';
+            event.classList.add('calendar-event-animate');
+        }, index * 100 + 500); // Start after 500ms with 100ms intervals
+    });
+
+    // Add hover effects to calendar events
+    calendarEvents.forEach(event => {
+        event.classList.add('calendar-event'); // Ensure class is present for styling/selection
+
+        event.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+            this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+        });
+
+        event.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '';
+        });
+
+        // Add click interaction
+        event.addEventListener('click', function() {
+            showEventDetails(this); // Use 'this' to refer to the clicked event element
+        });
+    });
+}
+
+function initializeInteractiveElements() {
+    // Search functionality
+    const searchInput = document.querySelector('input[placeholder="Search patients…"]');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            handleSearch(e.target.value); // Pass the value directly
+        });
+    }
+
+    // Export button
+    const exportButton = document.querySelector('button:has(svg + span:contains("Export"))');
+    if (exportButton) {
+        exportButton.addEventListener('click', function() {
+            handleExport();
+        });
+    }
+
+    // Dashboard link interaction
+    const dashboardLinks = document.querySelectorAll('.dashboard-link');
+    dashboardLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleDashboardNavigation();
+        });
+    });
+}
+
+function initializeMetricsUpdates() {
+    // Animate metrics on load
+    animateMetrics();
+
+    // Update metrics periodically (demo purposes)
+    setInterval(() => {
+        updateMetrics();
+    }, 10000); // Update every 10 seconds
+}
+
+function animateMetrics() {
+    const bookedToday = document.getElementById('bookedToday');
+    const showRate = document.getElementById('showRate');
+    const capacityBar = document.getElementById('capacityBar');
+    // const capacityPct = document.getElementById('capacityPct'); // This element is not used in the provided snippet
+
+    // Animate booked today counter
+    if (bookedToday) {
+        animateCounter(bookedToday, 0, 40, 1000);
+    }
+
+    // Animate show rate
+    if (showRate) {
+        animateCounter(showRate, 0, 38, 1000, '%');
+    }
+
+    // Animate capacity bar
+    if (capacityBar) {
+        setTimeout(() => {
+            capacityBar.style.transition = 'width 1.5s ease-out';
+            capacityBar.style.width = '100%';
+        }, 500);
+    }
+}
+
+function animateCounter(element, start, end, duration, suffix = '') {
+    const startTime = Date.now();
+    const range = end - start;
+
+    function updateCounter() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(start + (range * progress));
+
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        }
+    }
+
+    updateCounter();
+}
+
+function updateMetrics() {
+    const bookedToday = document.getElementById('bookedToday');
+    const showRate = document.getElementById('showRate');
+
+    if (bookedToday) {
+        // Simulate realistic updates
+        const currentValue = parseInt(bookedToday.textContent);
+        const newValue = currentValue + Math.floor(Math.random() * 3);
+        animateCounter(bookedToday, currentValue, newValue, 500);
+    }
+
+    if (showRate) {
+        // Simulate small fluctuations in show rate
+        const currentValue = parseInt(showRate.textContent.replace('%', ''));
+        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        const newValue = Math.max(35, Math.min(42, currentValue + change));
+        animateCounter(showRate, currentValue, newValue, 500, '%');
+    }
+}
+
+function showEventDetails(eventElement) {
+    // Extract event information
+    // Assuming the structure is consistent with the original calendar events
+    const patientNameElement = eventElement.querySelector('.font-semibold'); // Assuming patient name has this class
+    const timeAndRoomElements = eventElement.querySelectorAll('.opacity-90 span:not(.sm\\:hidden)');
+
+    const patientName = patientNameElement ? patientNameElement.textContent.trim() : 'Unknown Patient';
+    let time = 'Unknown time';
+    let room = 'Unknown room';
+
+    if (timeAndRoomElements.length >= 2) {
+        time = timeAndRoomElements[0].textContent.trim();
+        room = timeAndRoomElements[1].textContent.trim();
+    } else if (timeAndRoomElements.length === 1) {
+        time = timeAndRoomElements[0].textContent.trim();
+    }
+
+
+    // Create a simple modal or alert (for demo purposes)
+    alert(`Event Details:\n\nPatient: ${patientName}\nTime: ${time}\nLocation: ${room}\n\nScheduled via Stellah AI`);
+}
+
+function handleSearch(query) {
+    // Simple search simulation
+    console.log('Searching for:', query);
+
+    if (query.length > 2) {
+        // Simulate search results by highlighting matching events
+        const events = document.querySelectorAll('#eventsLayer > div');
+        events.forEach(event => {
+            const patientNameElement = event.querySelector('.font-semibold'); // Assuming patient name has this class
+            const patientName = patientNameElement ? patientNameElement.textContent.toLowerCase() : '';
+            
+            if (patientName.includes(query.toLowerCase())) {
+                event.style.outline = '2px solid #3b82f6';
+                event.style.outlineOffset = '2px';
+            } else {
+                event.style.outline = 'none';
+            }
+        });
+    } else {
+        // Clear highlights
+        const events = document.querySelectorAll('#eventsLayer > div');
+        events.forEach(event => {
+            event.style.outline = 'none';
+        });
+    }
+}
+
+function handleExport() {
+    // Simulate export functionality
+    alert('Exporting calendar data...\n\nThis would normally download a CSV or PDF file with all appointment data.');
+    console.log('Export functionality triggered');
+}
+
+function handleDashboardNavigation() {
+    // Simulate navigation to dashboard
+    console.log('Navigating to dashboard...');
+    alert('This would normally navigate to the full dashboard view.');
+}
+
+// Add smooth scrolling for any anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add notification bell animation
+const notificationBell = document.querySelector('button:has(svg path[d*="6 8a6 6 0"])');
+if (notificationBell) {
+    notificationBell.addEventListener('click', function() {
+        this.style.animation = 'none'; // Reset animation
+        setTimeout(() => {
+            this.style.animation = 'bellRing 0.5s ease-in-out'; // Apply animation
+        }, 10); // Small delay to ensure reset is applied
+    });
+}
+
+// Add CSS for bell animation
+const bellAnimationStyle = document.createElement('style');
+bellAnimationStyle.textContent = `
+    @keyframes bellRing {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(10deg); }
+        75% { transform: rotate(-10deg); }
+    }
+`;
+document.head.appendChild(bellAnimationStyle);
