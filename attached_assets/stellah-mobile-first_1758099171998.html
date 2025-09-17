@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5" />
+  <title>Stellah AI - Your Team Is Drowning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Respect user preferences for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Performance optimizations */
+    .will-animate {
+      will-change: transform, opacity;
+    }
+    
+    /* Scroll-triggered animations */
+    .scroll-trigger {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .scroll-trigger.visible {
+      opacity: 1;
+      transform: translateY(0);
+      will-change: auto;
+    }
+    
+    /* Graph line animations */
+    .line-draw {
+      stroke-dasharray: var(--path-length, 1000);
+      stroke-dashoffset: var(--path-length, 1000);
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .line-draw.animate {
+      stroke-dashoffset: 0;
+    }
+    
+    /* Water rising effect */
+    @keyframes waterRise {
+      from { 
+        height: 0%; 
+        opacity: 0;
+      }
+      to { 
+        height: var(--water-height, 70%);
+        opacity: 1;
+      }
+    }
+    
+    .water-effect {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, 
+        rgba(59, 130, 246, 0.25) 0%, 
+        rgba(59, 130, 246, 0.1) 50%,
+        transparent 100%);
+      animation: waterRise 3s ease-out forwards;
+      animation-play-state: paused;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .water-effect.animate {
+      animation-play-state: running;
+    }
+    
+    /* WhatsApp message cascade */
+    @keyframes msgSlide {
+      from {
+        transform: translateX(-100%) scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+    
+    .msg-animate {
+      animation: msgSlide 0.4s ease-out forwards;
+      animation-play-state: paused;
+      opacity: 0;
+    }
+    
+    .msg-animate.visible {
+      animation-play-state: running;
+    }
+    
+    /* Pulse effect for critical numbers */
+    @keyframes criticalPulse {
+      0%, 100% { 
+        transform: scale(1);
+        filter: brightness(1);
+      }
+      50% { 
+        transform: scale(1.08);
+        filter: brightness(1.1);
+      }
+    }
+    
+    .pulse-critical {
+      animation: criticalPulse 1.5s ease-in-out infinite;
+    }
+    
+    @media (prefers-reduced-motion: no-preference) {
+      .pulse-critical {
+        animation-duration: 1.5s;
+      }
+    }
+    
+    /* Crack spreading effect */
+    .crack-line {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      transition: stroke-dashoffset 1.5s ease-out;
+    }
+    
+    .crack-line.animate {
+      stroke-dashoffset: 0;
+    }
+    
+    /* Desktop hover effects */
+    @media (min-width: 768px) and (hover: hover) {
+      .hover-card {
+        position: relative;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      
+      .hover-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        z-index: 10;
+      }
+      
+      .hover-reveal {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+      
+      .hover-card:hover .hover-reveal {
+        max-height: 500px;
+        opacity: 1;
+        margin-top: 1rem;
+      }
+      
+      .hover-card:hover .water-desktop {
+        height: var(--water-level);
+      }
+      
+      .water-desktop {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+        background: linear-gradient(to top, rgba(59, 130, 246, 0.2), transparent);
+        transition: height 1s ease;
+        pointer-events: none;
+        border-radius: 0 0 0.75rem 0.75rem;
+      }
+      
+      .capacity-bar {
+        width: 0;
+        transition: width 0.8s ease;
+      }
+      
+      .hover-card:hover .capacity-bar {
+        width: var(--capacity);
+      }
+    }
+    
+    /* Mobile overflow warning - repositioned to avoid conflicts */
+    .overflow-badge {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+      z-index: 40;
+      transform: translateX(150%);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .overflow-badge.show {
+      transform: translateX(0);
+    }
+    
+    /* Accessibility improvements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .water-effect {
+        background: linear-gradient(to top, 
+          rgba(0, 0, 255, 0.3) 0%, 
+          transparent 100%);
+      }
+    }
+  </style>
+</head>
+<body class="antialiased font-sans bg-white text-slate-900">
+  
+  <!-- Header -->
+  <header class="bg-white border-b sticky top-0 z-50 backdrop-blur-lg bg-white/95" role="banner">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2 md:gap-3">
+        <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold" aria-label="Stellah AI logo">
+          S
+        </div>
+        <span class="font-semibold text-lg md:text-xl">Stellah AI</span>
+      </div>
+      <button class="bg-red-500 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+        Book Demo
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE VERSION ============ -->
+  <main class="md:hidden" role="main">
+    
+    <!-- Mobile Hero -->
+    <section class="px-4 pt-8 pb-6 text-center scroll-trigger will-animate">
+      <h1 class="font-serif text-4xl leading-tight mb-2">
+        Your Team is<br>
+        <span class="text-red-600 font-bold">Drowning</span>
+      </h1>
+      <p class="text-gray-600">Watch it happen in real-time ↓</p>
+    </section>
+
+    <!-- Mobile Interactive Graph -->
+    <section class="relative bg-gradient-to-b from-white to-blue-50 mx-4 rounded-2xl shadow-xl overflow-hidden mb-8" aria-label="Lead overflow visualization">
+      <div class="water-effect" style="--water-height: 75%;" role="img" aria-label="Water level rising to show drowning"></div>
+      
+      <div class="relative z-10 p-4">
+        <div class="mb-4">
+          <h2 class="font-bold text-lg">Lead Volume vs Staff Capacity</h2>
+          <p class="text-sm text-gray-600">The exponential growth that destroys teams</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="flex gap-4 text-xs mb-3">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 h-1 bg-blue-500 rounded"></div>
+            <span>Staff Capacity</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 h-1 bg-red-500 rounded"></div>
+            <span>Total Workload</span>
+          </div>
+        </div>
+        
+        <svg viewBox="0 0 400 240" class="w-full h-52" role="img" aria-label="Graph showing lead volume exceeding staff capacity">
+          <defs>
+            <linearGradient id="redFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ef4444" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#fecaca" stop-opacity="0.2" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Grid line -->
+          <line x1="40" x2="360" y1="180" y2="180" stroke="#e5e7eb" stroke-width="2" />
+          
+          <!-- Staff capacity (barely moves) -->
+          <path class="line-draw" id="blueLine" 
+                d="M40 180 Q120 178 200 176 T360 174" 
+                stroke="#3b82f6" stroke-width="4" fill="none"
+                style="--path-length: 321" />
+          
+          <!-- Total workload (shoots up) -->
+          <path class="line-draw" id="redLine" 
+                d="M40 180 Q120 140 200 80 T360 20" 
+                stroke="#ef4444" stroke-width="5" fill="none"
+                style="--path-length: 485" />
+          
+          <!-- Gap fill -->
+          <path id="gapFill"
+                d="M40 180 Q120 140 200 80 T360 20 L360 174 Q280 176 200 176 T40 180 Z" 
+                fill="url(#redFill)" opacity="0" />
+          
+          <!-- Data points -->
+          <g id="dataPoints" opacity="0">
+            <circle cx="40" cy="180" r="5" fill="#3b82f6" />
+            <circle cx="120" cy="160" r="5" fill="#f97316" />
+            <circle cx="200" cy="80" r="6" fill="#ef4444" />
+            <circle cx="360" cy="20" r="7" fill="#dc2626" class="pulse-critical" />
+          </g>
+          
+          <!-- Simplified month labels only -->
+          <g font-weight="600" fill="#1e293b">
+            <text x="40" y="205" text-anchor="middle" font-size="13">Month 1</text>
+            <text x="120" y="205" text-anchor="middle" font-size="13">Month 3</text>
+            <text x="200" y="205" text-anchor="middle" font-size="13">Month 6</text>
+            <text x="360" y="205" text-anchor="middle" font-size="13">Month 9</text>
+          </g>
+          
+          <!-- Crisis annotation -->
+          <text x="200" y="50" text-anchor="middle" font-size="18" font-weight="700" fill="#ef4444" opacity="0" id="overflow-text">
+            SYSTEM FAILING
+          </text>
+        </svg>
+        
+        <!-- Progressive data cards - scrollable -->
+        <div class="flex overflow-x-auto gap-2 mt-4 pb-2 -mx-2 px-2">
+          <div class="min-w-fit bg-white/90 backdrop-blur rounded-lg px-3 py-2 text-center border border-gray-200">
+            <p class="text-xs text-gray-600">Month 1</p>
+            <p class="text-lg font-bold" data-counter="m1-card" data-end="1500">1,500</p>
+            <p class="text-xs text-gray-500">leads</p>
+          </div>
+          <div class="min-w-fit bg-orange-50 rounded-lg px-3 py-2 text-center border border-orange-200">
+            <p class="text-xs text-gray-600">Month 3</p>
+            <p class="text-lg font-bold text-orange-600" data-counter="m3-card" data-end="2750">2,750</p>
+            <p class="text-xs text-orange-500">total</p>
+          </div>
+          <div class="min-w-fit bg-red-50 rounded-lg px-3 py-2 text-center border border-red-200">
+            <p class="text-xs text-gray-600">Month 6</p>
+            <p class="text-lg font-bold text-red-600" data-counter="m6-card" data-end="3500">3,500</p>
+            <p class="text-xs text-red-500">total</p>
+          </div>
+          <div class="min-w-fit bg-gradient-to-br from-red-50 to-orange-50 rounded-lg px-3 py-2 text-center border-2 border-red-300">
+            <p class="text-xs text-gray-600">Month 9</p>
+            <p class="text-lg font-bold text-red-700 pulse-critical" data-counter="m9-card" data-end="4750">4,750</p>
+            <p class="text-xs text-red-600 font-semibold">drowning</p>
+          </div>
+        </div>
+        
+        <!-- Live stats -->
+        <div class="mt-4 grid grid-cols-3 gap-2" id="stats-row">
+          <div class="bg-white/80 backdrop-blur rounded-xl p-3 text-center scroll-trigger will-animate">
+            <p class="text-xs text-gray-600">Team Size</p>
+            <p class="text-xl font-bold text-blue-600" data-counter="team" data-end="3">3</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-xl p-3 text-center scroll-trigger will-animate" style="animation-delay: 0.1s">
+            <p class="text-xs text-gray-600">Overflow</p>
+            <p class="text-xl font-bold text-red-600" data-counter="overflow" data-end="2875">0</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-xl p-3 text-center scroll-trigger will-animate" style="animation-delay: 0.2s">
+            <p class="text-xs text-gray-600">Cost/mo</p>
+            <p class="text-xl font-bold text-red-600" data-counter="cost" data-end="28000" data-prefix="$" data-format="currency">$0</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile Timeline Story -->
+    <section class="px-4 space-y-6 mb-8">
+      
+      <!-- Month 1 -->
+      <article class="bg-white rounded-2xl shadow-sm overflow-hidden scroll-trigger will-animate" data-month="1">
+        <div class="p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 font-semibold text-sm">1</span>
+            <h3 class="font-semibold text-gray-800">Month 1</h3>
+            <span class="ml-auto text-xs text-gray-500">Starting</span>
+          </div>
+          
+          <p class="text-5xl font-bold text-gray-900 mb-1">1,500</p>
+          <p class="text-sm text-gray-600 mb-4">leads/month</p>
+          
+          <p class="text-sm text-gray-700 mb-3">Your 3-person team handles it. Barely.</p>
+          
+          <div class="mb-2">
+            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-orange-300 transition-all duration-1000 capacity-bar" style="--capacity: 80%"></div>
+            </div>
+            <p class="text-xs text-gray-600 mt-1">Capacity: 80% used</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Month 3 -->
+      <article class="bg-orange-50/30 rounded-2xl shadow-sm overflow-hidden scroll-trigger will-animate" data-month="3">
+        <div class="p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 font-semibold text-sm">2</span>
+            <h3 class="font-semibold text-gray-800">Month 3</h3>
+            <span class="ml-auto text-xs text-gray-500">Cracking</span>
+          </div>
+          
+          <p class="text-5xl font-bold text-gray-900 mb-1">2,000</p>
+          <p class="text-sm text-orange-600 mb-1">+ 750 follow-ups</p>
+          <p class="text-2xl font-bold text-red-600">= 2,750 total</p>
+          
+          <p class="text-sm text-gray-700 mt-4 mb-3">Same team. System cracking.</p>
+          
+          <div class="mb-2">
+            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-orange-400 capacity-bar" style="--capacity: 100%"></div>
+            </div>
+            <div class="h-2 bg-gray-100 rounded-full overflow-hidden mt-1">
+              <div class="h-full bg-red-500 capacity-bar" style="--capacity: 47%"></div>
+            </div>
+            <p class="text-xs text-red-600 font-semibold mt-1">147% OVERLOAD!</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Month 6 - WhatsApp Chaos -->
+      <article class="bg-red-50/20 rounded-2xl shadow-sm overflow-hidden scroll-trigger will-animate" data-month="6">
+        <div class="p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600 font-semibold text-sm">3</span>
+            <h3 class="font-semibold text-gray-800">Month 6</h3>
+            <span class="ml-auto bg-red-600 text-white px-2 py-0.5 rounded text-xs font-semibold">FAILED</span>
+          </div>
+          
+          <p class="text-5xl font-bold text-gray-900 mb-1">2,500</p>
+          <p class="text-sm text-orange-600 mb-1">+ 1,000 follow-ups</p>
+          <p class="text-2xl font-bold text-red-600">= 3,500 total</p>
+          
+          <div class="mt-4">
+            <p class="text-xs font-semibold text-gray-700 mb-2">WhatsApp exploding:</p>
+            <div class="space-y-1.5">
+              <div class="msg-animate bg-white rounded-lg px-3 py-2 text-sm text-gray-700" data-delay="0">
+                💬 "How much for coolsculpting?"
+              </div>
+              <div class="msg-animate bg-white rounded-lg px-3 py-2 text-sm text-gray-700" data-delay="200">
+                💬 "Hello??? Anyone there?"
+              </div>
+              <div class="msg-animate bg-white rounded-lg px-3 py-2 text-sm text-gray-700" data-delay="400">
+                💬 "Following up from last week"
+              </div>
+              <div class="msg-animate bg-red-50 rounded-lg px-3 py-2 text-sm font-semibold text-red-600" data-delay="600">
+                💬 "I messaged you 2 days ago"
+              </div>
+            </div>
+            
+            <div class="mt-3 text-center">
+              <span class="inline-block bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                3,500 UNREAD
+              </span>
+            </div>
+          </div>
+          
+          <p class="text-sm text-gray-700 mt-4">You hire #4. Problem solved? <span class="font-bold text-red-600">NOPE.</span></p>
+        </div>
+      </article>
+
+      <!-- Month 9 - Total Collapse -->
+      <article class="bg-red-50/30 rounded-2xl shadow-sm overflow-hidden scroll-trigger will-animate" data-month="9">
+        <div class="p-4">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600 font-semibold text-sm">4</span>
+            <h3 class="font-semibold text-gray-800">Month 9</h3>
+            <span class="ml-auto bg-red-700 text-white px-2 py-0.5 rounded text-xs font-semibold">DROWNING</span>
+          </div>
+          
+          <p class="text-5xl font-bold text-gray-900 mb-1">3,500</p>
+          <p class="text-sm text-orange-600 mb-1">+ 1,250 follow-ups</p>
+          <p class="text-3xl font-bold text-red-600">= 4,750 TOTAL</p>
+          
+          <div class="mt-4">
+            <p class="text-sm font-semibold text-gray-800 mb-3">The Catastrophic Math:</p>
+            <div class="space-y-2 text-sm text-gray-700">
+              <div class="flex justify-between">
+                <span>4,750 leads ÷ 625</span>
+                <span class="font-semibold">= 8 people</span>
+              </div>
+              <div class="flex justify-between">
+                <span>8 people × $3,500</span>
+                <span class="font-semibold">=</span>
+              </div>
+            </div>
+            
+            <div class="bg-red-600 rounded-lg p-3 text-center mt-3">
+              <p class="text-3xl font-bold text-white">$28,000</p>
+              <p class="text-xs text-white/90">PER MONTH</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-900 text-white rounded-lg p-3 text-center mt-4">
+            <p class="text-xs opacity-90">Even with 8 people:</p>
+            <p class="font-bold">STILL DROWNING</p>
+          </div>
+        </div>
+      </article>
+      
+    </section>
+
+    <!-- Mobile CTA -->
+    <section class="px-4 pb-8">
+      <div class="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-6 text-white text-center">
+        <h2 class="text-xl font-bold mb-2">Stop the Drowning</h2>
+        <p class="text-sm opacity-90 mb-4">See how deep you're sinking</p>
+        <button class="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white py-4 rounded-xl font-bold text-lg hover:from-red-600 hover:to-orange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-900">
+          Calculate Your Crisis →
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ DESKTOP VERSION ============ -->
+  <main class="hidden md:block max-w-6xl mx-auto px-6 py-12" role="main">
+    
+    <!-- Desktop Headline -->
+    <section class="text-center mb-12">
+      <h1 class="font-serif text-6xl mb-4">Your Team is Drowning</h1>
+      <p class="text-xl text-gray-600">Hover to discover the 9-month disaster</p>
+    </section>
+
+    <!-- Desktop Graph with Interactive Elements -->
+    <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-xl font-semibold text-slate-800">Lead Volume vs Staff Capacity</h2>
+          <p class="text-gray-600">The exponential growth that destroys teams</p>
+        </div>
+        <div class="flex gap-4 text-sm">
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-1 bg-blue-500 rounded"></div>
+            <span>Staff Capacity</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="w-4 h-1 bg-red-500 rounded"></div>
+            <span>Total Workload</span>
+          </div>
+        </div>
+      </div>
+      
+      <svg viewBox="0 0 900 260" class="w-full h-64">
+        <defs>
+          <linearGradient id="desktopGap" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ef4444" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#fecaca" stop-opacity="0.05" />
+          </linearGradient>
+        </defs>
+        
+        <!-- Grid -->
+        <g stroke="#e5e7eb" stroke-width="1">
+          <line x1="60" x2="840" y1="60" y2="60" />
+          <line x1="60" x2="840" y1="120" y2="120" />
+          <line x1="60" x2="840" y1="180" y2="180" />
+        </g>
+        
+        <!-- Staff capacity line -->
+        <path d="M60 180 Q200 175 400 170 T840 165" 
+              stroke="#3b82f6" stroke-width="3" fill="none" />
+        
+        <!-- Total workload line -->
+        <path d="M60 180 Q200 150 400 100 T840 30" 
+              stroke="#ef4444" stroke-width="4" fill="none" />
+        
+        <!-- Gap fill -->
+        <path d="M60 180 Q200 150 400 100 T840 30 L840 165 Q620 170 400 170 T60 180 Z" 
+              fill="url(#desktopGap)" opacity="0.7" />
+        
+        <!-- Month markers with data -->
+        <g text-anchor="middle" font-size="12" fill="#64748b">
+          <g transform="translate(60, 0)">
+            <text y="220" font-weight="600">Month 1</text>
+            <text y="235">1,500 leads</text>
+          </g>
+          <g transform="translate(200, 0)">
+            <text y="220" font-weight="600">Month 3</text>
+            <text y="235" fill="#f97316" font-weight="600">2,750 total</text>
+          </g>
+          <g transform="translate(400, 0)">
+            <text y="220" font-weight="600">Month 6</text>
+            <text y="235" fill="#ef4444" font-weight="600">3,500 total</text>
+          </g>
+          <g transform="translate(840, 0)">
+            <text y="220" font-weight="600">Month 9</text>
+            <text y="235" fill="#dc2626" font-weight="700">4,750 total</text>
+            <text y="250" fill="#dc2626" font-size="11">($28K/mo)</text>
+          </g>
+        </g>
+        
+        <!-- Annotations -->
+        <text x="450" y="100" fill="#ef4444" font-size="14" font-weight="600" text-anchor="middle">
+          2,875 lead overflow by Month 9
+        </text>
+      </svg>
+    </section>
+
+    <!-- Desktop Timeline Cards with Hover -->
+    <div class="grid grid-cols-4 gap-6 mb-12">
+      
+      <!-- Month 1 Desktop -->
+      <div class="hover-card bg-white rounded-xl shadow-md p-6" style="--water-level: 20%;">
+        <div class="water-desktop"></div>
+        <div class="relative z-10">
+          <h3 class="text-sm font-bold text-gray-600 mb-2">Month 1</h3>
+          <p class="text-4xl font-bold">1,500</p>
+          <p class="text-xs text-gray-500 mt-1">new leads</p>
+          
+          <div class="hover-reveal">
+            <p class="text-sm text-gray-600 mb-3">Your 3-person team handles it. Barely.</p>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-yellow-400 to-orange-400 capacity-bar" style="--capacity: 80%"></div>
+            </div>
+            <p class="text-xs text-gray-600 mt-2">80% capacity used</p>
+            <div class="mt-3 p-2 bg-yellow-50 rounded text-xs">
+              ⚠️ First signs of stress
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 3 Desktop -->
+      <div class="hover-card bg-white rounded-xl shadow-md border-2 border-orange-200 p-6" style="--water-level: 35%;">
+        <div class="water-desktop"></div>
+        <div class="relative z-10">
+          <h3 class="text-sm font-bold text-gray-600 mb-2">Month 3</h3>
+          <p class="text-4xl font-bold">2,000</p>
+          <p class="text-xs text-gray-500 mt-1">new leads</p>
+          
+          <div class="hover-reveal">
+            <p class="text-sm text-orange-600 font-bold">+ 750 follow-ups</p>
+            <p class="text-lg text-red-600 font-bold">= 2,750 total</p>
+            <p class="text-sm text-gray-600 mt-2">Same team. Starting to crack.</p>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-orange-400 to-red-500 capacity-bar" style="--capacity: 100%"></div>
+            </div>
+            <div class="h-1 mt-1 bg-red-500 rounded-full capacity-bar" style="--capacity: 47%"></div>
+            <p class="text-xs text-red-600 font-bold mt-2">147% over capacity!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 6 Desktop -->
+      <div class="hover-card bg-white rounded-xl shadow-md border-2 border-red-200 p-6 relative" style="--water-level: 55%;">
+        <div class="water-desktop"></div>
+        <div class="relative z-10">
+          <h3 class="text-sm font-bold text-gray-600 mb-2">Month 6</h3>
+          <p class="text-4xl font-bold">2,500</p>
+          <p class="text-xs text-gray-500 mt-1">new leads</p>
+          
+          <div class="hover-reveal">
+            <p class="text-sm text-orange-600 font-bold">+ 1,000 follow-ups</p>
+            <p class="text-lg text-red-600 font-bold">= 3,500 total</p>
+            <p class="text-sm text-gray-600 mt-2">You hire #4. Problem solved?</p>
+            
+            <div class="mt-3 p-2 bg-red-50 rounded">
+              <p class="text-xs font-bold text-red-600 text-center">NOPE</p>
+            </div>
+            
+            <div class="mt-3 space-y-1">
+              <div class="text-xs bg-gray-100 rounded px-2 py-1">💬 "How much?"</div>
+              <div class="text-xs bg-yellow-50 rounded px-2 py-1">💬 "3rd time asking"</div>
+              <div class="text-xs bg-red-50 text-red-700 rounded px-2 py-1 font-bold">💬 "2 days ago"</div>
+            </div>
+            
+            <div class="mt-3 text-center">
+              <span class="inline-block bg-green-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+                3.5K unread
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month 9 Desktop -->
+      <div class="hover-card bg-white rounded-xl shadow-md border-2 border-red-300 p-6" style="--water-level: 75%;">
+        <div class="water-desktop"></div>
+        <div class="relative z-10">
+          <h3 class="text-sm font-bold text-gray-600 mb-2">Month 9</h3>
+          <p class="text-4xl font-bold text-red-600">3,500</p>
+          <p class="text-xs text-gray-500 mt-1">new leads</p>
+          
+          <div class="hover-reveal">
+            <p class="text-sm text-orange-600 font-bold">+ 1,250 follow-ups</p>
+            <p class="text-xl text-red-600 font-bold">= 4,750 total</p>
+            
+            <div class="mt-3 p-3 bg-red-100 rounded">
+              <p class="text-xs text-gray-600">Required staff:</p>
+              <p class="text-sm font-bold">8 people</p>
+              <p class="text-xs text-gray-600 mt-2">Monthly payroll:</p>
+              <p class="text-2xl font-bold text-red-600">$28,000</p>
+            </div>
+            
+            <div class="mt-3 p-2 bg-slate-900 text-white rounded text-center">
+              <p class="text-xs font-bold">COMPLETE SYSTEM FAILURE</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Desktop CTA -->
+    <section class="text-center">
+      <p class="text-gray-600 mb-4">Discovered the full disaster?</p>
+      <button class="bg-gradient-to-r from-red-500 to-orange-500 text-white px-8 py-3 rounded-lg font-bold hover:from-red-600 hover:to-orange-600 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+        Calculate YOUR Drowning Point →
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Floating overflow indicator (mobile only) -->
+  <div class="overflow-badge md:hidden" id="overflow-badge" role="alert" aria-live="polite">
+    <span data-counter="overflow-live" data-end="2875">0</span> leads drowning
+  </div>
+
+  <!-- Accessibility announcements -->
+  <div class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+    <span id="aria-announcer"></span>
+  </div>
+
+  <script>
+    // Configuration
+    const config = {
+      animationDuration: 1500,
+      observerThreshold: 0.1,
+      observerMargin: '0px 0px -50px 0px',
+      debounceDelay: 100,
+      prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    };
+    
+    // Utility: Debounce function for performance
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+    
+    // Utility: Format numbers
+    function formatNumber(value, format) {
+      if (format === 'currency') {
+        return '$' + value.toLocaleString();
+      }
+      if (value >= 1000) {
+        return (value / 1000).toFixed(1) + 'K';
+      }
+      return value.toString();
+    }
+    
+    // Utility: Animate counter
+    function animateCounter(element, start, end, duration) {
+      if (config.prefersReducedMotion) {
+        element.textContent = formatNumber(end, element.dataset.format);
+        return;
+      }
+      
+      const startTime = performance.now();
+      const prefix = element.dataset.prefix || '';
+      const format = element.dataset.format;
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function
+        const eased = progress < 0.5 
+          ? 2 * progress * progress 
+          : -1 + (4 - 2 * progress) * progress;
+        
+        const current = Math.round(start + (end - start) * eased);
+        element.textContent = prefix + formatNumber(current, format);
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          // Announce completion for screen readers
+          const announcer = document.getElementById('aria-announcer');
+          if (announcer && element.dataset.counter === 'overflow') {
+            announcer.textContent = `System overflow reached ${end} leads`;
+          }
+        }
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    // Initialize scroll animations
+    function initScrollAnimations() {
+      const observerOptions = {
+        threshold: config.observerThreshold,
+        rootMargin: config.observerMargin
+      };
+      
+      const scrollObserver = new IntersectionObserver(
+        debounce((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const target = entry.target;
+              target.classList.add('visible');
+              
+              // Handle specific animation types
+              if (target.classList.contains('water-effect')) {
+                target.classList.add('animate');
+              }
+              
+              // Animate capacity bars
+              const capacityBars = target.querySelectorAll('.capacity-bar');
+              capacityBars.forEach(bar => {
+                setTimeout(() => {
+                  if (!config.prefersReducedMotion) {
+                    bar.style.width = bar.style.getPropertyValue('--capacity');
+                  }
+                }, 200);
+              });
+              
+              // Handle WhatsApp messages
+              if (target.dataset.month === '6') {
+                const messages = target.querySelectorAll('.msg-animate');
+                messages.forEach((msg, index) => {
+                  const delay = parseInt(msg.dataset.delay || index * 200);
+                  setTimeout(() => {
+                    msg.classList.add('visible');
+                  }, delay);
+                });
+              }
+              
+              // Stop observing after animation
+              scrollObserver.unobserve(target);
+            }
+          });
+        }, config.debounceDelay),
+        observerOptions
+      );
+      
+      // Observe elements
+      document.querySelectorAll('.scroll-trigger').forEach(el => {
+        scrollObserver.observe(el);
+      });
+      
+      document.querySelectorAll('[data-month]').forEach(el => {
+        scrollObserver.observe(el);
+      });
+    }
+    
+    // Initialize graph animations
+    function initGraphAnimations() {
+      const graphSection = document.querySelector('.water-effect');
+      if (!graphSection) return;
+      
+      const graphObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!config.prefersReducedMotion) {
+              // Animate lines
+              document.querySelectorAll('.line-draw').forEach((line, i) => {
+                setTimeout(() => {
+                  line.classList.add('animate');
+                }, i * 300);
+              });
+              
+              // Fade in gap fill
+              setTimeout(() => {
+                const gap = document.getElementById('gapFill');
+                if (gap) {
+                  gap.style.opacity = '1';
+                  gap.style.transition = 'opacity 1s ease';
+                }
+              }, 900);
+              
+              // Show data points
+              setTimeout(() => {
+                const points = document.getElementById('dataPoints');
+                if (points) {
+                  points.style.opacity = '1';
+                  points.style.transition = 'opacity 0.5s ease';
+                }
+              }, 1200);
+              
+              // Animate counters
+              document.querySelectorAll('[data-counter]').forEach(counter => {
+                // Only animate counters that are visible within the graph section or cards
+                if (counter.closest('.water-effect')?.parentElement || counter.closest('.overflow-x-auto')) {
+                  const end = parseInt(counter.dataset.end || 0);
+                  const delay = parseInt(counter.dataset.delay || 0);
+                  
+                  setTimeout(() => {
+                    animateCounter(counter, 0, end, config.animationDuration);
+                  }, 1000 + delay);
+                }
+              });
+              
+              // Show overflow text
+              setTimeout(() => {
+                const overflowText = document.getElementById('overflow-text');
+                if (overflowText && !config.prefersReducedMotion) {
+                  overflowText.style.opacity = '1';
+                  overflowText.style.transition = 'opacity 0.5s ease';
+                }
+              }, 2000);
+              
+              // Show overflow badge
+              setTimeout(() => {
+                const badge = document.getElementById('overflow-badge');
+                if (badge) {
+                  badge.classList.add('show');
+                  const counter = badge.querySelector('[data-counter]');
+                  if (counter) {
+                    const end = parseInt(counter.dataset.end || 0);
+                    animateCounter(counter, 0, end, 2000);
+                  }
+                }
+              }, 2500);
+            } else {
+              // Reduced motion: show everything immediately
+              document.querySelectorAll('.line-draw').forEach(line => {
+                line.style.strokeDashoffset = '0';
+              });
+              document.getElementById('gapFill').style.opacity = '1';
+              document.getElementById('dataPoints').style.opacity = '1';
+              document.getElementById('overflow-text').style.opacity = '1';
+              
+              // Set final values for counters
+              document.querySelectorAll('[data-counter]').forEach(counter => {
+                const end = parseInt(counter.dataset.end || 0);
+                counter.textContent = formatNumber(end, counter.dataset.format);
+              });
+            }
+            
+            graphObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      
+      graphObserver.observe(graphSection);
+    }
+    
+    // Initialize crack animations
+    function initCrackAnimations() {
+      document.querySelectorAll('.crack-line').forEach(crack => {
+        const card = crack.closest('[data-month="3"]');
+        if (!card) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                crack.classList.add('animate');
+              }, 500);
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.5 });
+        
+        observer.observe(card);
+      });
+    }
+    
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollAnimations();
+      initGraphAnimations();
+      initCrackAnimations();
+      
+      // Clean up will-animate class after animations complete
+      setTimeout(() => {
+        document.querySelectorAll('.will-animate').forEach(el => {
+          el.style.willChange = 'auto';
+        });
+      }, 5000);
+    });
+    
+    // Handle visibility change to pause animations when tab is inactive
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        // Pause animations
+        document.querySelectorAll('.pulse-critical').forEach(el => {
+          el.style.animationPlayState = 'paused';
+        });
+      } else {
+        // Resume animations
+        document.querySelectorAll('.pulse-critical').forEach(el => {
+          el.style.animationPlayState = 'running';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
