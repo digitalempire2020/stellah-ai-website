@@ -20068,40 +20068,130 @@ body { overflow-x: hidden; }
   </div>
 
   <!-- Timeline Story -->
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
-    <div class="grid gap-4 sm:gap-6 lg:gap-8 sm:grid-cols-3">
+  <section class="px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      
       <!-- Month 1 -->
-      <div class="progressive-card card scroll-trigger" onclick="toggleCard(this)">
+      <article class="card scroll-trigger progressive-card">
         <div class="initial-view">
-          <div class="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">Month 1</div>
-          <div class="text-lg font-semibold text-neutral-900">1,500 leads</div>
-          <p class="text-sm text-neutral-700 mt-2">Your 3-person team handles it. Barely.</p>
+          <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center text-white font-semibold text-3xl mb-4">
+            1
+          </div>
+          <h3 class="font-semibold text-xl text-neutral-900 mb-2">Month 1</h3>
+          <span class="badge badge-success">MANAGEABLE</span>
+          <p class="text-5xl text-neutral-900 mt-4">1,500</p>
+          <p class="text-sm text-neutral-600">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
         </div>
-        <div class="tap-hint">Tap to explore</div>
-      </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center text-white font-semibold">
+              1
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">Month 1</h3>
+              <span class="badge badge-success text-xs">MANAGEABLE</span>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <p class="text-3xl lg:text-4xl text-neutral-900">1,500</p>
+            <p class="text-sm text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">Your 3-person team handles it. Barely.</p>
+          
+          <div class="progress-bar">
+            <div class="progress-fill bg-gradient-to-r from-green-400 to-blue-400" style="width: 80%"></div>
+          </div>
+          <p class="text-xs text-neutral-600 mt-2">80% capacity</p>
+        </div>
+      </article>
 
       <!-- Month 3 -->
-      <div class="progressive-card card scroll-trigger" onclick="toggleCard(this)">
+      <article class="card scroll-trigger progressive-card border-2 border-orange-200">
         <div class="initial-view">
-          <div class="text-2xl sm:text-3xl font-bold text-orange-500 mb-2">Month 3</div>
-          <div class="text-lg font-semibold text-neutral-900">2,000 leads</div>
-          <p class="text-sm text-neutral-700 mt-2">Same team. Starting to crack. Complaints rising.</p>
+          <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white font-semibold text-3xl mb-4">
+            3
+          </div>
+          <h3 class="font-semibold text-xl text-neutral-900 mb-2">Month 3</h3>
+          <span class="badge badge-warning">OVERLOAD</span>
+          <p class="text-5xl text-soft-orange mt-4">2,000</p>
+          <p class="text-sm text-soft-orange">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
         </div>
-        <div class="tap-hint">Tap to explore</div>
-      </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white font-semibold">
+              3
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">Month 3</h3>
+              <span class="badge badge-warning text-xs">OVERLOAD</span>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <p class="text-2xl lg:text-3xl text-neutral-900">2,000</p>
+            <p class="text-sm text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">Same team. Starting to crack. Complaints rising.</p>
+          
+          <div class="space-y-1 mb-2">
+            <div class="progress-bar">
+              <div class="progress-fill bg-orange-400" style="width: 100%"></div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill bg-orange-500" style="width: 47%"></div>
+            </div>
+          </div>
+          <p class="text-xs text-orange-600 font-semibold">147% CAPACITY!</p>
+        </div>
+      </article>
 
       <!-- Month 6 -->
-      <div class="progressive-card card scroll-trigger" onclick="toggleCard(this)">
+      <article class="card scroll-trigger progressive-card border-2 border-orange-300 min-h-[320px]">
         <div class="initial-view">
-          <div class="text-2xl sm:text-3xl font-bold text-red-500 mb-2">Month 6</div>
-          <div class="text-lg font-semibold text-neutral-900">2,500 leads</div>
-          <p class="text-sm text-neutral-700 mt-2">You hire person #4. Problem solved? Nope.</p>
+          <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-semibold text-3xl mb-4">
+            6
+          </div>
+          <h3 class="font-semibold text-xl text-neutral-900 mb-2">Month 6</h3>
+          <span class="badge badge-warning">CRITICAL</span>
+          <p class="text-5xl text-soft-orange mt-4">2,500</p>
+          <p class="text-sm text-soft-orange">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
         </div>
-        <div class="tap-hint">Tap to explore</div>
-      </div>
-
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white text-sm font-semibold">
+              6
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-neutral-900">Month 6</h3>
+              <span class="badge badge-warning text-xs">CRITICAL</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <p class="text-xl lg:text-2xl text-neutral-900">2,500</p>
+            <p class="text-xs text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">You hire person #4. Problem solved? Nope.</p>
+          
+          <div class="progress-bar">
+            <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500" style="width: 90%"></div>
+          </div>
+          <p class="text-xs text-orange-600 mt-2">90% capacity (still struggling)</p>
+        </div>
+      </article>
+      
     </div>
-  </div>
+  </section>
 
   <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6 mt-8">
     <div class="rounded-2xl border p-6 border-stone-200 bg-white">
