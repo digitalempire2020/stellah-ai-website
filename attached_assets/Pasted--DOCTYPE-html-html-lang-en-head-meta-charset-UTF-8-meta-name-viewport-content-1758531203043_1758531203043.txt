@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 3 - Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        h2 {
+            font-size: 48px;
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 40px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 60px;
+        }
+        
+        /* Comparison Cards */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .comparison-card {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-card.instead-of {
+            background: #f9f9f9;
+        }
+        
+        .comparison-card.instead-of::before {
+            content: "Instead of:";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #fff;
+            padding: 0 8px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .comparison-card.theyre::before {
+            content: "They're:";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #fff;
+            padding: 0 8px;
+            color: #FF6B35;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-list li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .task-list li::before {
+            content: "•";
+            color: #999;
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .theyre .task-list li::before {
+            color: #FF6B35;
+        }
+        
+        /* ROI Visual */
+        .roi-container {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .math-simple {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .roi-box {
+            text-align: center;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .roi-box.positive {
+            background: #fff9f5;
+            border: 2px solid #FF6B35;
+        }
+        
+        .roi-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .roi-value {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .roi-value.negative {
+            color: #dc2626;
+        }
+        
+        .roi-value.positive {
+            color: #FF6B35;
+        }
+        
+        .roi-detail {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow {
+            width: 40px;
+            height: 2px;
+            background: #ddd;
+            position: relative;
+        }
+        
+        .arrow::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #ddd;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        
+        /* Time Allocation Bars */
+        .time-comparison {
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        
+        .time-bar-container {
+            margin-bottom: 30px;
+        }
+        
+        .time-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .time-bar {
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .time-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            transition: width 1.5s ease-out;
+        }
+        
+        .time-fill.admin {
+            background: #9ca3af;
+        }
+        
+        .time-fill.revenue {
+            background: #FF6B35;
+        }
+        
+        /* Bottom Line */
+        .bottom-line {
+            text-align: center;
+            padding: 30px;
+            background: #fff9f5;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .bottom-line-text {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .bottom-line-highlight {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 32px;
+            }
+            
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .roi-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .arrow-container {
+                transform: rotate(90deg);
+                margin: 20px 0;
+            }
+            
+            .roi-value {
+                font-size: 28px;
+            }
+        }
+        
+        /* Subtle animations on scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .time-fill.animate {
+            width: var(--width) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 3: Transformation -->
+    <section class="section-container">
+        <!-- Headline -->
+        <h2 class="animate-on-scroll">
+            What If Your Reception Team Never Had to<br>Chase Leads Again?
+        </h2>
+        <p class="subtitle animate-on-scroll">Imagine this:</p>
+
+        <!-- Comparison Cards -->
+        <div class="comparison-container animate-on-scroll">
+            <!-- Instead of Card -->
+            <div class="comparison-card instead-of">
+                <ul class="task-list">
+                    <li>Answering "How much is Fatfreeze?" for the 500th time</li>
+                    <li>Texting appointment reminders all day</li>
+                    <li>Playing phone tag with no-shows</li>
+                    <li>Manually booking routine appointments</li>
+                </ul>
+            </div>
+
+            <!-- They're Card -->
+            <div class="comparison-card theyre">
+                <ul class="task-list">
+                    <li>Converting walk-ins to $3,000 treatment packages</li>
+                    <li>Building relationships with high-value clients</li>
+                    <li>Upselling during consultations</li>
+                    <li>Actually providing patient care</li>
+                    <li>Closing premium memberships</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Time Allocation Visual -->
+        <div class="time-comparison animate-on-scroll">
+            <div class="time-bar-container">
+                <div class="time-label">
+                    <span>Current Time Allocation</span>
+                    <span style="color: #999;">Your 3 Receptionists</span>
+                </div>
+                <div class="time-bar">
+                    <div class="time-fill admin" style="width: 0;" data-width="80%">
+                        80% Admin Tasks
+                    </div>
+                </div>
+            </div>
+            
+            <div class="time-bar-container">
+                <div class="time-label">
+                    <span style="color: #FF6B35;">With Stellah AI</span>
+                    <span style="color: #999;">Same People</span>
+                </div>
+                <div class="time-bar">
+                    <div class="time-fill revenue" style="width: 0;" data-width="85%">
+                        85% Revenue Generation
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI Container -->
+        <div class="roi-container animate-on-scroll">
+            <p class="math-simple">The math is simple:</p>
+            <div class="roi-grid">
+                <div class="roi-box">
+                    <div class="roi-label">Receptionist doing routine tasks</div>
+                    <div class="roi-value negative">$3,500/month</div>
+                    <div class="roi-detail">in costs</div>
+                </div>
+                
+                <div class="arrow-container">
+                    <div class="arrow"></div>
+                </div>
+                
+                <div class="roi-box positive">
+                    <div class="roi-label">Same person closing packages</div>
+                    <div class="roi-value positive">$35,000/month</div>
+                    <div class="roi-detail">in revenue</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Line -->
+        <div class="bottom-line animate-on-scroll">
+            <div class="bottom-line-text">
+                Your team isn't the problem.
+            </div>
+            <div class="bottom-line-text">
+                <span class="bottom-line-highlight">Their workload is.</span>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate time bars if they exist
+                    const timeFills = entry.target.querySelectorAll('.time-fill');
+                    timeFills.forEach(fill => {
+                        setTimeout(() => {
+                            fill.style.width = fill.dataset.width;
+                        }, 300);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
