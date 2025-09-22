@@ -19960,6 +19960,318 @@ body { overflow-x: hidden; }
   </div>
 </section>
 
+<!-- THE PROBLEM -->
+<section class="lg:mt-28 mt-20">
+  <div class="max-w-5xl mr-auto ml-auto pr-6 pl-6 text-center">
+    <div class="fade-in-up">
+      <span class="badge badge-warning mb-4">⚠️ CLINIC ALERT</span>
+      <h2 class="sm:text-4xl text-3xl font-normal text-stone-900 tracking-tight font-serif-news">Your 3 Appointment Setters Are <span class="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-500">Drowning</span></h2>
+      <p class="mt-4 text-lg text-stone-700">Let me paint you a picture that's probably familiar:</p>
+    </div>
+  </div>
+
+  <!-- Interactive Graph -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+    <div class="rounded-2xl border p-6 border-stone-200 bg-white relative overflow-hidden scroll-trigger" id="main-graph">
+      <div class="water-effect" id="water-effect"></div>
+      
+      <div class="relative z-10">
+        <div class="mb-4 sm:mb-6">
+          <h3 class="sm:text-xl lg:text-2xl text-lg font-bold text-neutral-900">Lead Volume vs Team Capacity</h3>
+          <p class="sm:text-base text-sm text-neutral-600">How beauty clinics lose revenue</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm mb-4 sm:mb-6 justify-center">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 sm:w-4 h-1 bg-blue-500 rounded"></div>
+            <span>Team Capacity</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 sm:w-4 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded"></div>
+            <span>Total Workload</span>
+          </div>
+        </div>
+        
+        <!-- SVG Graph -->
+        <svg viewBox="0 0 900 300" class="w-full h-48 sm:h-56 md:h-64 lg:h-72">
+          <defs>
+            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#F97316;stop-opacity:1"></stop>
+              <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1"></stop>
+            </linearGradient>
+            <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.15"></stop>
+              <stop offset="50%" style="stop-color:#FB923C;stop-opacity:0.08"></stop>
+              <stop offset="100%" style="stop-color:transparent;stop-opacity:0"></stop>
+            </linearGradient>
+          </defs>
+          
+          <!-- Grid lines -->
+          <g stroke="#E5E7EB" stroke-width="1">
+            <line x1="60" x2="840" y1="240" y2="240"></line>
+            <line x1="60" x2="840" y1="180" y2="180" stroke-dasharray="3,3"></line>
+            <line x1="60" x2="840" y1="120" y2="120" stroke-dasharray="3,3"></line>
+            <line x1="60" x2="840" y1="60" y2="60" stroke-dasharray="3,3"></line>
+          </g>
+          
+          <!-- Team capacity line -->
+          <path id="capacity-line" class="line-draw" d="M60 240 Q200 235 400 230 T840 225" stroke="#3B82F6" stroke-width="4" fill="none"></path>
+          
+          <!-- Total workload line -->
+          <path id="workload-line" class="line-draw" d="M60 240 Q200 180 400 100 T840 30" stroke="url(#orangeGradient)" stroke-width="5" fill="none"></path>
+          
+          <!-- Gap fill -->
+          <path id="gap-fill" class="graph-element" d="M60 240 Q200 180 400 100 T840 30 L840 225 Q620 230 400 230 T60 240 Z" fill="url(#fillGradient)"></path>
+          
+          <!-- Data points -->
+          <g id="data-points" class="graph-element">
+            <circle cx="60" cy="240" r="6" fill="#3B82F6"></circle>
+            <circle cx="200" cy="200" r="6" fill="#F97316"></circle>
+            <circle cx="400" cy="100" r="7" fill="#EF4444"></circle>
+            <circle cx="840" cy="30" r="8" fill="#DC2626" class="pulse-animation"></circle>
+          </g>
+          
+          <!-- Labels -->
+          <g text-anchor="middle" font-size="14" fill="#525252" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" class="block">
+            <text x="60" y="265" font-weight="600">Month 1</text>
+            <text x="60" y="280">1,500 leads</text>
+            
+            <text x="200" y="265" font-weight="600">Month 3</text>
+            <text x="200" y="280" fill="#F97316" font-weight="600">2,750 total</text>
+            
+            <text x="400" y="265" font-weight="600">Month 6</text>
+            <text x="400" y="280" fill="#EF4444" font-weight="600">3,500 total</text>
+            
+            <text x="840" y="265" font-weight="600">Month 9</text>
+            <text x="840" y="280" fill="#DC2626" font-weight="700">4,750 total</text>
+          </g>
+          
+          <!-- Crisis annotation -->
+          <text id="crisis-text" class="graph-element" x="450" y="140" fill="#EF4444" font-size="16" font-weight="700" text-anchor="middle" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+            2,875 LEAD OVERFLOW
+          </text>
+        </svg>
+        
+        <!-- Real-time counters -->
+        <div class="grid grid-cols-3 gap-2 sm:gap-3 mt-4 sm:mt-6">
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-neutral-200">
+            <p class="text-xs text-neutral-600">Team Size</p>
+            <p id="counter-team" class="text-lg sm:text-xl text-blue-600">3</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-orange-200">
+            <p class="text-xs text-neutral-600">Overflow</p>
+            <p id="counter-overflow" class="text-lg sm:text-xl text-orange-600">0</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-orange-300">
+            <p class="text-xs text-neutral-600">Cost/mo</p>
+            <p id="counter-cost" class="text-lg sm:text-xl text-orange-600">$0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline Story -->
+  <section class="px-3 sm:px-6 lg:px-8 mt-8 sm:mt-12 lg:mt-16 mb-8 sm:mb-12 max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+      
+      <!-- Month 1 -->
+      <article class="card scroll-trigger progressive-card" onclick="toggleCard(this)">
+        <div class="initial-view">
+          <div class="w-16 h-16 md:w-20 lg:w-24 md:h-20 lg:h-24 mx-auto rounded-full bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-3 md:mb-4">
+            1
+          </div>
+          <h3 class="font-semibold text-lg md:text-xl text-neutral-900 mb-2">Month 1</h3>
+          <span class="badge badge-success">MANAGEABLE</span>
+          <p class="text-3xl md:text-4xl lg:text-5xl text-neutral-900 mt-3 md:mt-4">1,500</p>
+          <p class="text-sm text-neutral-600">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
+        </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center text-white font-semibold">
+              1
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">Month 1</h3>
+              <span class="badge badge-success text-xs">MANAGEABLE</span>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <p class="text-3xl lg:text-4xl text-neutral-900">1,500</p>
+            <p class="text-sm text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">Your 3-person team handles it. Barely.</p>
+          
+          <div class="progress-bar">
+            <div class="progress-fill bg-gradient-to-r from-green-400 to-blue-400" style="width: 80%"></div>
+          </div>
+          <p class="text-xs text-neutral-600 mt-2">80% capacity</p>
+        </div>
+      </article>
+
+      <!-- Month 3 -->
+      <article class="card scroll-trigger progressive-card" onclick="toggleCard(this)">
+        <div class="initial-view">
+          <div class="w-16 h-16 md:w-20 lg:w-24 md:h-20 lg:h-24 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-3 md:mb-4">
+            3
+          </div>
+          <h3 class="font-semibold text-lg md:text-xl text-neutral-900 mb-2">Month 3</h3>
+          <span class="badge badge-warning">OVERLOAD</span>
+          <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">2,000</p>
+          <p class="text-sm text-soft-orange">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
+        </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center text-white font-semibold">
+              3
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">Month 3</h3>
+              <span class="badge badge-warning text-xs">OVERLOAD</span>
+            </div>
+          </div>
+          
+          <div class="mb-4">
+            <p class="text-2xl lg:text-3xl text-neutral-900">2,000</p>
+            <p class="text-sm text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">Same team. Starting to crack. Complaints rising.</p>
+          
+          <div class="space-y-1 mb-2">
+            <div class="progress-bar">
+              <div class="progress-fill bg-orange-400" style="width: 100%"></div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill bg-orange-500" style="width: 47%"></div>
+            </div>
+          </div>
+          <p class="text-xs text-orange-600 font-semibold">147% CAPACITY!</p>
+        </div>
+      </article>
+
+      <!-- Month 6 -->
+      <article class="card scroll-trigger progressive-card" onclick="toggleCard(this)">
+        <div class="initial-view">
+          <div class="w-16 h-16 md:w-20 lg:w-24 md:h-20 lg:h-24 mx-auto rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-3 md:mb-4">
+            6
+          </div>
+          <h3 class="font-semibold text-lg md:text-xl text-neutral-900 mb-2">Month 6</h3>
+          <span class="badge badge-warning">CRITICAL</span>
+          <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">2,500</p>
+          <p class="text-sm text-soft-orange">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
+        </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white text-sm font-semibold">
+              6
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-neutral-900">Month 6</h3>
+              <span class="badge badge-warning text-xs">CRITICAL</span>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <p class="text-xl lg:text-2xl text-neutral-900">2,500</p>
+            <p class="text-xs text-neutral-600">new leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">You hire person #4. Problem solved? Nope.</p>
+          
+          <div class="progress-bar">
+            <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500" style="width: 90%"></div>
+          </div>
+          <p class="text-xs text-orange-600 mt-2">90% capacity (still struggling)</p>
+        </div>
+      </article>
+
+      <!-- Month 9 -->
+      <article class="card scroll-trigger progressive-card" onclick="toggleCard(this)">
+        <div class="initial-view">
+          <div class="w-16 h-16 md:w-20 lg:w-24 md:h-20 lg:h-24 mx-auto rounded-full bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-3 md:mb-4 pulse-animation">
+            9
+          </div>
+          <h3 class="font-semibold text-lg md:text-xl text-neutral-900 mb-2">Month 9</h3>
+          <span class="badge badge-danger">🔥 DROWNING</span>
+          <p class="text-3xl md:text-4xl lg:text-5xl text-soft-red mt-3 md:mt-4">3,500</p>
+          <p class="text-sm text-soft-red">leads</p>
+          <span class="tap-hint lg:hidden">Tap for details</span>
+        </div>
+        
+        <div class="detailed-view">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-orange-600 to-red-600 flex items-center justify-center text-white text-sm font-semibold pulse-animation">
+              9
+            </div>
+            <div>
+              <h3 class="font-semibold text-sm text-neutral-900">Month 9</h3>
+              <span class="badge badge-danger text-xs">🔥 DROWNING</span>
+            </div>
+          </div>
+          
+          <div class="mb-2">
+            <p class="text-2xl lg:text-3xl text-soft-red">3,500</p>
+            <p class="text-xs text-neutral-700">leads</p>
+          </div>
+          
+          <p class="text-sm text-neutral-700 mb-3">Now you need 5-6 people. Your payroll just hit $21,000/month.</p>
+          
+          <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-2 mb-2 shadow">
+            <p class="text-xs text-orange-50 mb-1">Monthly Cost:</p>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-white">5-6 people</span>
+              <span class="text-lg lg:text-xl text-white">$21K</span>
+            </div>
+          </div>
+          
+          <p class="text-xs text-orange-600 font-semibold text-center">STILL DROWNING</p>
+        </div>
+      </article>
+      
+    </div>
+  </section>
+
+  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6 mt-8">
+    <p class="font-semibold text-red-600 mt-8">But here's the killer:</p>
+    <p class="text-stone-700 mt-2">Even with 6 appointment setters, you're still:</p>
+    <div class="mt-4 rounded-2xl border p-6 border-stone-200 bg-white">
+      <ul class="space-y-3">
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" class="lucide lucide-clock h-4 w-4 mt-1 text-red-600"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="10"></circle></svg>
+          <p class="text-stone-800">Missing after-hours inquiries (43% of leads contact you after 6 PM)</p>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="database" class="lucide lucide-database h-4 w-4 mt-1 text-red-600"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
+          <p class="text-stone-800">Ignoring your database of 3,000+ old leads (worth $450,000+ in untapped revenue)</p>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="repeat" class="lucide lucide-repeat h-4 w-4 mt-1 text-red-600"><path d="m17 2 4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path><path d="m7 22-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path></svg>
+          <p class="text-stone-800">Forcing skilled staff to answer "How much is Botox?" 500 times a month</p>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="timer" class="lucide lucide-timer h-4 w-4 mt-1 text-red-600"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg>
+          <p class="text-stone-800">Watching response times stretch from minutes to hours</p>
+        </li>
+      </ul>
+    </div>
+    <div class="mt-6 rounded-2xl border p-5 border-red-200 bg-red-50/50">
+      <p class="font-semibold text-red-700">The Brutal Truth: Hiring more appointment setters is like adding more buckets to catch rain when you need to fix the roof.</p>
+      <p class="text-stone-900 mt-2">Each new hire costs $3,500/month but can only handle ~625 leads. The math never works.</p>
+    </div>
+    <p class="text-stone-700 mt-6">And your best people? They're burning out doing repetitive work instead of what they're great at – actually caring for patients and closing high-ticket packages.</p>
+  </div>
+</section>
+
 <!-- TRANSFORMATION SECTION -->
 <section class="lg:mt-28 mt-20">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20090,48 +20402,6 @@ body { overflow-x: hidden; }
   </div>
 </section>
 
-<!-- THE REFRAME -->
-<section class="lg:mt-28 mt-20">
-  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
-    <h2 class="sm:text-4xl text-3xl text-stone-900 tracking-tight font-serif-news">What If Your Reception Team Never Had to Chase Leads Again?</h2>
-    <p class="mt-4 text-lg text-stone-700">Imagine this:</p>
-    <div class="mt-6 grid gap-6 sm:grid-cols-2">
-      <div class="rounded-xl border border-l-4 border-l-red-500 p-5 border-stone-200 bg-white">
-        <p class="text-sm font-medium text-red-700 mb-3">Instead of:</p>
-        <ul class="space-y-2 text-sm text-stone-700">
-          <li class="">• Answering "How much is Fatfreeze?" for the 500th time</li>
-          <li class="">• Texting appointment reminders all day</li>
-          <li class="">• Playing phone tag with no-shows</li>
-          <li class="">• Manually booking routine appointments</li>
-        </ul>
-      </div>
-      <div class="rounded-xl border border-l-4 border-l-orange-500 p-5 border-stone-200 bg-white">
-        <p class="text-sm font-medium text-orange-700 mb-3">They're:</p>
-        <ul class="space-y-2 text-sm text-stone-700">
-          <li class="">• Converting walk-ins to $3,000 treatment packages</li>
-          <li class="">• Building relationships with high-value clients</li>
-          <li class="">• Upselling during consultations</li>
-          <li class="">• Actually providing patient care</li>
-          <li class="">• Closing premium memberships</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mt-6 rounded-2xl border p-6 border-stone-200 bg-white">
-      <p class="font-semibold text-stone-900">The math is simple:</p>
-      <div class="mt-3 grid gap-4 sm:grid-cols-2">
-        <div class="text-center">
-          <p class="text-lg font-medium text-red-700">Receptionist doing routine tasks</p>
-          <p class="text-2xl font-serif-news tracking-tight text-stone-900">$3,500/month in costs</p>
-        </div>
-        <div class="text-center">
-          <p class="text-lg font-medium text-orange-700">Same person closing packages</p>
-          <p class="text-2xl font-serif-news tracking-tight text-stone-900">$35,000/month in revenue</p>
-        </div>
-      </div>
-      <p class="mt-4 text-center font-medium text-stone-900">Your team isn't the problem. Their workload is.</p>
-    </div>
-  </div>
-</section>
 
 <!-- THE SOLUTION -->
 <section id="process" class="lg:mt-28 mt-20">
