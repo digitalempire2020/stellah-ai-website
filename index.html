@@ -134,6 +134,124 @@ body { overflow-x: hidden; }
   color: #92400E;
 }
 
+.badge-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.badge-success {
+  background: #10B981;
+  color: white;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+}
+
+/* Progressive disclosure for all devices */
+.progressive-card {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressive-card .initial-view {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.progressive-card .detailed-view {
+  position: absolute;
+  inset: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .progressive-card .detailed-view {
+    inset: 0.75rem;
+  }
+}
+
+/* Mobile: tap to toggle */
+.progressive-card.expanded .initial-view {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.progressive-card.expanded .detailed-view {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Desktop: hover to reveal */
+@media (hover: hover) and (min-width: 1024px) {
+  .progressive-card:hover .initial-view {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  .progressive-card:hover .detailed-view {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
+  .progressive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+  }
+}
+
+/* Tap indicator for mobile */
+@media (max-width: 1023px) {
+  .tap-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #525252;
+    opacity: 0.7;
+  }
+  
+  .progressive-card.expanded .tap-hint {
+    display: none;
+  }
+}
+
+/* Softer color palette */
+.text-soft-orange {
+  color: #FB923C;
+}
+
+.text-soft-red {
+  color: #F87171;
+}
+
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
