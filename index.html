@@ -34,6 +34,114 @@ body { overflow-x: hidden; }
 .credibility-text:hover { text-shadow: 0 0 8px rgba(234, 88, 12, 0.6), 0 0 16px rgba(234, 88, 12, 0.4); }
 .dashboard-link { color: #ea580c; text-decoration: underline; background: none; border: none; cursor: pointer; font-size: inherit; transition: all 0.3s ease; }
 .dashboard-link:hover { color: #c2410c; }
+
+/* Interactive Graph Styles */
+.progress-bar {
+  height: 8px;
+  background: #E5E5E5;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Graph Animations */
+.line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.line-draw.animate {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.water-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0%;
+  opacity: 0;
+  background: linear-gradient(to top, 
+    rgba(255, 107, 53, 0.15) 0%,
+    rgba(251, 146, 60, 0.08) 50%,
+    transparent 100%);
+  transition: all 3s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.water-effect.animate {
+  height: 75%;
+  opacity: 1;
+}
+
+/* Graph element transitions */
+.graph-element {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.graph-element.show {
+  opacity: 1;
+}
+
+/* Scroll animations */
+.scroll-trigger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-trigger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-warning {
+  background: #FCD34D;
+  color: #92400E;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 </style><link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
 <body class="font-sans selection:bg-orange-200 selection:text-neutral-900 text-neutral-900 bg-white">
 
@@ -19731,23 +19839,119 @@ body { overflow-x: hidden; }
 
 <!-- THE PROBLEM -->
 <section class="lg:mt-28 mt-20">
-  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
-    <h2 class="sm:text-4xl text-3xl font-normal text-stone-900 tracking-tight font-serif-news">Your 3 Appointment Setters Are Drowning (And It's Getting Worse)</h2>
-    <p class="mt-4 text-lg text-stone-700">Let me paint you a picture that's probably familiar:</p>
-    <div class="mt-6 rounded-2xl border p-6 border-stone-200 bg-white">
+  <div class="max-w-5xl mr-auto ml-auto pr-6 pl-6 text-center">
+    <div class="fade-in-up">
+      <span class="badge badge-warning mb-4">⚠️ CLINIC ALERT</span>
+      <h2 class="sm:text-4xl text-3xl font-normal text-stone-900 tracking-tight font-serif-news">Your 3 Appointment Setters Are <span class="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-500">Drowning</span></h2>
+      <p class="mt-4 text-lg text-stone-700">Let me paint you a picture that's probably familiar:</p>
+    </div>
+  </div>
+
+  <!-- Interactive Graph -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+    <div class="rounded-2xl border p-6 border-stone-200 bg-white relative overflow-hidden scroll-trigger" id="main-graph">
+      <div class="water-effect" id="water-effect"></div>
+      
+      <div class="relative z-10">
+        <div class="mb-4 sm:mb-6">
+          <h3 class="sm:text-xl lg:text-2xl text-lg font-bold text-neutral-900">Lead Volume vs Team Capacity</h3>
+          <p class="sm:text-base text-sm text-neutral-600">How beauty clinics lose revenue</p>
+        </div>
+        
+        <!-- Legend -->
+        <div class="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm mb-4 sm:mb-6 justify-center">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 sm:w-4 h-1 bg-blue-500 rounded"></div>
+            <span>Team Capacity</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 sm:w-4 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded"></div>
+            <span>Total Workload</span>
+          </div>
+        </div>
+        
+        <!-- SVG Graph -->
+        <svg viewBox="0 0 900 300" class="w-full h-48 sm:h-56 md:h-64 lg:h-72">
+          <defs>
+            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#F97316;stop-opacity:1"></stop>
+              <stop offset="100%" style="stop-color:#EF4444;stop-opacity:1"></stop>
+            </linearGradient>
+            <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.15"></stop>
+              <stop offset="50%" style="stop-color:#FB923C;stop-opacity:0.08"></stop>
+              <stop offset="100%" style="stop-color:transparent;stop-opacity:0"></stop>
+            </linearGradient>
+          </defs>
+          
+          <!-- Grid lines -->
+          <g stroke="#E5E7EB" stroke-width="1">
+            <line x1="60" x2="840" y1="240" y2="240"></line>
+            <line x1="60" x2="840" y1="180" y2="180" stroke-dasharray="3,3"></line>
+            <line x1="60" x2="840" y1="120" y2="120" stroke-dasharray="3,3"></line>
+            <line x1="60" x2="840" y1="60" y2="60" stroke-dasharray="3,3"></line>
+          </g>
+          
+          <!-- Team capacity line -->
+          <path id="capacity-line" class="line-draw" d="M60 240 Q200 235 400 230 T840 225" stroke="#3B82F6" stroke-width="4" fill="none"></path>
+          
+          <!-- Total workload line -->
+          <path id="workload-line" class="line-draw" d="M60 240 Q200 180 400 100 T840 30" stroke="url(#orangeGradient)" stroke-width="5" fill="none"></path>
+          
+          <!-- Gap fill -->
+          <path id="gap-fill" class="graph-element" d="M60 240 Q200 180 400 100 T840 30 L840 225 Q620 230 400 230 T60 240 Z" fill="url(#fillGradient)"></path>
+          
+          <!-- Data points -->
+          <g id="data-points" class="graph-element">
+            <circle cx="60" cy="240" r="6" fill="#3B82F6"></circle>
+            <circle cx="200" cy="200" r="6" fill="#F97316"></circle>
+            <circle cx="400" cy="100" r="7" fill="#EF4444"></circle>
+            <circle cx="840" cy="30" r="8" fill="#DC2626" class="pulse-animation"></circle>
+          </g>
+          
+          <!-- Labels -->
+          <g text-anchor="middle" font-size="12" fill="#525252" class="hidden sm:block">
+            <text x="60" y="265" font-weight="600">Month 1</text>
+            <text x="60" y="280">1,500 leads</text>
+            
+            <text x="200" y="265" font-weight="600">Month 3</text>
+            <text x="200" y="280" fill="#F97316" font-weight="600">2,750 total</text>
+            
+            <text x="400" y="265" font-weight="600">Month 6</text>
+            <text x="400" y="280" fill="#EF4444" font-weight="600">3,500 total</text>
+            
+            <text x="840" y="265" font-weight="600">Month 9</text>
+            <text x="840" y="280" fill="#DC2626" font-weight="700">4,750 total</text>
+          </g>
+          
+          <!-- Crisis annotation -->
+          <text id="crisis-text" class="graph-element" x="450" y="140" fill="#EF4444" font-size="16" font-weight="700" text-anchor="middle">
+            2,875 LEAD OVERFLOW
+          </text>
+        </svg>
+        
+        <!-- Real-time counters -->
+        <div class="grid grid-cols-3 gap-2 sm:gap-3 mt-4 sm:mt-6">
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-neutral-200">
+            <p class="text-xs text-neutral-600">Team Size</p>
+            <p id="counter-team" class="text-lg sm:text-xl text-blue-600">3</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-orange-200">
+            <p class="text-xs text-neutral-600">Overflow</p>
+            <p id="counter-overflow" class="text-lg sm:text-xl text-orange-600">0</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-orange-300">
+            <p class="text-xs text-neutral-600">Cost/mo</p>
+            <p id="counter-cost" class="text-lg sm:text-xl text-orange-600">$0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6 mt-8">
+    <div class="rounded-2xl border p-6 border-stone-200 bg-white">
       <ul class="space-y-4">
-        <li class="flex items-start gap-3">
-          <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center ring-1 text-[11px] ring-orange-200 font-medium text-orange-700 bg-orange-100 rounded-md">1</span>
-          <p class="text-stone-800"><span class="font-medium">Month 1:</span> 1,500 leads. Your 3-person team handles it. Barely.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center ring-1 text-[11px] ring-orange-200 font-medium text-orange-700 bg-orange-100 rounded-md">2</span>
-          <p class="text-stone-800"><span class="font-medium">Month 3:</span> 2,000 leads. Same team. Starting to crack. Complaints rising.</p>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center ring-1 text-[11px] ring-orange-200 font-medium text-orange-700 bg-orange-100 rounded-md">3</span>
-          <p class="text-stone-800"><span class="font-medium">Month 6:</span> 2,500 leads. You hire person #4. Problem solved? Nope.</p>
-        </li>
         <li class="flex items-start gap-3">
           <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center ring-1 text-[11px] ring-red-200 font-medium text-red-700 bg-red-100 rounded-md">4</span>
           <p class="text-stone-800"><span class="font-medium">Month 9:</span> 3,500 leads. Now you need 5-6 people. Your payroll just hit $21,000/month.</p>
@@ -20707,6 +20911,105 @@ document.addEventListener('DOMContentLoaded', function() {
     positionTodayHighlight();
     positionCurrentTime();
   });
+});
+
+// Interactive Graph Animation
+document.addEventListener('DOMContentLoaded', function() {
+  const graphElement = document.getElementById('main-graph');
+  if (!graphElement) return; // Exit if graph element doesn't exist
+  
+  const waterEffect = document.getElementById('water-effect');
+  const capacityLine = document.getElementById('capacity-line');
+  const workloadLine = document.getElementById('workload-line');
+  const gapFill = document.getElementById('gap-fill');
+  const dataPoints = document.getElementById('data-points');
+  const crisisText = document.getElementById('crisis-text');
+  
+  const counterTeam = document.getElementById('counter-team');
+  const counterOverflow = document.getElementById('counter-overflow');
+  const counterCost = document.getElementById('counter-cost');
+  
+  // Intersection Observer for scroll trigger
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Start animations when graph becomes visible
+        if (entry.target.id === 'main-graph') {
+          startGraphAnimation();
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  observer.observe(graphElement);
+  
+  function startGraphAnimation() {
+    // Start line animations
+    setTimeout(() => {
+      if (capacityLine) capacityLine.classList.add('animate');
+    }, 500);
+    
+    setTimeout(() => {
+      if (workloadLine) workloadLine.classList.add('animate');
+    }, 1000);
+    
+    // Show graph elements
+    setTimeout(() => {
+      if (gapFill) gapFill.classList.add('show');
+      if (dataPoints) dataPoints.classList.add('show');
+    }, 2000);
+    
+    setTimeout(() => {
+      if (crisisText) crisisText.classList.add('show');
+    }, 2500);
+    
+    // Start water effect
+    setTimeout(() => {
+      if (waterEffect) waterEffect.classList.add('animate');
+    }, 3000);
+    
+    // Animate counters
+    setTimeout(() => {
+      animateCounters();
+    }, 2000);
+  }
+  
+  function animateCounters() {
+    // Team size stays at 3
+    // Animate overflow
+    animateCounter(counterOverflow, 0, 2875, 2000, (value) => {
+      return value.toLocaleString();
+    });
+    
+    // Animate cost
+    animateCounter(counterCost, 0, 21000, 2000, (value) => {
+      return '$' + value.toLocaleString();
+    });
+  }
+  
+  function animateCounter(element, start, end, duration, formatter) {
+    if (!element) return;
+    
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = start + (end - start) * easeOut;
+      
+      element.textContent = formatter ? formatter(Math.round(current)) : Math.round(current);
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
 });
 </script>
 
