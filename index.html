@@ -27,6 +27,15 @@ body { overflow-x: hidden; }
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 @keyframes slideInRight { to { opacity: 1; transform: translateX(0); } }
 @keyframes blurIn { to { opacity: 1; filter: blur(0); } }
+
+@keyframes scrollMessages {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.animate-scroll-messages {
+  animation: scrollMessages 8s linear infinite;
+}
 .glass-card { backdrop-filter: blur(8px); background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(0, 0, 0, 0.05); }
 .gradient-border { background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(234, 88, 12, 0.2)); padding: 1px; border-radius: 16px; }
 .gradient-border-inner { background: white; border-radius: 15px; height: 100%; width: 100%; }
@@ -19916,7 +19925,7 @@ body { overflow-x: hidden; }
       <div class="bg-white">
         <div class="p-4 sm:p-6 lg:p-8">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="bg-white pt-4 pr-4 pb-4 pl-4">
+            <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center">
               <div class="flex items-center justify-between">
                 <p class="text-xs uppercase tracking-wide text-stone-500">Revenue Generated</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="dollar-sign" class="lucide lucide-dollar-sign h-4 w-4 text-orange-600"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
@@ -19924,7 +19933,7 @@ body { overflow-x: hidden; }
               <p class="sm:text-3xl text-2xl text-stone-900 tracking-tight font-geist mt-3">$3,700,000+</p>
               <p class="mt-1 text-xs text-stone-500">Till Date</p>
             </div>
-            <div class="p-4 bg-white">
+            <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center">
               <div class="flex items-center justify-between">
                 <p class="uppercase text-xs text-stone-500 tracking-wide">Appointments Booked</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-check" class="lucide lucide-calendar-check h-4 w-4 text-orange-600"><path d="M8 2v4"></path><path d="M16 2v4" class=""></path><rect width="18" height="18" x="3" y="4" rx="2" class=""></rect><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg>
@@ -19932,7 +19941,7 @@ body { overflow-x: hidden; }
               <p class="sm:text-3xl text-2xl text-stone-900 tracking-tight font-geist mt-3">30,546+</p>
               <p class="mt-1 text-xs text-stone-500">Confirmed</p>
             </div>
-            <div class="p-4 bg-white">
+            <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center">
               <div class="flex items-center justify-between">
                 <p class="text-xs uppercase tracking-wide text-stone-500">Staff Free to Upsell</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" class="lucide lucide-users h-4 w-4 text-orange-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
@@ -20403,73 +20412,738 @@ body { overflow-x: hidden; }
 
 
 <!-- THE SOLUTION -->
-<section id="process" class="lg:mt-28 mt-20">
-  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
-    <div class="inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[11px] font-medium border-stone-200 bg-white text-stone-600">
-      <span class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-orange-500/10 text-orange-600">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="lightbulb" class="lucide lucide-lightbulb h-3 w-3"><path d="M15 14c.2-1.7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
-      </span>
-      Solution
-    </div>
-    <h2 class="sm:text-4xl text-3xl font-semibold text-orange-400 tracking-tight font-geist text-center mt-3">The Accident That Changed Everything</h2>
-    <p class="mt-4 text-stone-700">We discovered the solution by accident.</p>
-    <p class="mt-3 text-stone-700">Our first client, Dr. Lee, had 4 receptionists drowning in WhatsApp messages. We tried giving them ONE AI assistant to help.</p>
-    <p class="mt-3 font-medium text-red-600">It failed. Too many conversations, too many different questions. The AI got confused, mixed things up.</p>
-    <div class="mt-6 rounded-2xl border p-6 border-stone-200 bg-white">
-      <h3 class="text-xl lg:text-2xl font-semibold tracking-tight font-geist text-stone-900">The Crazy Idea That Worked</h3>
-      <p class="text-stone-700 mt-3">Then our engineer said something crazy: "What if we use THREE specialized AIs instead of one?"</p>
-      <p class="text-stone-700 mt-3">We cloned their ability to #1.identify buyer intent into AI. #2.Their booking process into AI. #3.Their follow-up system into AI. Then made them work together on every single lead.</p>
-      <p class="mt-3 font-semibold text-orange-600">Dr. Lee's team went from drowning in 2,000 leads to closing high-ticket packages - while our 3-AI team handled everything routine.</p>
-    </div>
-    <h3 class="text-xl lg:text-2xl font-semibold text-stone-900 tracking-tight font-geist mt-8">How Stellah AI Works Today</h3>
-    <p class="text-stone-700 mt-3">This became Stellah's Agent Orchestration Architecture – it's like cloning your 3 best appointment setters and having them tag-team every single lead.</p>
-    <div class="mt-6 grid gap-4 sm:grid-cols-3">
-      <div class="rounded-xl border border-l-4 border-l-orange-500 p-4 border-stone-200 bg-white">
-        <div class="flex items-center gap-2">
-          <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/10 ring-1 text-orange-700 ring-orange-200/60">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" class="lucide lucide-search h-4 w-4"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
-          </span>
-          <p class="text-sm font-medium text-stone-900">The Qualifier</p>
+<section class="story-section">
+    <h2 class="sm:text-4xl text-3xl font-normal text-stone-900 tracking-tight font-geist text-center">The Accident That Changed Everything</h2>
+
+    <p class="text-lg sm:text-xl text-stone-700 text-center max-w-3xl mx-auto mb-6">
+        We discovered the solution by accident.
+    </p>
+
+    <p class="text-lg sm:text-xl text-stone-700 text-center max-w-3xl mx-auto mb-8">
+        Our first client, Dr. Lee, had 4 receptionists drowning in WhatsApp messages. We tried giving them ONE AI assistant to help.
+    </p>
+
+    <!-- Phone Showcase -->
+    <div class="phone-showcase">
+        <div class="iphone-container">
+            <div class="chaos-indicator">DROWNING IN MESSAGES</div>
+            <div class="iphone-mockup">
+                <div class="iphone-notch"></div>
+                <div class="iphone-screen">
+                    <!-- iOS Status Bar -->
+                    <div class="ios-status-bar">
+                        <div class="status-left">9:41</div>
+                        <div class="status-right">
+                            <div class="signal-bars">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                            <span class="wifi-icon"></span>
+                            <span class="battery-icon"></span>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Header -->
+                    <div class="whatsapp-header">
+                        <div class="whatsapp-nav-top">
+                            <span class="nav-left">Edit</span>
+                            <span class="nav-title">Chats</span>
+                            <div class="nav-right">
+                                <span class="nav-icon camera-icon"></span>
+                                <span class="nav-icon edit-icon"></span>
+                            </div>
+                        </div>
+                        <div class="filter-tabs">
+                            <span class="tab">All</span>
+                            <span class="tab active">Unread</span>
+                            <span class="tab">Groups</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat List - showing perpetual scroll -->
+                    <div class="chat-list">
+                        <div class="chat-scroll-container">
+                            <!-- First set of messages -->
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FF6B6B;">SC</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Sarah Chen</span>
+                                        <span class="chat-time">9:37 AM</span>
+                                    </div>
+                                    <div class="last-message">Hi! How much is the Botox treatment?...</div>
+                                </div>
+                                <span class="unread-badge">3</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #4ECDC4;">ML</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Maria Lopez</span>
+                                        <span class="chat-time">9:22 AM</span>
+                                    </div>
+                                    <div class="last-message">Can I book FatFreeze for next week?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #45B7D1;">JW</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Jennifer Wu</span>
+                                        <span class="chat-time">8:54 AM</span>
+                                    </div>
+                                    <div class="last-message">I need to reschedule my 3pm today</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #96CEB4;">AT</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Amanda Taylor</span>
+                                        <span class="chat-time">8:41 AM</span>
+                                    </div>
+                                    <div class="last-message">Do you have any promotions?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FECA57;">RK</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Rachel Kim</span>
+                                        <span class="chat-time">8:15 AM</span>
+                                    </div>
+                                    <div class="last-message">What's the difference between...</div>
+                                </div>
+                                <span class="unread-badge">4</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #B983FF;">DN</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">David Ng</span>
+                                        <span class="chat-time">7:58 AM</span>
+                                    </div>
+                                    <div class="last-message">How long is the consultation?</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FD79A8;">LB</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Lisa Brown</span>
+                                        <span class="chat-time">7:45 AM</span>
+                                    </div>
+                                    <div class="last-message">Is the deposit refundable?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #A8E6CF;">MP</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Michael Park</span>
+                                        <span class="chat-time">7:32 AM</span>
+                                    </div>
+                                    <div class="last-message">Hello? Anyone there?...</div>
+                                </div>
+                                <span class="unread-badge">5</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FFD93D;">EG</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Emma Garcia</span>
+                                        <span class="chat-time">7:20 AM</span>
+                                    </div>
+                                    <div class="last-message">Can I pay in installments?</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #6BCB77;">JT</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">James Thompson</span>
+                                        <span class="chat-time">7:08 AM</span>
+                                    </div>
+                                    <div class="last-message">Do you do men's treatments?</div>
+                                </div>
+                                <span class="unread-badge">3</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FF6B9D;">SJ</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Sophia Johnson</span>
+                                        <span class="chat-time">6:55 AM</span>
+                                    </div>
+                                    <div class="last-message">URGENT - wedding next week!</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #C06C84;">AH</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Ashley Harris</span>
+                                        <span class="chat-time">6:42 AM</span>
+                                    </div>
+                                    <div class="last-message">What's your cancellation policy?</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <!-- Duplicate set for seamless scrolling -->
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FF6B6B;">SC</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Sarah Chen</span>
+                                        <span class="chat-time">9:37 AM</span>
+                                    </div>
+                                    <div class="last-message">Hi! How much is the Botox treatment?...</div>
+                                </div>
+                                <span class="unread-badge">3</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #4ECDC4;">ML</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Maria Lopez</span>
+                                        <span class="chat-time">9:22 AM</span>
+                                    </div>
+                                    <div class="last-message">Can I book FatFreeze for next week?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #45B7D1;">JW</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Jennifer Wu</span>
+                                        <span class="chat-time">8:54 AM</span>
+                                    </div>
+                                    <div class="last-message">I need to reschedule my 3pm today</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #96CEB4;">AT</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Amanda Taylor</span>
+                                        <span class="chat-time">8:41 AM</span>
+                                    </div>
+                                    <div class="last-message">Do you have any promotions?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FECA57;">RK</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Rachel Kim</span>
+                                        <span class="chat-time">8:15 AM</span>
+                                    </div>
+                                    <div class="last-message">What's the difference between...</div>
+                                </div>
+                                <span class="unread-badge">4</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #B983FF;">DN</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">David Ng</span>
+                                        <span class="chat-time">7:58 AM</span>
+                                    </div>
+                                    <div class="last-message">How long is the consultation?</div>
+                                </div>
+                                <span class="unread-badge">1</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #FD79A8;">LB</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Lisa Brown</span>
+                                        <span class="chat-time">7:45 AM</span>
+                                    </div>
+                                    <div class="last-message">Is the deposit refundable?</div>
+                                </div>
+                                <span class="unread-badge">2</span>
+                            </div>
+
+                            <div class="chat-item">
+                                <div class="avatar" style="background: #A8E6CF;">MP</div>
+                                <div class="chat-content">
+                                    <div class="chat-header">
+                                        <span class="contact-name">Michael Park</span>
+                                        <span class="chat-time">7:32 AM</span>
+                                    </div>
+                                    <div class="last-message">Hello? Anyone there?...</div>
+                                </div>
+                                <span class="unread-badge">5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Bar -->
+                    <div class="whatsapp-tab-bar">
+                        <div class="tab-item">
+                            <span class="tab-icon">○</span>
+                            <span>Status</span>
+                        </div>
+                        <div class="tab-item">
+                            <span class="tab-icon">📞</span>
+                            <span>Calls</span>
+                        </div>
+                        <div class="tab-item">
+                            <span class="tab-icon">⊙</span>
+                            <span>Communities</span>
+                        </div>
+                        <div class="tab-item active">
+                            <span class="tab-icon">💬</span>
+                            <span class="tab-badge">99+</span>
+                            <span>Chats</span>
+                        </div>
+                        <div class="tab-item">
+                            <span class="tab-icon">⚙</span>
+                            <span>Settings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="text-sm text-stone-700 mt-2">Instantly knows if they're ready to buy or just browsing</p>
-      </div>
-      <div class="rounded-xl border border-l-4 border-l-orange-500 p-4 border-stone-200 bg-white">
-        <div class="flex items-center gap-2">
-          <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/10 ring-1 text-orange-700 ring-orange-200/60">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap h-4 w-4"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1.86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1.78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
-          </span>
-          <p class="text-sm font-medium text-stone-900">The Closer</p>
-        </div>
-        <p class="mt-2 text-sm text-stone-700">Strikes while interest is hot and books immediately</p>
-      </div>
-      <div class="rounded-xl border border-l-4 border-l-orange-500 p-4 border-stone-200 bg-white">
-        <div class="flex items-center gap-2">
-          <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/10 ring-1 text-orange-700 ring-orange-200/60">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" class="lucide lucide-shield-check h-4 w-4"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
-          </span>
-          <p class="text-sm font-medium text-stone-900">Revenue Protector</p>
-        </div>
-        <p class="text-sm text-stone-700 mt-2">Ensures that booking turns into actual revenue</p>
-      </div>
     </div>
-    <div class="mt-6 rounded-2xl border p-5 border-orange-200 bg-orange-50/50">
-      <div class="flex items-start gap-3">
-        <span class="inline-flex h-6 w-6 items-center justify-center rounded-md ring-1 bg-white text-orange-700 ring-orange-200">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" class="lucide lucide-clock h-3.5 w-3.5"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="10"></circle></svg>
-        </span>
-        <p class="font-medium text-stone-900">All three work on EVERY lead. Simultaneously. 24/7.<span class="font-normal"> Except they work in 3 seconds, not 3 hours. And they never get tired, confused, or overwhelmed.</span></p>
-      </div>
+
+    <p class="text-lg sm:text-xl text-red-600 text-center max-w-3xl mx-auto font-medium mb-12">
+        It failed. Too many conversations, too many different questions. The AI got confused, mixed things up.
+    </p>
+
+    <!-- Breakthrough Box -->
+    <div class="breakthrough-box">
+        <h2>The Crazy Idea That Worked</h2>
+
+        <p class="text-lg sm:text-xl text-stone-700 text-center mb-6">
+            Then our engineer said something crazy: "What if we use THREE specialized AIs instead of one?"
+        </p>
+
+        <p class="text-lg sm:text-xl text-stone-700 text-center mb-6">
+            We cloned their ability to <strong>#1.identify buyer intent</strong> into AI. <strong>#2.Their booking process</strong> into AI. <strong>#3.Their follow-up system</strong> into AI. Then made them work together on every single lead.
+        </p>
+
+        <p class="text-lg sm:text-xl font-semibold text-center" style="color: #FF7A45;">
+            Dr. Lee's team went from drowning in 2,000 leads to closing high-ticket packages - while our 3-AI team handled everything routine.
+        </p>
     </div>
-    <div class="mt-6 rounded-2xl border p-6 border-stone-200 bg-white">
-      <div class="flex gap-3 mb-4 items-center">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/10 ring-1 text-orange-700 ring-orange-200/60">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="target" class="lucide lucide-target h-4 w-4"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-        </span>
-        <p class="font-semibold text-stone-900">The Result: 100% lead coverage for less than half your current appointment-setting costs.</p>
-      </div>
-    </div>
-  </div>
 </section>
+
+<style>
+    /* Main Container */
+    .story-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+    }
+
+    /* Title styling now handled by Tailwind classes */
+
+    /* Phone Container */
+    .phone-showcase {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 60px auto 80px;
+        position: relative;
+    }
+
+    .iphone-container {
+        position: relative;
+    }
+
+    .chaos-indicator {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 16px;
+        background: #DC2626;
+        color: white;
+        border-radius: 16px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        animation: pulse 2s ease-in-out infinite;
+        z-index: 1;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
+        50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
+    .iphone-mockup {
+        width: 245px;
+        height: 497px;
+        background: #1c1c1e;
+        border-radius: 29px;
+        padding: 6px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        position: relative;
+    }
+
+    /* iPhone Notch */
+    .iphone-notch {
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 86px;
+        height: 18px;
+        background: #1c1c1e;
+        border-radius: 0 0 11px 11px;
+        z-index: 100;
+    }
+
+    /* iPhone internals */
+    .iphone-screen {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border-radius: 23px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* iOS Status Bar */
+    .ios-status-bar {
+        background: #F6F6F6;
+        padding: 6px 17px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: #000;
+        height: 31px;
+    }
+
+    .status-left {
+        font-weight: 600;
+    }
+
+    .status-right {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 10px;
+    }
+
+    .signal-bars {
+        display: flex;
+        gap: 1px;
+        align-items: flex-end;
+    }
+
+    .bar {
+        width: 2px;
+        background: #000;
+        border-radius: 0.5px;
+    }
+
+    .bar:nth-child(1) { height: 3px; }
+    .bar:nth-child(2) { height: 4px; }
+    .bar:nth-child(3) { height: 5px; }
+    .bar:nth-child(4) { height: 6px; opacity: 0.3; }
+
+    .wifi-icon {
+        width: 10px;
+        height: 10px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.65-4.35-1.65-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z'/%3E%3C/svg%3E") center no-repeat;
+        background-size: contain;
+    }
+
+    .battery-icon {
+        width: 16px;
+        height: 8px;
+        border: 1px solid #000;
+        border-radius: 1px;
+        position: relative;
+        background: linear-gradient(to right, #000 75%, transparent 75%);
+    }
+
+    .battery-icon::after {
+        content: "";
+        position: absolute;
+        right: -2px;
+        top: 2px;
+        width: 1px;
+        height: 4px;
+        background: #000;
+        border-radius: 0 0.5px 0.5px 0;
+    }
+
+    /* WhatsApp Navigation */
+    .whatsapp-header {
+        background: #F7F7F7;
+        border-bottom: 0.5px solid #B2B2B2;
+        padding-bottom: 6px;
+    }
+
+    .whatsapp-nav-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 12px;
+    }
+
+    .nav-left {
+        color: #007AFF;
+        font-size: 14px;
+    }
+
+    .nav-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .nav-right {
+        display: flex;
+        gap: 18px;
+    }
+
+    .nav-icon {
+        width: 17px;
+        height: 17px;
+        background-size: contain;
+    }
+
+    .camera-icon {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z'/%3E%3C/svg%3E") center no-repeat;
+    }
+
+    .edit-icon {
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E") center no-repeat;
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+        display: flex;
+        margin: 0 12px;
+        background: #E5E5E5;
+        border-radius: 7px;
+        padding: 1px;
+    }
+
+    .filter-tabs .tab {
+        flex: 1;
+        padding: 5px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        border-radius: 6px;
+        transition: all 0.3s;
+    }
+
+    .filter-tabs .tab.active {
+        background: #fff;
+        color: #000;
+        font-weight: 500;
+    }
+
+    /* Chat List */
+    .chat-list {
+        background: #fff;
+        height: calc(100% - 130px);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Scrolling container */
+    .chat-scroll-container {
+        animation: infiniteScroll 12s linear infinite;
+    }
+
+    @keyframes infiniteScroll {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    .chat-item {
+        display: flex;
+        padding: 7px 12px;
+        position: relative;
+        border-bottom: 0.5px solid #E5E5E5;
+    }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 500;
+        font-size: 12px;
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+
+    .chat-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+    }
+
+    .contact-name {
+        font-weight: 600;
+        font-size: 13px;
+        color: #000;
+    }
+
+    .chat-time {
+        font-size: 11px;
+        color: #8E8E93;
+    }
+
+    .last-message {
+        color: #8E8E93;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .unread-badge {
+        position: absolute;
+        right: 12px;
+        bottom: 14px;
+        background: #25D366;
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 1px 5px;
+        border-radius: 10px;
+        min-width: 17px;
+        text-align: center;
+    }
+
+    /* WhatsApp Tab Bar */
+    .whatsapp-tab-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #F6F6F6;
+        border-top: 0.5px solid #B2B2B2;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0 22px;
+    }
+
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        font-size: 10px;
+        color: #8E8E93;
+        position: relative;
+    }
+
+    .tab-item.active {
+        color: #007AFF;
+    }
+
+    .tab-icon {
+        font-size: 17px;
+    }
+
+    .tab-badge {
+        position: absolute;
+        top: -3px;
+        right: -8px;
+        background: #FF3B30;
+        color: white;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 1px 4px;
+        border-radius: 8px;
+        min-width: 18px;
+        text-align: center;
+    }
+
+    /* Breakthrough Box */
+    .breakthrough-box {
+        background: #F8F9FA;
+        border: 2px solid #E5E7EB;
+        border-radius: 16px;
+        padding: 50px 40px;
+        margin: 80px auto 0;
+        max-width: 900px;
+        text-align: center;
+    }
+
+    .breakthrough-box h2 {
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 30px;
+        font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+        letter-spacing: -0.025em;
+    }
+
+    /* Text styling now handled by Tailwind classes */
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .story-section {
+            padding: 40px 20px;
+        }
+
+        .phone-showcase {
+            margin: 40px auto 60px;
+        }
+
+        .breakthrough-box {
+            padding: 30px 20px;
+        }
+    }
+</style>
 
 <!-- REAL RESULTS HERO SECTION -->
 <section id="results" class="lg:mt-28 mt-20 min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -20495,8 +21169,8 @@ body { overflow-x: hidden; }
 
       <!-- Featured Case Study - Large Card -->
       <div class="lg:col-span-8 fade-in fade-in-delay-1">
-        <div class="gradient-border">
-          <div class="gradient-border-inner p-8 lg:p-12 h-full">
+        <div class="bg-white/50 backdrop-blur-sm rounded-2xl border border-stone-200 shadow-lg">
+          <div class="p-8 lg:p-12 h-full">
             <!-- Client Info Header -->
             <div class="flex flex-col sm:flex-row gap-6 slide-in mb-8 items-start">
               <img class="h-16 w-16 ring-4 ring-orange-100 object-cover rounded-2xl shadow-lg" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&amp;w=256&amp;auto=format&amp;fit=crop" alt="Dr. Patricia Lim">
@@ -20516,7 +21190,7 @@ body { overflow-x: hidden; }
 
             <!-- Before/After Comparison -->
             <div class="grid gap-6 sm:grid-cols-2 mb-8">
-              <div class="glass-card rounded-xl p-6 border-l-4 border-l-red-500 blur-in">
+              <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 border-l-4 border-l-red-500 blur-in">
                 <div class="flex items-center gap-2 mb-4">
                   <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-red-500/10 ring-1 text-red-700 ring-red-200/60">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" class="lucide lucide-x h-4 w-4"><path d="m18 6-12 12"></path><path d="m6 6 12 12"></path></svg>
@@ -20525,54 +21199,54 @@ body { overflow-x: hidden; }
                 </div>
                 <ul class="text-sm text-stone-700 space-y-3">
                   <li class="flex items-start gap-2">
-                    <span class="text-red-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
                     <span class="">4 receptionists struggling with 3,000 leads</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-red-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
                     <span class="">6-hour response times on average</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-red-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
                     <span class="">40% show-up rate</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-red-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
                     <span class=""><span class="font-semibold">$14,000/month</span> staff costs</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-red-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
                     <span class="">Team constantly stressed</span>
                   </li>
                 </ul>
               </div>
 
-              <div class="glass-card rounded-xl p-6 border-l-4 border-l-green-500 blur-in blur-in-delay-1">
+              <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 border-l-4 border-l-orange-500 blur-in blur-in-delay-1">
                 <div class="flex items-center gap-2 mb-4">
-                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-green-500/10 ring-1 text-green-700 ring-green-200/60">
+                  <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/10 ring-1 text-orange-700 ring-orange-200/60">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" class="lucide lucide-check h-4 w-4"><path d="m9 12 2 2 4-4"></path></svg>
                   </span>
                   <p class="text-lg font-semibold text-stone-900">With Stellah</p>
                 </div>
                 <ul class="space-y-3 text-sm text-stone-700">
                   <li class="flex items-start gap-2">
-                    <span class="text-green-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                     <span class="">3 staff focus on high-value consultations</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-green-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                     <span class=""><span class="font-semibold">15-second</span> response times</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-green-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                     <span class=""><span class="font-semibold">72%</span> show-up rate</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-green-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                     <span class=""><span class="font-semibold">$4,500/month</span> total costs</span>
                   </li>
                   <li class="flex items-start gap-2">
-                    <span class="text-green-500 mt-0.5">•</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500 mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                     <span class="">Team energized and profitable</span>
                   </li>
                 </ul>
@@ -20596,49 +21270,81 @@ body { overflow-x: hidden; }
       <div class="lg:col-span-4 space-y-6">
 
         <!-- Response Time Card -->
-        <div class="glass-card rounded-2xl p-6 text-center fade-in fade-in-delay-2">
-          <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+        <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center fade-in fade-in-delay-2">
+          <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 opacity-75 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap w-6 h-6 text-white"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1.86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1.78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" class=""></path></svg>
           </div>
-          <p class="text-3xl font-semibold text-stone-900 font-geist mb-2">15 sec</p>
-          <p class="text-sm font-semibold tracking-tight text-stone-700 mb-1">Average Response Time</p>
-          <p class="text-xs text-stone-500">Down from 6 hours</p>
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <p class="text-4xl sm:text-5xl font-bold text-orange-600">15</p>
+            <span class="text-sm font-medium text-stone-700">SEC</span>
+          </div>
+          <p class="text-sm font-semibold text-stone-800 mb-1">Response Time</p>
+          <div class="flex items-center justify-center gap-1 text-xs text-stone-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="m7 14 2-2m0 0 2-2m-2 2-2-2m2 2 2 2m6-6h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-5l-5 5v-5H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"></path></svg>
+            <span>was 6 hours</span>
+          </div>
         </div>
 
         <!-- Show Rate Card -->
-        <div class="glass-card rounded-2xl p-6 text-center fade-in fade-in-delay-3">
-          <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+        <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center fade-in fade-in-delay-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 opacity-75 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="trending-up" class="lucide lucide-trending-up w-6 h-6 text-white"><path d="m22 7-8.5 8.5L9 11l-7 7"></path><path d="M16 7h6v6"></path></svg>
           </div>
-          <p class="text-3xl font-semibold text-stone-900 font-geist mb-2">+80%</p>
-          <p class="text-sm font-semibold tracking-tight text-stone-700 mb-1">Show Rate Increase</p>
-          <p class="text-xs text-stone-500">30% to 72%</p>
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <p class="text-4xl sm:text-5xl font-bold text-orange-600">72</p>
+            <span class="text-sm font-medium text-stone-700">%</span>
+          </div>
+          <p class="text-sm font-semibold text-stone-800 mb-1">Show Rate</p>
+          <div class="flex items-center justify-center gap-1 text-xs text-stone-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="m7 14 2-2m0 0 2-2m-2 2-2-2m2 2 2 2m6-6h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-5l-5 5v-5H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"></path></svg>
+            <span>+80% improvement</span>
+          </div>
         </div>
 
         <!-- Cost Savings Card -->
-        <div class="glass-card rounded-2xl p-6 text-center fade-in fade-in-delay-4">
-          <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+        <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center fade-in fade-in-delay-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 opacity-75 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="dollar-sign" class="lucide lucide-dollar-sign w-6 h-6 text-white"><line x1="12" x2="12" y1="2" y2="22" class=""></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" class=""></path></svg>
           </div>
-          <p class="text-3xl font-semibold text-stone-900 font-geist mb-2">68%</p>
-          <p class="text-sm font-semibold tracking-tight text-stone-700 mb-1">Cost Reduction</p>
-          <p class="text-xs text-stone-500">$9,500/month savings</p>
+          <div class="flex items-center justify-center gap-1 mb-2">
+            <span class="text-2xl font-bold text-orange-600">$</span>
+            <p class="text-4xl sm:text-5xl font-bold text-orange-600">114</p>
+            <span class="text-sm font-medium text-stone-700">K</span>
+          </div>
+          <p class="text-sm font-semibold text-stone-800 mb-1">Annual Savings</p>
+          <div class="flex items-center justify-center gap-1 text-xs text-stone-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="m7 14 2-2m0 0 2-2m-2 2-2-2m2 2 2 2m6-6h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-5l-5 5v-5H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"></path></svg>
+            <span>68% cost reduction</span>
+          </div>
         </div>
 
         <!-- Team Focus Card -->
-        <div class="glass-card rounded-2xl p-6 text-center fade-in fade-in-delay-5">
-          <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-4 mx-auto">
+        <div class="bg-gradient-to-br from-stone-50 to-stone-100 border border-stone-200 rounded-xl p-6 text-center fade-in fade-in-delay-5">
+          <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 opacity-75 rounded-full flex items-center justify-center mb-4 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" class="lucide lucide-users w-6 h-6 text-white"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4" class=""></circle></svg>
           </div>
-          <p class="text-3xl font-semibold text-stone-900 font-geist mb-2">75%</p>
-          <p class="text-sm font-semibold tracking-tight text-stone-700 mb-1">Staff Reduction</p>
-          <p class="text-xs text-stone-500">More focus on high-value work</p>
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <p class="text-4xl sm:text-5xl font-bold text-orange-600">75</p>
+            <span class="text-sm font-medium text-stone-700">%</span>
+          </div>
+          <p class="text-sm font-semibold text-stone-800 mb-1">Staff Reduction</p>
+          <div class="flex items-center justify-center gap-1 text-xs text-stone-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="m7 14 2-2m0 0 2-2m-2 2-2-2m2 2 2 2m6-6h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-5l-5 5v-5H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"></path></svg>
+            <span>more focus on revenue</span>
+          </div>
         </div>
 
       </div>
     </div>
 
   </div>
+
+  <!-- Transition to Case Study -->
+  <div class="text-center mb-12 fade-in fade-in-delay-2">
+    <p class="text-lg text-stone-600 mb-2">See how one client achieved these results:</p>
+    <div class="w-24 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto"></div>
+  </div>
+
 </section>
 
 <!-- WHY MULTI-OUTLET CHAINS -->
