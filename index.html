@@ -1,5 +1,9 @@
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <title>Stellah AI — High-Volume Medical Chain Solutions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -181,6 +185,19 @@ body { overflow-x: hidden; }
 @media (max-width: 640px) {
  .progressive-card .detailed-view {
  inset: 0.75rem;
+ }
+ /* Increase font size and spacing for graph labels on mobile */
+ svg text[y="265"] {
+ font-size: 24px !important;
+ transform: translateY(15px);
+ }
+ svg text[y="280"] {
+ font-size: 24px !important;
+ transform: translateY(25px);
+ }
+ /* Adjust crisis text font size for mobile to prevent overlap */
+ svg text#crisis-text {
+ font-size: 20px !important;
  }
 }
 /* Mobile: tap to toggle */
@@ -20046,9 +20063,9 @@ body { overflow-x: hidden; }
  </div>
  <div class="mb-4">
  <p class="text-3xl lg:text-4xl text-stone-900">1,500</p>
- <p class="text-sm text-stone-600">new leads</p>
+ <p class="text-sm text-stone-600">total leads</p>
  </div>
- <p class="text-sm text-stone-700 mb-3">Your 3-person team handles it. Barely.</p>
+ <p class="text-sm text-stone-700 mb-3">Your small team is stretched thin, but managing. Response times slip to 4+ hours during busy periods.</p>
  <div class="progress-bar">
  <div class="progress-fill bg-gradient-to-r from-green-400 to-blue-400" style="width: 80%"></div>
  </div>
@@ -20063,8 +20080,8 @@ body { overflow-x: hidden; }
  </div>
  <h3 class="text-xl font-semibold text-stone-900 tracking-tight mb-2">Month 3</h3>
  <span class="badge badge-warning">OVERLOAD</span>
- <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">2,000</p>
- <p class="text-sm text-soft-orange">leads</p>
+ <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">2,750</p>
+ <p class="text-sm text-soft-orange">total leads</p>
  <span class="tap-hint lg:hidden">Tap for details</span>
  </div>
  <div class="detailed-view">
@@ -20078,10 +20095,10 @@ body { overflow-x: hidden; }
  </div>
  </div>
  <div class="mb-4">
- <p class="text-2xl lg:text-3xl text-stone-900">2,000</p>
- <p class="text-sm text-stone-600">new leads</p>
+ <p class="text-2xl lg:text-3xl text-stone-900">2,750</p>
+ <p class="text-sm text-stone-600">total leads</p>
  </div>
- <p class="text-sm text-stone-700 mb-3">Same team. Starting to crack. Complaints rising.</p>
+ <p class="text-sm text-stone-700 mb-3">Same team size, 83% more leads. Staff working 50+ hour weeks. Patient complaints about slow responses double.</p>
  <div class="space-y-1 mb-2">
  <div class="progress-bar">
  <div class="progress-fill bg-orange-400" style="width: 100%"></div>
@@ -20101,8 +20118,8 @@ body { overflow-x: hidden; }
  </div>
  <h3 class="text-xl font-semibold text-stone-900 tracking-tight mb-2">Month 6</h3>
  <span class="badge badge-warning">CRITICAL</span>
- <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">2,500</p>
- <p class="text-sm text-soft-orange">leads</p>
+ <p class="text-3xl md:text-4xl lg:text-5xl text-soft-orange mt-3 md:mt-4">3,500</p>
+ <p class="text-sm text-soft-orange">total leads</p>
  <span class="tap-hint lg:hidden">Tap for details</span>
  </div>
  <div class="detailed-view">
@@ -20116,14 +20133,14 @@ body { overflow-x: hidden; }
  </div>
  </div>
  <div class="mb-3">
- <p class="text-xl lg:text-2xl text-stone-900">2,500</p>
- <p class="text-xs text-stone-600">new leads</p>
+ <p class="text-xl lg:text-2xl text-stone-900">3,500</p>
+ <p class="text-xs text-stone-600">total leads</p>
  </div>
- <p class="text-sm text-stone-700 mb-3">You hire person #4. Problem solved? Nope.</p>
+ <p class="text-sm text-stone-700 mb-3">You hire another setter, but leads keep growing. Team burnout accelerates. 30% of inquiries still go unanswered after 8 PM.</p>
  <div class="progress-bar">
- <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500" style="width: 90%"></div>
+ <div class="progress-fill bg-gradient-to-r from-orange-500 to-red-500" style="width: 100%"></div>
  </div>
- <p class="text-xs text-orange-600 mt-2">90% capacity (still struggling)</p>
+ <p class="text-xs text-orange-600 mt-2">105% capacity (still struggling)</p>
  </div>
  </article>
  <!-- Month 9 -->
@@ -20134,8 +20151,8 @@ body { overflow-x: hidden; }
  </div>
  <h3 class="text-xl font-semibold text-stone-900 tracking-tight mb-2">Month 9</h3>
  <span class="badge badge-danger">🔥 DROWNING</span>
- <p class="text-3xl md:text-4xl lg:text-5xl text-soft-red mt-3 md:mt-4">3,500</p>
- <p class="text-sm text-soft-red">leads</p>
+ <p class="text-3xl md:text-4xl lg:text-5xl text-soft-red mt-3 md:mt-4">4,750</p>
+ <p class="text-sm text-soft-red">total leads</p>
  <span class="tap-hint lg:hidden">Tap for details</span>
  </div>
  <div class="detailed-view">
@@ -20149,10 +20166,10 @@ body { overflow-x: hidden; }
  </div>
  </div>
  <div class="mb-2">
- <p class="text-2xl lg:text-3xl text-soft-red">3,500</p>
- <p class="text-xs text-stone-700">leads</p>
+ <p class="text-2xl lg:text-3xl text-soft-red">4,750</p>
+ <p class="text-xs text-stone-700">total leads</p>
  </div>
- <p class="text-sm text-stone-700 mb-3">Now you need 5-6 people. Your payroll just hit $21,000/month.</p>
+ <p class="text-sm text-stone-700 mb-3">You're bleeding talent and revenue. Payroll: $21K/month. Still missing 43% of after-hours leads worth $180K+ annually.</p>
  <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-2 mb-2 shadow">
  <p class="text-xs text-orange-50 mb-1">Monthly Cost:</p>
  <div class="flex justify-between items-center">
@@ -20954,7 +20971,6 @@ body { overflow-x: hidden; }
  font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
  letter-spacing: -0.025em;
  }
- /* Text styling now handled by Tailwind classes */
  /* Responsive */
  @media (max-width: 768px) {
  .story-section {
@@ -21361,6 +21377,13 @@ body { overflow-x: hidden; }
  </div>
  <div class="rounded-xl border border-l-4 border-l-orange-500 p-5 border-stone-200 bg-white">
  <div class="flex items-center gap-2">
+ <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="refresh-cw" class="lucide lucide-refresh-cw h-5 w-5 text-orange-600"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path></svg>
+ <p class="text-sm font-medium text-stone-900">Staff Turnover Impact Elimination</p>
+ </div>
+ <p class="text-sm text-stone-700 mt-2">Your best appointment setter quits? Performance doesn't drop. Institutional knowledge stays in the AI, not in departing employees.</p>
+ </div>
+ <div class="rounded-xl border border-l-4 border-l-orange-500 p-5 border-stone-200 bg-white">
+ <div class="flex items-center gap-2">
  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="database" class="lucide lucide-database h-5 w-5 text-orange-600"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5V19A9 3 0 0 0 21 19V5"></path><path d="M3 12A9 3 0 0 0 21 12"></path></svg>
  <p class="text-sm font-medium text-stone-900">Your Data, Your Control</p>
  </div>
@@ -21469,8 +21492,29 @@ body { overflow-x: hidden; }
  </div>
  </div>
 </section>
+<!-- FINAL CTA -->
+<section class="lg:mt-28 mt-20 mb-20">
+ <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
+ <div class="rounded-2xl border p-8 border-stone-200 bg-white text-center">
+ <h2 class="sm:text-4xl text-3xl font-medium text-stone-900 tracking-tight font-geist">We Only Accept 3 High-Volume Clinics Per Month</h2>
+ <p class="mt-4 text-lg text-stone-700">Each implementation requires our team to analyze your entire lead flow, map your appointment protocols, train the AI on your specific services, monitor performance for 30 days, and optimize based on your data.</p>
+ <p class="mt-3 text-stone-700">We can only do this properly for 3 clients at a time.</p>
+ <div class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium border-orange-200 bg-orange-50 text-orange-700">
+ <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+ Current availability: 2 spots remaining
+ </div>
+ <p class="mt-6 text-stone-700">Your competitor (that chain expanding aggressively?) inquired yesterday.</p>
+ <p class="mt-2 font-medium text-stone-900">If they implement first, they'll have an operational advantage you can't match without doubling your payroll.</p>
+ <div class="mt-8">
+ <a href="#" class="inline-flex items-center justify-center transition hover:bg-orange-700 text-lg font-semibold tracking-tight text-white bg-orange-600 rounded-full pt-4 pr-8 pb-4 pl-8 shadow-sm">BOOK A LIVE DEMO</a>
+ <p class="mt-3 text-sm text-stone-600 italic">For Operations Directors ready to transform their team's potential</p>
+ </div>
+ <div class="mt-8 border-t pt-6 border-stone-200"></div>
+ </div>
+ </div>
+</section>
 <!-- THE PROCESS -->
-<section class="lg:mt-28 mt-20">
+<section class="mt-20 lg:mt-28">
  <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
  <h2 class="sm:text-4xl text-3xl font-normal text-stone-900 tracking-tight font-geist">30 Days to Transformation</h2>
  <div class="mt-8 space-y-6">
@@ -21533,27 +21577,6 @@ body { overflow-x: hidden; }
  <p class="text-stone-700">Prove the guarantee metrics or you pay nothing</p>
  </div>
  </div>
- </div>
- </div>
-</section>
-<!-- FINAL CTA -->
-<section class="mt-20 lg:mt-28 mb-20">
- <div class="max-w-4xl mr-auto ml-auto pr-6 pl-6">
- <div class="rounded-2xl border p-8 border-stone-200 bg-white text-center">
- <h2 class="sm:text-4xl text-3xl font-medium text-stone-900 tracking-tight font-geist">We Only Accept 3 High-Volume Clinics Per Month</h2>
- <p class="mt-4 text-lg text-stone-700">Each implementation requires our team to analyze your entire lead flow, map your appointment protocols, train the AI on your specific services, monitor performance for 30 days, and optimize based on your data.</p>
- <p class="mt-3 text-stone-700">We can only do this properly for 3 clients at a time.</p>
- <div class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium border-orange-200 bg-orange-50 text-orange-700">
- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
- Current availability: 2 spots remaining
- </div>
- <p class="mt-6 text-stone-700">Your competitor (that chain expanding aggressively?) inquired yesterday.</p>
- <p class="mt-2 font-medium text-stone-900">If they implement first, they'll have an operational advantage you can't match without doubling your payroll.</p>
- <div class="mt-8">
- <a href="#" class="inline-flex items-center justify-center transition hover:bg-orange-700 text-lg font-semibold tracking-tight text-white bg-orange-600 rounded-full pt-4 pr-8 pb-4 pl-8 shadow-sm">BOOK A LIVE DEMO</a>
- <p class="mt-3 text-sm text-stone-600 italic">For Operations Directors ready to transform their team's potential</p>
- </div>
- <div class="mt-8 border-t pt-6 border-stone-200"></div>
  </div>
  </div>
 </section>
