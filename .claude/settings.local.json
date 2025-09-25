@@ -18,7 +18,11 @@
       "Bash(gzip:*)",
       "Bash(cp:*)",
       "Bash(rm:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(npm run deploy:*)",
+      "Bash(npm run:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []
