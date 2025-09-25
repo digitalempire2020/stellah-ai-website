@@ -1,0 +1,10 @@
+HTTP/2 200 
+content-length: 2396527
+content-type: text/html; charset=utf-8
+etag: "1758808897129369"
+last-modified: Thu, 25 Sep 2025 14:01:37 GMT
+strict-transport-security: max-age=63072000; includeSubDomains
+date: Thu, 25 Sep 2025 14:04:21 GMT
+via: 1.1 google
+alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+

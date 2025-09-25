@@ -22,7 +22,8 @@
       "Bash(npm run deploy:*)",
       "Bash(npm run:*)",
       "Bash(git push:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Bash(nmap:*)"
     ],
     "deny": [],
     "ask": []
