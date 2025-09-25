@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Story Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Main Container */
+        .story-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        /* Title Styling */
+        h1 {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 700;
+            color: #FF7A45;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+        
+        /* Intro text */
+        .intro-text {
+            font-size: clamp(20px, 2.5vw, 28px);
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Failure text */
+        .failure-text {
+            font-size: clamp(20px, 2.5vw, 28px);
+            color: #DC2626;
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Phone Container */
+        .phone-showcase {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 60px auto 80px;
+            position: relative;
+        }
+        
+        .iphone-container {
+            position: relative;
+        }
+        
+        .chaos-indicator {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 16px;
+            background: #DC2626;
+            color: white;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+        }
+        
+        .iphone-mockup {
+            width: 245px;
+            height: 497px;
+            background: #1c1c1e;
+            border-radius: 29px;
+            padding: 6px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        /* iPhone Notch */
+        .iphone-notch {
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 86px;
+            height: 18px;
+            background: #1c1c1e;
+            border-radius: 0 0 11px 11px;
+            z-index: 100;
+        }
+        
+        /* iPhone internals */
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 23px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* iOS Status Bar */
+        .ios-status-bar {
+            background: #F6F6F6;
+            padding: 6px 17px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            height: 31px;
+        }
+        
+        .status-left {
+            font-weight: 600;
+        }
+        
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 10px;
+        }
+        
+        .signal-bars {
+            display: flex;
+            gap: 1px;
+            align-items: flex-end;
+        }
+        
+        .bar {
+            width: 2px;
+            background: #000;
+            border-radius: 0.5px;
+        }
+        
+        .bar:nth-child(1) { height: 3px; }
+        .bar:nth-child(2) { height: 4px; }
+        .bar:nth-child(3) { height: 5px; }
+        .bar:nth-child(4) { height: 6px; opacity: 0.3; }
+        
+        .wifi-icon {
+            width: 10px;
+            height: 10px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.65-4.35-1.65-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z'/%3E%3C/svg%3E") center no-repeat;
+            background-size: contain;
+        }
+        
+        .battery-icon {
+            width: 16px;
+            height: 8px;
+            border: 1px solid #000;
+            border-radius: 1px;
+            position: relative;
+            background: linear-gradient(to right, #000 75%, transparent 75%);
+        }
+        
+        .battery-icon::after {
+            content: "";
+            position: absolute;
+            right: -2px;
+            top: 2px;
+            width: 1px;
+            height: 4px;
+            background: #000;
+            border-radius: 0 0.5px 0.5px 0;
+        }
+        
+        /* WhatsApp Navigation */
+        .whatsapp-header {
+            background: #F7F7F7;
+            border-bottom: 0.5px solid #B2B2B2;
+            padding-bottom: 6px;
+        }
+        
+        .whatsapp-nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 12px;
+        }
+        
+        .nav-left {
+            color: #007AFF;
+            font-size: 14px;
+        }
+        
+        .nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 18px;
+        }
+        
+        .nav-icon {
+            width: 17px;
+            height: 17px;
+            background-size: contain;
+        }
+        
+        .camera-icon {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z'/%3E%3C/svg%3E") center no-repeat;
+        }
+        
+        .edit-icon {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007AFF'%3E%3Cpath d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E") center no-repeat;
+        }
+        
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            margin: 0 12px;
+            background: #E5E5E5;
+            border-radius: 7px;
+            padding: 1px;
+        }
+        
+        .filter-tabs .tab {
+            flex: 1;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .filter-tabs .tab.active {
+            background: #fff;
+            color: #000;
+            font-weight: 500;
+        }
+        
+        /* Chat List */
+        .chat-list {
+            background: #fff;
+            height: calc(100% - 130px);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Scrolling container */
+        .chat-scroll-container {
+            animation: infiniteScroll 12s linear infinite;
+        }
+        
+        @keyframes infiniteScroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+        
+        .chat-item {
+            display: flex;
+            padding: 7px 12px;
+            position: relative;
+            border-bottom: 0.5px solid #E5E5E5;
+        }
+        
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        .chat-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+        
+        .contact-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #000;
+        }
+        
+        .chat-time {
+            font-size: 11px;
+            color: #8E8E93;
+        }
+        
+        .last-message {
+            color: #8E8E93;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .unread-badge {
+            position: absolute;
+            right: 12px;
+            bottom: 14px;
+            background: #25D366;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 1px 5px;
+            border-radius: 10px;
+            min-width: 17px;
+            text-align: center;
+        }
+        
+        /* WhatsApp Tab Bar */
+        .whatsapp-tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #F6F6F6;
+            border-top: 0.5px solid #B2B2B2;
+            display: flex;
+            justify-content: space-around;
+            padding: 5px 0 22px;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 10px;
+            color: #8E8E93;
+            position: relative;
+        }
+        
+        .tab-item.active {
+            color: #007AFF;
+        }
+        
+        .tab-icon {
+            font-size: 17px;
+        }
+        
+        .tab-badge {
+            position: absolute;
+            top: -3px;
+            right: -8px;
+            background: #FF3B30;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 1px 4px;
+            border-radius: 8px;
+            min-width: 18px;
+            text-align: center;
+        }
+        
+        /* Breakthrough Box */
+        .breakthrough-box {
+            background: #F8F9FA;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 50px 40px;
+            margin: 80px auto 0;
+            max-width: 900px;
+            text-align: center;
+        }
+        
+        .breakthrough-box h2 {
+            font-size: clamp(28px, 3.5vw, 42px);
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 30px;
+        }
+        
+        .breakthrough-text {
+            font-size: clamp(18px, 2vw, 24px);
+            color: #4B5563;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .solution-text {
+            font-size: clamp(18px, 2vw, 24px);
+            color: #4B5563;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .solution-text strong {
+            color: #333;
+        }
+        
+        .result-text {
+            font-size: clamp(20px, 2.2vw, 26px);
+            color: #FF7A45;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .story-section {
+                padding: 40px 20px;
+            }
+            
+            .phone-showcase {
+                margin: 40px auto 60px;
+            }
+            
+            .breakthrough-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="story-section">
+        <h1>The Accident That Changed Everything</h1>
+        
+        <p class="intro-text">
+            We discovered the solution by accident.
+        </p>
+        
+        <p class="intro-text">
+            Our first client, Dr. Lee, had 4 receptionists drowning in WhatsApp messages. We tried giving them ONE AI assistant to help.
+        </p>
+        
+        <!-- Phone Showcase -->
+        <div class="phone-showcase">
+            <div class="iphone-container">
+                <div class="chaos-indicator">DROWNING IN MESSAGES</div>
+                <div class="iphone-mockup">
+                    <div class="iphone-notch"></div>
+                    <div class="iphone-screen">
+                        <!-- iOS Status Bar -->
+                        <div class="ios-status-bar">
+                            <div class="status-left">9:41</div>
+                            <div class="status-right">
+                                <div class="signal-bars">
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                </div>
+                                <span class="wifi-icon"></span>
+                                <span class="battery-icon"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- WhatsApp Header -->
+                        <div class="whatsapp-header">
+                            <div class="whatsapp-nav-top">
+                                <span class="nav-left">Edit</span>
+                                <span class="nav-title">Chats</span>
+                                <div class="nav-right">
+                                    <span class="nav-icon camera-icon"></span>
+                                    <span class="nav-icon edit-icon"></span>
+                                </div>
+                            </div>
+                            <div class="filter-tabs">
+                                <span class="tab">All</span>
+                                <span class="tab active">Unread</span>
+                                <span class="tab">Groups</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Chat List - showing perpetual scroll -->
+                        <div class="chat-list">
+                            <div class="chat-scroll-container">
+                                <!-- First set of messages -->
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FF6B6B;">SC</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Sarah Chen</span>
+                                            <span class="chat-time">9:37 AM</span>
+                                        </div>
+                                        <div class="last-message">Hi! How much is the Botox treatment?...</div>
+                                    </div>
+                                    <span class="unread-badge">3</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #4ECDC4;">ML</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Maria Lopez</span>
+                                            <span class="chat-time">9:22 AM</span>
+                                        </div>
+                                        <div class="last-message">Can I book FatFreeze for next week?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #45B7D1;">JW</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Jennifer Wu</span>
+                                            <span class="chat-time">8:54 AM</span>
+                                        </div>
+                                        <div class="last-message">I need to reschedule my 3pm today</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #96CEB4;">AT</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Amanda Taylor</span>
+                                            <span class="chat-time">8:41 AM</span>
+                                        </div>
+                                        <div class="last-message">Do you have any promotions?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FECA57;">RK</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Rachel Kim</span>
+                                            <span class="chat-time">8:15 AM</span>
+                                        </div>
+                                        <div class="last-message">What's the difference between...</div>
+                                    </div>
+                                    <span class="unread-badge">4</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #B983FF;">DN</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">David Ng</span>
+                                            <span class="chat-time">7:58 AM</span>
+                                        </div>
+                                        <div class="last-message">How long is the consultation?</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FD79A8;">LB</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Lisa Brown</span>
+                                            <span class="chat-time">7:45 AM</span>
+                                        </div>
+                                        <div class="last-message">Is the deposit refundable?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #A8E6CF;">MP</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Michael Park</span>
+                                            <span class="chat-time">7:32 AM</span>
+                                        </div>
+                                        <div class="last-message">Hello? Anyone there?...</div>
+                                    </div>
+                                    <span class="unread-badge">5</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FFD93D;">EG</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Emma Garcia</span>
+                                            <span class="chat-time">7:20 AM</span>
+                                        </div>
+                                        <div class="last-message">Can I pay in installments?</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #6BCB77;">JT</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">James Thompson</span>
+                                            <span class="chat-time">7:08 AM</span>
+                                        </div>
+                                        <div class="last-message">Do you do men's treatments?</div>
+                                    </div>
+                                    <span class="unread-badge">3</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FF6B9D;">SJ</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Sophia Johnson</span>
+                                            <span class="chat-time">6:55 AM</span>
+                                        </div>
+                                        <div class="last-message">URGENT - wedding next week!</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #C06C84;">AH</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Ashley Harris</span>
+                                            <span class="chat-time">6:42 AM</span>
+                                        </div>
+                                        <div class="last-message">What's your cancellation policy?</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <!-- Duplicate set for seamless scrolling -->
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FF6B6B;">SC</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Sarah Chen</span>
+                                            <span class="chat-time">9:37 AM</span>
+                                        </div>
+                                        <div class="last-message">Hi! How much is the Botox treatment?...</div>
+                                    </div>
+                                    <span class="unread-badge">3</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #4ECDC4;">ML</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Maria Lopez</span>
+                                            <span class="chat-time">9:22 AM</span>
+                                        </div>
+                                        <div class="last-message">Can I book FatFreeze for next week?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #45B7D1;">JW</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Jennifer Wu</span>
+                                            <span class="chat-time">8:54 AM</span>
+                                        </div>
+                                        <div class="last-message">I need to reschedule my 3pm today</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #96CEB4;">AT</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Amanda Taylor</span>
+                                            <span class="chat-time">8:41 AM</span>
+                                        </div>
+                                        <div class="last-message">Do you have any promotions?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FECA57;">RK</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Rachel Kim</span>
+                                            <span class="chat-time">8:15 AM</span>
+                                        </div>
+                                        <div class="last-message">What's the difference between...</div>
+                                    </div>
+                                    <span class="unread-badge">4</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #B983FF;">DN</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">David Ng</span>
+                                            <span class="chat-time">7:58 AM</span>
+                                        </div>
+                                        <div class="last-message">How long is the consultation?</div>
+                                    </div>
+                                    <span class="unread-badge">1</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #FD79A8;">LB</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Lisa Brown</span>
+                                            <span class="chat-time">7:45 AM</span>
+                                        </div>
+                                        <div class="last-message">Is the deposit refundable?</div>
+                                    </div>
+                                    <span class="unread-badge">2</span>
+                                </div>
+                                
+                                <div class="chat-item">
+                                    <div class="avatar" style="background: #A8E6CF;">MP</div>
+                                    <div class="chat-content">
+                                        <div class="chat-header">
+                                            <span class="contact-name">Michael Park</span>
+                                            <span class="chat-time">7:32 AM</span>
+                                        </div>
+                                        <div class="last-message">Hello? Anyone there?...</div>
+                                    </div>
+                                    <span class="unread-badge">5</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab Bar -->
+                        <div class="whatsapp-tab-bar">
+                            <div class="tab-item">
+                                <span class="tab-icon">○</span>
+                                <span>Status</span>
+                            </div>
+                            <div class="tab-item">
+                                <span class="tab-icon">📞</span>
+                                <span>Calls</span>
+                            </div>
+                            <div class="tab-item">
+                                <span class="tab-icon">⊙</span>
+                                <span>Communities</span>
+                            </div>
+                            <div class="tab-item active">
+                                <span class="tab-icon">💬</span>
+                                <span class="tab-badge">99+</span>
+                                <span>Chats</span>
+                            </div>
+                            <div class="tab-item">
+                                <span class="tab-icon">⚙</span>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="failure-text">
+            It failed. Too many conversations, too many different questions. The AI got confused, mixed things up.
+        </p>
+        
+        <!-- Breakthrough Box -->
+        <div class="breakthrough-box">
+            <h2>The Crazy Idea That Worked</h2>
+            
+            <p class="breakthrough-text">
+                Then our engineer said something crazy: "What if we use THREE specialized AIs instead of one?"
+            </p>
+            
+            <p class="solution-text">
+                We cloned their ability to <strong>#1.identify buyer intent</strong> into AI. <strong>#2.Their booking process</strong> into AI. <strong>#3.Their follow-up system</strong> into AI. Then made them work together on every single lead.
+            </p>
+            
+            <p class="result-text">
+                Dr. Lee's team went from drowning in 2,000 leads to closing high-ticket packages - while our 3-AI team handled everything routine.
+            </p>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Breakthrough Box Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+            background: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        /* Comparison container */
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            background: linear-gradient(135deg, #111827 0%, #4B5563 50%, #111827 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #111827; /* Fallback */
+            margin-bottom: 80px;
+            position: relative;
+            line-height: 1.2;
+        }
+
+        .comparison-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right,
+                transparent,
+                #FF7A45,
+                transparent);
+            border-radius: 2px;
+        }
+
+        .versions {
+            display: grid;
+            gap: 120px;
+            margin-bottom: 60px;
+        }
+
+        .version-label {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 50px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            display: inline-block;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .version-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 122, 69, 0.3);
+        }
+
+        .version-label::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: #FF7A45;
+            border-radius: 1px;
+        }
+
+        /* CURRENT VERSION */
+        .current-breakthrough-box {
+            background: #F8F9FA;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 50px 40px;
+            margin: 80px auto 0;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .current-breakthrough-box h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 30px;
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+            letter-spacing: -0.025em;
+        }
+
+        .current-breakthrough-box p {
+            font-size: 18px;
+            color: #4B5563;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .current-breakthrough-box p:last-child {
+            font-size: 20px;
+            color: #FF7A45;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* ENHANCED VERSION with subtle patterns */
+        .enhanced-breakthrough-box {
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 122, 69, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 122, 69, 0.06) 0%, transparent 50%),
+                linear-gradient(135deg,
+                    rgba(255, 122, 69, 0.04) 0%,
+                    rgba(255, 255, 255, 1) 50%,
+                    rgba(255, 122, 69, 0.04) 100%);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            border-radius: 24px;
+            padding: 60px 50px;
+            margin: 120px auto 80px;
+            max-width: 950px;
+            text-align: center;
+            box-shadow:
+                0 20px 60px rgba(255, 122, 69, 0.08),
+                0 8px 25px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            animation: breakthrough-pulse 4s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        /* Enhanced animated border with texture */
+        .enhanced-breakthrough-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg,
+                #FF7A45 0%,
+                rgba(255, 122, 69, 0.8) 25%,
+                #EA580C 50%,
+                rgba(255, 122, 69, 0.8) 75%,
+                #FF7A45 100%);
+            background-size: 400% 400%;
+            animation: border-flow 6s ease-in-out infinite;
+            border-radius: 24px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+            z-index: -1;
+        }
+
+        @keyframes border-flow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Add subtle dot pattern overlay */
+        .enhanced-breakthrough-box .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255, 122, 69, 0.1) 1px, transparent 0);
+            background-size: 20px 20px;
+            pointer-events: none;
+            border-radius: 24px;
+            opacity: 0.3;
+        }
+
+        /* Add decorative line above with animation */
+        .enhanced-breakthrough-box::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right,
+                transparent,
+                #FF7A45,
+                transparent);
+            border-radius: 2px;
+            animation: line-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes line-glow {
+            0%, 100% {
+                width: 80px;
+                opacity: 0.7;
+            }
+            50% {
+                width: 120px;
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(255, 122, 69, 0.4);
+            }
+        }
+
+        .enhanced-breakthrough-box:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+                0 30px 100px rgba(255, 122, 69, 0.15),
+                0 15px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add hover effect for individual paragraphs */
+        .enhanced-breakthrough-box p {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .enhanced-breakthrough-box p:hover {
+            transform: translateX(5px);
+            color: #374151;
+        }
+
+        /* Enhanced title styling with improved typography */
+        .enhanced-breakthrough-box h2 {
+            font-size: 1.875rem; /* text-3xl equivalent */
+            font-weight: 700; /* Increased weight for more impact */
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 50%, #FF7A45 100%);
+            background-size: 200% 200%;
+            animation: gradient-shift 4s ease-in-out infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #FF7A45; /* Fallback */
+            margin-bottom: 40px;
+            position: relative;
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            letter-spacing: -0.025em;
+            text-shadow: 0 4px 8px rgba(255, 122, 69, 0.2);
+            line-height: 1.2;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Responsive sizing to match sm:text-4xl */
+        @media (min-width: 640px) {
+            .enhanced-breakthrough-box h2 {
+                font-size: 2.25rem; /* text-4xl equivalent */
+            }
+        }
+
+        /* Add interactive accent element after title */
+        .enhanced-breakthrough-box h2::after {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            font-size: 0.6em;
+            animation: bulb-glow 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .enhanced-breakthrough-box h2:hover::after {
+            transform: scale(1.3) rotate(15deg);
+            filter: brightness(1.2);
+        }
+
+        @keyframes bulb-glow {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1) drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+            }
+            50% {
+                transform: scale(1.1);
+                filter: brightness(1.3) drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+            }
+        }
+
+        /* Enhanced paragraph styling with improved typography */
+        .enhanced-breakthrough-box p {
+            margin-bottom: 28px;
+            line-height: 1.7;
+            position: relative;
+            font-size: 18px;
+            color: #374151;
+            font-weight: 400;
+            letter-spacing: 0.015em;
+            max-width: 100%;
+        }
+
+        /* Progressive reveal animations */
+        .enhanced-breakthrough-box {
+            --reveal-delay: 0.3s;
+        }
+
+        .enhanced-breakthrough-box h2 {
+            opacity: 0;
+            animation: title-reveal 1s ease-out forwards;
+            animation-delay: 0.1s;
+        }
+
+        .enhanced-breakthrough-box p {
+            opacity: 0;
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+
+        /* Staggered reveal for AI callouts */
+        .enhanced-breakthrough-box p:nth-child(4) strong:nth-of-type(1) {
+            animation: ai-reveal 0.6s ease-out forwards;
+            animation-delay: 1.0s;
+            opacity: 0;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(4) strong:nth-of-type(2) {
+            animation: ai-reveal 0.6s ease-out forwards;
+            animation-delay: 1.3s;
+            opacity: 0;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(4) strong:nth-of-type(3) {
+            animation: ai-reveal 0.6s ease-out forwards;
+            animation-delay: 1.6s;
+            opacity: 0;
+        }
+
+        @keyframes title-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes ai-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Add intersection observer for scroll-triggered animations */
+        .enhanced-breakthrough-box.scroll-revealed {
+            animation-play-state: running;
+        }
+
+        .enhanced-breakthrough-box:not(.scroll-revealed) h2,
+        .enhanced-breakthrough-box:not(.scroll-revealed) p,
+        .enhanced-breakthrough-box:not(.scroll-revealed) strong {
+            animation-play-state: paused;
+        }
+
+        /* Enhanced three AI callouts with premium styling */
+        .enhanced-breakthrough-box p:nth-child(3) {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .enhanced-breakthrough-box p:nth-child(3) strong {
+            background: linear-gradient(135deg,
+                rgba(255, 122, 69, 0.15),
+                rgba(255, 122, 69, 0.08));
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: #EA580C;
+            border: 2px solid rgba(255, 122, 69, 0.25);
+            display: inline-block;
+            margin: 4px 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 122, 69, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .enhanced-breakthrough-box p:nth-child(3) strong:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 122, 69, 0.2);
+            background: linear-gradient(135deg,
+                rgba(255, 122, 69, 0.2),
+                rgba(255, 122, 69, 0.12));
+        }
+
+        /* Add number badges */
+        .enhanced-breakthrough-box p:nth-child(3) strong:nth-of-type(1)::before {
+            content: '1';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #FF7A45;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(255, 122, 69, 0.3);
+        }
+
+        .enhanced-breakthrough-box p:nth-child(3) strong:nth-of-type(2)::before {
+            content: '2';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #EA580C;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
+        }
+
+        .enhanced-breakthrough-box p:nth-child(3) strong:nth-of-type(3)::before {
+            content: '3';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: #DC2626;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Enhanced final result paragraph with premium styling */
+        .enhanced-breakthrough-box p:last-child {
+            background: linear-gradient(135deg,
+                rgba(255, 122, 69, 0.12),
+                rgba(255, 122, 69, 0.06),
+                rgba(255, 122, 69, 0.12));
+            border: 2px solid rgba(255, 122, 69, 0.3);
+            border-left: 6px solid #FF7A45;
+            padding: 28px 35px;
+            border-radius: 16px;
+            margin-top: 35px;
+            position: relative;
+            font-weight: 700;
+            font-size: 21px;
+            color: #EA580C;
+            text-align: left;
+            box-shadow:
+                0 8px 32px rgba(255, 122, 69, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.02em;
+            line-height: 1.5;
+        }
+
+        /* Enhanced glow effect with pulsing animation */
+        .enhanced-breakthrough-box p:last-child::before {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(to bottom, #FF7A45, #EA580C, #FF7A45);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(255, 122, 69, 0.4);
+            animation: border-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes border-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 122, 69, 0.4);
+                opacity: 0.8;
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 122, 69, 0.6);
+                opacity: 1;
+            }
+        }
+
+        /* Animations */
+        @keyframes breakthrough-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 20px 60px rgba(255, 122, 69, 0.08),
+                    0 8px 25px rgba(0, 0, 0, 0.06);
+            }
+            50% {
+                box-shadow:
+                    0 25px 80px rgba(255, 122, 69, 0.12),
+                    0 12px 35px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .comparison-container {
+                padding: 20px 15px;
+            }
+
+            .comparison-title {
+                font-size: clamp(24px, 6vw, 32px);
+                margin-bottom: 60px;
+            }
+
+            .comparison-title::after {
+                width: 80px;
+                bottom: -15px;
+            }
+
+            .versions {
+                gap: 80px;
+            }
+
+            .enhanced-breakthrough-box {
+                padding: 35px 20px;
+                margin: 60px auto 50px;
+                border-radius: 20px;
+            }
+
+            .enhanced-breakthrough-box h2 {
+                font-size: 1.75rem;
+                margin-bottom: 25px;
+            }
+
+            .enhanced-breakthrough-box h2::after {
+                right: -15px;
+                top: -5px;
+                font-size: 0.5em;
+            }
+
+            .enhanced-breakthrough-box p {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .enhanced-breakthrough-box p:last-child {
+                padding: 18px 20px;
+                margin-top: 20px;
+                font-size: 17px;
+            }
+
+            .current-breakthrough-box {
+                padding: 30px 18px;
+                margin: 60px auto 0;
+            }
+
+            .current-breakthrough-box h2 {
+                font-size: clamp(20px, 5vw, 28px);
+            }
+
+            .results-section {
+                margin: 40px auto;
+                padding: 0 10px;
+            }
+
+            .results-title {
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .metric-card {
+                padding: 20px 16px;
+            }
+
+            .metric-value {
+                font-size: 28px;
+            }
+
+            .nav-buttons {
+                margin: 40px 0;
+            }
+
+            .nav-button {
+                display: block;
+                width: 100%;
+                max-width: 280px;
+                margin: 8px auto;
+                padding: 16px 24px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .comparison-container {
+                padding: 15px 10px;
+            }
+
+            .enhanced-breakthrough-box {
+                padding: 25px 15px;
+                margin: 40px auto 30px;
+            }
+
+            .enhanced-breakthrough-box h2 {
+                font-size: 1.5rem;
+            }
+
+            .enhanced-breakthrough-box p {
+                font-size: 15px;
+            }
+
+            .current-breakthrough-box {
+                padding: 25px 15px;
+            }
+
+            .metric-card {
+                padding: 16px 12px;
+            }
+
+            .metric-value {
+                font-size: 24px;
+            }
+
+            .metric-icon {
+                font-size: 28px;
+            }
+        }
+
+        /* Results Metrics Cards */
+        .results-section {
+            margin: 60px auto;
+            max-width: 1000px;
+        }
+
+        .results-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 40px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 122, 69, 0.05) 50%,
+                rgba(255, 255, 255, 0.95) 100%);
+            border: 2px solid rgba(255, 122, 69, 0.15);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(255, 122, 69, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(255, 122, 69, 0.15);
+            border-color: rgba(255, 122, 69, 0.3);
+        }
+
+        .metric-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FF7A45;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .metric-sublabel {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        /* Staggered animation for metric cards */
+        .metric-card {
+            opacity: 0;
+            animation: slide-up 0.8s ease-out forwards;
+        }
+
+        .metric-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .metric-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .metric-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* AI Evolution Timeline Styles */
+        .ai-evolution-container {
+            margin: 40px 0;
+            padding: 30px 0;
+        }
+
+        .evolution-timeline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .evolution-step {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #E5E7EB;
+            border-radius: 20px;
+            padding: 24px 20px;
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.4s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .evolution-step.failed {
+            border-color: #FCA5A5;
+            background: linear-gradient(135deg, rgba(252, 165, 165, 0.1), rgba(255, 255, 255, 0.9));
+        }
+
+        .evolution-step.success {
+            border-color: #86EFAC;
+            background: linear-gradient(135deg, rgba(134, 239, 172, 0.1), rgba(255, 255, 255, 0.9));
+        }
+
+        .ai-visual {
+            margin-bottom: 16px;
+        }
+
+        .single-ai {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .single-ai .ai-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+            animation: shake 2s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-2deg); }
+            75% { transform: translateX(3px) rotate(2deg); }
+        }
+
+        .overload-indicator {
+            background: #DC2626;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            animation: pulse-red 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .ai-trio {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .specialist-ai {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            background: rgba(255, 122, 69, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 122, 69, 0.2);
+            min-width: 60px;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .specialist-ai:nth-child(1) { animation-delay: 0s; }
+        .specialist-ai:nth-child(2) { animation-delay: 0.5s; }
+        .specialist-ai:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .specialist-ai:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(255, 122, 69, 0.15);
+            border-color: rgba(255, 122, 69, 0.4);
+        }
+
+        .specialist-ai .ai-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .specialty-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #EA580C;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .status-indicator {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-indicator.failure {
+            background: #FEE2E2;
+            color: #DC2626;
+            border: 1px solid #FECACA;
+        }
+
+        .status-indicator.success {
+            background: #DCFCE7;
+            color: #16A34A;
+            border: 1px solid #BBF7D0;
+        }
+
+        .evolution-arrow {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .arrow-line {
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, #FF7A45, #EA580C);
+            position: relative;
+        }
+
+        .arrow-line::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid #EA580C;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .arrow-head {
+            font-size: 20px;
+            margin-left: 8px;
+            animation: spark 2s ease-in-out infinite;
+        }
+
+        @keyframes spark {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); filter: brightness(1.3); }
+        }
+
+        /* Hover effects for the entire evolution timeline */
+        .evolution-step:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .evolution-step.failed:hover {
+            border-color: #F87171;
+            box-shadow: 0 12px 30px rgba(248, 113, 113, 0.2);
+        }
+
+        .evolution-step.success:hover {
+            border-color: #4ADE80;
+            box-shadow: 0 12px 30px rgba(74, 222, 128, 0.2);
+        }
+
+        /* Mobile responsiveness for AI evolution */
+        @media (max-width: 768px) {
+            .evolution-timeline {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .evolution-arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+
+            .evolution-step {
+                min-width: 180px;
+                padding: 20px 16px;
+            }
+
+            .ai-trio {
+                gap: 8px;
+            }
+
+            .specialist-ai {
+                min-width: 50px;
+                padding: 6px;
+            }
+
+            .specialist-ai .ai-icon {
+                font-size: 20px;
+            }
+
+            .specialty-label {
+                font-size: 8px;
+            }
+        }
+
+        /* Interactive Toggle Button */
+        .toggle-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .comparison-toggle {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 122, 69, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .comparison-toggle:hover::before {
+            left: 100%;
+        }
+
+        .comparison-toggle:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(255, 122, 69, 0.4);
+        }
+
+        .comparison-toggle:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Enhanced current box interactivity */
+        .current-breakthrough-box {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .current-breakthrough-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            border-color: #D1D5DB;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 122, 69, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 122, 69, 0.4);
+        }
+
+        .nav-button.secondary {
+            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+            box-shadow: 0 4px 16px rgba(107, 114, 128, 0.3);
+        }
+
+        .nav-button.secondary:hover {
+            box-shadow: 0 8px 24px rgba(107, 114, 128, 0.4);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="comparison-container">
+        <h1 class="comparison-title">Breakthrough Box Design Comparison</h1>
+
+        <!-- Enhanced scroll trigger and animation script -->
+        <script>
+            // Intersection Observer for scroll-triggered animations
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-revealed');
+
+                        // Trigger metric counters if it's the metrics section
+                        if (entry.target.classList.contains('metrics-grid')) {
+                            animateMetricCounters();
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Animated counter function
+            function animateCounter(element, target, prefix = '', suffix = '', duration = 2000) {
+                let current = 0;
+                const increment = target / (duration / 16);
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                        element.textContent = prefix + target.toLocaleString() + suffix;
+                    } else {
+                        element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
+                    }
+                }, 16);
+            }
+
+            // Animate all metric counters
+            function animateMetricCounters() {
+                const revenueElement = document.querySelector('.metric-card:nth-child(1) .metric-value');
+                const appointmentsElement = document.querySelector('.metric-card:nth-child(2) .metric-value');
+                const staffElement = document.querySelector('.metric-card:nth-child(3) .metric-value');
+
+                if (revenueElement && !revenueElement.dataset.animated) {
+                    revenueElement.dataset.animated = 'true';
+                    animateCounter(revenueElement, 3700000, '$', '+');
+                }
+
+                if (appointmentsElement && !appointmentsElement.dataset.animated) {
+                    appointmentsElement.dataset.animated = 'true';
+                    animateCounter(appointmentsElement, 30546, '', '+');
+                }
+
+                if (staffElement && !staffElement.dataset.animated) {
+                    staffElement.dataset.animated = 'true';
+                    animateCounter(staffElement, 80, '', '+');
+                }
+            }
+
+            // AI Evolution Timeline interaction
+            function initializeAIEvolution() {
+                const evolutionSteps = document.querySelectorAll('.evolution-step');
+
+                evolutionSteps.forEach(step => {
+                    step.addEventListener('click', () => {
+                        // Add visual feedback for interaction
+                        step.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            step.style.transform = '';
+                        }, 150);
+
+                        // Optional: Add sound effects or more visual feedback
+                        if (step.classList.contains('failed')) {
+                            // Show tooltip or additional info about the problem
+                            console.log('Single AI was overwhelmed by 2,000 leads');
+                        } else if (step.classList.contains('success')) {
+                            // Show tooltip or additional info about the solution
+                            console.log('Three specialized AIs working in harmony');
+                        }
+                    });
+                });
+            }
+
+            // Initialize everything when DOM is loaded
+            document.addEventListener('DOMContentLoaded', () => {
+                const enhancedBox = document.querySelector('.enhanced-breakthrough-box');
+                const metricsGrid = document.querySelector('.metrics-grid');
+
+                if (enhancedBox) {
+                    observer.observe(enhancedBox);
+                }
+
+                if (metricsGrid) {
+                    observer.observe(metricsGrid);
+                }
+
+                // Initialize AI evolution interactions
+                initializeAIEvolution();
+            });
+        </script>
+
+        <div class="versions">
+            <!-- CURRENT VERSION -->
+            <div>
+                <div class="version-label">📋 Current Version</div>
+                <div class="current-breakthrough-box">
+                    <h2>The Crazy Idea That Worked</h2>
+
+                    <p>
+                        Then our engineer said something crazy: "What if we use THREE specialized AIs instead of one?"
+                    </p>
+
+                    <p>
+                        We cloned their ability to <strong>#1.identify buyer intent</strong> into AI. <strong>#2.Their booking process</strong> into AI. <strong>#3.Their follow-up system</strong> into AI. Then made them work together on every single lead.
+                    </p>
+
+                    <p>
+                        Dr. Lee's team went from drowning in 2,000 leads to closing high-ticket packages - while our 3-AI team handled everything routine.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ENHANCED VERSION -->
+            <div>
+                <div class="version-label">✨ Enhanced Version</div>
+                <div class="enhanced-breakthrough-box">
+                    <div class="pattern-overlay"></div>
+                    <h2>The Crazy Idea That Worked</h2>
+
+                    <p>
+                        Then our engineer said something crazy: "What if we use THREE specialized AIs instead of one?"
+                    </p>
+
+                    <!-- AI Evolution Timeline -->
+                    <div class="ai-evolution-container">
+                        <div class="evolution-timeline">
+                            <div class="evolution-step failed" data-step="before">
+                                <div class="ai-visual">
+                                    <div class="single-ai overwhelmed">
+                                        <div class="ai-icon">🤖</div>
+                                        <div class="overload-indicator">2,000 LEADS</div>
+                                    </div>
+                                </div>
+                                <div class="step-label">Single AI</div>
+                                <div class="status-indicator failure">OVERWHELMED</div>
+                            </div>
+
+                            <div class="evolution-arrow">
+                                <span class="arrow-line"></span>
+                                <span class="arrow-head">⚡</span>
+                            </div>
+
+                            <div class="evolution-step success" data-step="after">
+                                <div class="ai-visual">
+                                    <div class="ai-trio">
+                                        <div class="specialist-ai" data-specialty="intent">
+                                            <div class="ai-icon">🧠</div>
+                                            <div class="specialty-label">#1 Intent</div>
+                                        </div>
+                                        <div class="specialist-ai" data-specialty="booking">
+                                            <div class="ai-icon">📅</div>
+                                            <div class="specialty-label">#2 Booking</div>
+                                        </div>
+                                        <div class="specialist-ai" data-specialty="followup">
+                                            <div class="ai-icon">🔄</div>
+                                            <div class="specialty-label">#3 Follow-up</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="step-label">Three Specialists</div>
+                                <div class="status-indicator success">THRIVING</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        We cloned their ability to <strong>identify buyer intent</strong>, <strong>booking process</strong>, and <strong>follow-up system</strong> into three specialized AIs. Then made them work together on every single lead.
+                    </p>
+
+                    <p>
+                        Dr. Lee's team went from drowning in 2,000 leads to closing high-ticket packages - while our 3-AI team handled everything routine.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Metrics Section -->
+        <div class="results-section">
+            <h3 class="results-title">The Results Speak for Themselves</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-icon">💰</span>
+                    <div class="metric-value">$0</div>
+                    <div class="metric-label">Revenue Generated</div>
+                    <div class="metric-sublabel">Till Date</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">📅</span>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Appointments Booked</div>
+                    <div class="metric-sublabel">Confirmed</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">👥</span>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Staff Free to Upsell</div>
+                    <div class="metric-sublabel">Team members</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="window.location.href='http://localhost:8000'">
+                👀 View Full Site
+            </button>
+            <button class="nav-button secondary" onclick="window.close()">
+                ← Back
+            </button>
+        </div>
+    </div>
+</body>
+</html>

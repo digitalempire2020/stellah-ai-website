@@ -5,7 +5,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <!-- Font loading optimized and moved below -->
 <!-- TailwindCSS: Deferred loading to prevent render-blocking -->
-<script src="./tailwind.js"></script>
+<script>
+ // Load TailwindCSS asynchronously to prevent render-blocking
+ (function() {
+ var script = document.createElement('script');
+ script.src = 'https://cdn.tailwindcss.com';
+ script.async = true;
+ document.head.appendChild(script);
+ })();
+</script>
+<noscript>
+ <!-- Fallback for users with JavaScript disabled -->
+ <script src="https://cdn.tailwindcss.com"></script>
+</noscript>
 <style>
 html, body { height: 100%; scroll-behavior: smooth; }
 html { overflow-x: hidden; }

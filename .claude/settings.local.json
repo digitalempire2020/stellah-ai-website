@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Read(//tmp/**)",
+      "Bash(time curl:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:cdn.tailwindcss.com)",
+      "Bash(npm init:*)",
+      "Bash(/dev/null)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(./node_modules/.bin/tailwindcss:*)",
+      "Bash(chmod:*)",
+      "Bash(./tailwindcss:*)",
+      "Bash(gzip:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)",
+      "Bash(npm start)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
