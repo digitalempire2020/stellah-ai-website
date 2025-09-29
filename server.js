@@ -4,6 +4,18 @@ const forceHttpsWww = require('./middleware/forceHttpsWww');
 
 const app = express();
 
+// Force redirect for apex domain at the route level
+app.use((req, res, next) => {
+  const hostname = req.hostname || req.headers.host || '';
+  console.log(`Route check - Host: ${req.headers.host}, Hostname: ${hostname}`);
+
+  if (hostname === 'stellah.ai') {
+    console.log(`Force redirecting apex domain: ${hostname} -> www.stellah.ai`);
+    return res.redirect(301, `https://www.stellah.ai${req.url}`);
+  }
+  next();
+});
+
 // Apply the redirect middleware
 app.use(forceHttpsWww);
 
