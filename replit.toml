@@ -1,0 +1,9 @@
+[deployment]
+deploymentTarget = "autoscale"
+publicDir = "/"
+
+[[deployment.domains]]
+domain = "stellah.ai"
+
+[[deployment.domains]]
+domain = "www.stellah.ai"
