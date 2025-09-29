@@ -1,0 +1,112 @@
+[build]
+  # Build command for your application
+  command = "npm install && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch=false"
+
+  # Directory to publish (your app root since you're serving static files from root)
+  publish = "."
+
+  # Node.js version
+  environment = { NODE_VERSION = "18" }
+
+[build.processing]
+  # Optimize CSS and JS files
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = false
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# Functions configuration for your Express.js server
+[functions]
+  # Increase timeout for serverless functions (default is 10s, max is 26s)
+  timeout = 26
+
+# Redirect rules (these will override your _redirects file)
+[[redirects]]
+  # Force HTTPS and www for apex domain HTTP
+  from = "http://stellah.ai/*"
+  to = "https://www.stellah.ai/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  # Force HTTPS for www HTTP
+  from = "http://www.stellah.ai/*"
+  to = "https://www.stellah.ai/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  # Force apex domain to www (HTTPS)
+  from = "https://stellah.ai/*"
+  to = "https://www.stellah.ai/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  # SPA fallback - redirect all other requests to index.html for client-side routing
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.gif"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Environment variables (you can set these in Netlify UI as well)
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
