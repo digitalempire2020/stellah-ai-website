@@ -291,19 +291,12 @@ function handleExport() {
 
 // Show appointment details (Original)
 function showAppointmentDetails(appointment) {
-    const modal = createModal(`
-        <h3>${appointment.type}</h3>
-        <p><strong>Patient:</strong> ${appointment.patient}</p>
-        <p><strong>Time:</strong> ${appointment.time}</p>
-        <p><strong>Type:</strong> ${appointment.type}</p>
-        <p><strong>Status:</strong> ${appointment.urgent ? 'Urgent' : 'Regular'}</p>
-    `);
-
+    const modal = createModal(appointment);
     document.body.appendChild(modal);
 }
 
-// Create a modal (Original)
-function createModal(content) {
+// Create a modal (Original) - Using safe DOM methods
+function createModal(appointment) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed;
@@ -328,7 +321,45 @@ function createModal(content) {
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     `;
 
-    modal.innerHTML = content + '<button onclick="this.parentElement.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>';
+    // Create modal content using safe DOM methods
+    const heading = document.createElement('h3');
+    heading.textContent = appointment.type;
+    modal.appendChild(heading);
+
+    const patientPara = document.createElement('p');
+    const patientStrong = document.createElement('strong');
+    patientStrong.textContent = 'Patient: ';
+    patientPara.appendChild(patientStrong);
+    patientPara.appendChild(document.createTextNode(appointment.patient));
+    modal.appendChild(patientPara);
+
+    const timePara = document.createElement('p');
+    const timeStrong = document.createElement('strong');
+    timeStrong.textContent = 'Time: ';
+    timePara.appendChild(timeStrong);
+    timePara.appendChild(document.createTextNode(appointment.time));
+    modal.appendChild(timePara);
+
+    const typePara = document.createElement('p');
+    const typeStrong = document.createElement('strong');
+    typeStrong.textContent = 'Type: ';
+    typePara.appendChild(typeStrong);
+    typePara.appendChild(document.createTextNode(appointment.type));
+    modal.appendChild(typePara);
+
+    const statusPara = document.createElement('p');
+    const statusStrong = document.createElement('strong');
+    statusStrong.textContent = 'Status: ';
+    statusPara.appendChild(statusStrong);
+    statusPara.appendChild(document.createTextNode(appointment.urgent ? 'Urgent' : 'Regular'));
+    modal.appendChild(statusPara);
+
+    // Create close button using safe DOM methods
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.style.cssText = 'margin-top: 1rem; padding: 0.5rem 1rem; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer;';
+    closeButton.addEventListener('click', () => overlay.remove());
+    modal.appendChild(closeButton);
 
     overlay.appendChild(modal);
 
