@@ -1,7 +1,4 @@
 [build]
-  # Build command for your application
-  command = "npm install && npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch=false"
-
   # Directory to publish (your app root since you're serving static files from root)
   publish = "."
 
