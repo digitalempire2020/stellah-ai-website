@@ -33,7 +33,8 @@
       "Bash(git fetch:*)",
       "WebFetch(domain:app.netlify.com)",
       "Bash(cat:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:30ba1be7-a24f-4de2-adec-6d85e8ba429a-00-1ptht9l830x4o.pike.replit.dev)"
     ],
     "deny": [],
     "ask": []
