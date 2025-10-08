@@ -285,6 +285,9 @@ body { overflow-x: hidden; }
  cursor: pointer;
  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.progressive-card.expanded {
+ min-height: auto;
+}
 .progressive-card .initial-view {
  text-align: center;
  transition: all 0.3s ease;
@@ -298,10 +301,15 @@ body { overflow-x: hidden; }
  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
  display: none;
 }
-@media (max-width: 640px) {
- .progressive-card .detailed-view {
- inset: 0.75rem;
+@media (max-width: 1023px) {
+ .progressive-card.expanded .detailed-view {
+ position: static;
+ inset: auto;
  }
+ .progressive-card .detailed-view {
+ padding: 0.75rem;
+ }
+}
  /* Increase font size and spacing for graph labels on mobile */
  svg text[y="265"] {
  font-size: 24px !important;
@@ -318,8 +326,7 @@ body { overflow-x: hidden; }
 }
 /* Mobile: tap to toggle */
 .progressive-card.expanded .initial-view {
- opacity: 0;
- transform: scale(0.9);
+ display: none;
 }
 .progressive-card.expanded .detailed-view {
  display: block;
