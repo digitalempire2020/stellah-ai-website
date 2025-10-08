@@ -30,7 +30,9 @@
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
       "WebFetch(domain:dainty-manatee-27c31c.netlify.app)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "WebFetch(domain:app.netlify.com)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
