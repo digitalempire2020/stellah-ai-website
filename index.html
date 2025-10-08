@@ -22140,35 +22140,35 @@ document.addEventListener('DOMContentLoaded', function() {
  // Start line animations
  setTimeout(() => {
  if (capacityLine) capacityLine.classList.add('animate');
- }, 500);
+ }, 250);
  setTimeout(() => {
  if (workloadLine) workloadLine.classList.add('animate');
- }, 1000);
+ }, 500);
  // Show graph elements
  setTimeout(() => {
  if (gapFill) gapFill.classList.add('show');
  if (dataPoints) dataPoints.classList.add('show');
- }, 2000);
+ }, 1000);
  setTimeout(() => {
  if (crisisText) crisisText.classList.add('show');
- }, 2500);
+ }, 1250);
  // Start water effect
  setTimeout(() => {
  if (waterEffect) waterEffect.classList.add('animate');
- }, 3000);
+ }, 1500);
  // Animate counters
  setTimeout(() => {
  animateCounters();
- }, 2000);
+ }, 1000);
  }
  function animateCounters() {
  // Team size stays at 3
  // Animate overflow
- animateCounter(counterOverflow, 0, 2875, 2000, (value) => {
+ animateCounter(counterOverflow, 0, 2875, 1200, (value) => {
  return value.toLocaleString();
  });
  // Animate cost
- animateCounter(counterCost, 0, 21000, 2000, (value) => {
+ animateCounter(counterCost, 0, 21000, 1200, (value) => {
  return '$' + value.toLocaleString();
  });
  }
