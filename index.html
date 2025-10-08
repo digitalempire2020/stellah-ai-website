@@ -21923,6 +21923,13 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, {
  threshold: 0.5
 });
+// Helper function to format time in 12-hour format
+function formatTime12Hr(hour) {
+    if (hour === 12) return '12pm';
+    if (hour > 12) return `${hour - 12}pm`;
+    return `${hour}am`;
+}
+
 // Calendar simulation
 document.addEventListener('DOMContentLoaded', function() {
  // Initialize counter animations
@@ -21993,8 +22000,8 @@ document.addEventListener('DOMContentLoaded', function() {
  <div class="flex items-center justify-between text-[9px] sm:text-[11px] gap-1">
  <span class="inline-flex items-center gap-0.5 sm:gap-1 opacity-90">
  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 sm:w-3.5 h-3 sm:h-3.5 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
- <span class="hidden sm:inline">${8 + e.start}:00</span>
- <span class="sm:hidden">${8 + e.start}h</span>
+ <span class="hidden sm:inline">${formatTime12Hr(8 + e.start)}</span>
+ <span class="sm:hidden">${formatTime12Hr(8 + e.start)}</span>
  </span>
  <span class="inline-flex items-center gap-0.5 sm:gap-1 opacity-90">
  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 sm:w-3.5 h-3 sm:h-3.5 shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
