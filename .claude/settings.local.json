@@ -32,7 +32,8 @@
       "WebFetch(domain:dainty-manatee-27c31c.netlify.app)",
       "Bash(git fetch:*)",
       "WebFetch(domain:app.netlify.com)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
