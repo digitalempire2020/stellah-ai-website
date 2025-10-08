@@ -29,7 +29,8 @@
       "WebFetch(domain:docs.replit.com)",
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
-      "WebFetch(domain:dainty-manatee-27c31c.netlify.app)"
+      "WebFetch(domain:dainty-manatee-27c31c.netlify.app)",
+      "Bash(git fetch:*)"
     ],
     "deny": [],
     "ask": []
