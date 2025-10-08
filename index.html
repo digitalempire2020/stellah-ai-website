@@ -288,16 +288,18 @@ body { overflow-x: hidden; }
 .progressive-card .initial-view {
  text-align: center;
  transition: all 0.3s ease;
+ width: 100%;
 }
 .progressive-card .detailed-view {
  position: absolute;
- inset: 1rem;
+ inset: 0.75rem;
  opacity: 0;
  transform: translateY(10px);
  pointer-events: none;
  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
  display: none;
  overflow-y: auto;
+ max-height: calc(100% - 1.5rem);
 }
 @media (max-width: 1023px) {
  .progressive-card.expanded {
@@ -344,6 +346,7 @@ body { overflow-x: hidden; }
  .progressive-card:hover .initial-view {
  opacity: 0;
  transform: scale(0.9);
+ pointer-events: none;
  }
  .progressive-card:hover .detailed-view {
  display: block;
@@ -354,6 +357,7 @@ body { overflow-x: hidden; }
  .progressive-card:hover {
  transform: translateY(-4px);
  box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+ min-height: 320px;
  }
 }
 /* Tap indicator for mobile */
