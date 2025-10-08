@@ -490,8 +490,8 @@ body { overflow-x: hidden; }
  </div>
  <div class="px-2 sm:px-4 md:px-6 pb-6">
  <div class="rounded-xl border border-stone-200 overflow-hidden">
- <div class="grid grid-cols-7 gap-px bg-stone-200">
- <div class="col-span-7 grid grid-cols-7 gap-px">
+ <div class="grid grid-cols-5 gap-px bg-stone-200">
+ <div class="col-span-5 grid grid-cols-5 gap-px">
  <div id="dayHeader0" class="bg-white py-2 sm:py-3 text-center touch-manipulation">
  <p class="text-[10px] sm:text-xs text-stone-500">Mon</p>
  <p class="text-xs sm:text-sm font-medium tracking-tight">12</p>
@@ -512,16 +512,8 @@ body { overflow-x: hidden; }
  <p class="text-[10px] sm:text-xs text-stone-500">Fri</p>
  <p class="text-xs sm:text-sm font-medium tracking-tight">16</p>
  </div>
- <div id="dayHeader5" class="bg-white py-2 sm:py-3 text-center touch-manipulation">
- <p class="text-[10px] sm:text-xs text-stone-500">Sat</p>
- <p class="text-xs sm:text-sm font-medium tracking-tight">17</p>
  </div>
- <div id="dayHeader6" class="bg-white py-2 sm:py-3 text-center touch-manipulation">
- <p class="text-[10px] sm:text-xs text-stone-500">Sun</p>
- <p class="text-xs sm:text-sm font-medium tracking-tight">18</p>
- </div>
- </div>
- <div id="calendarGrid" class="relative col-span-7 bg-white">
+ <div id="calendarGrid" class="relative col-span-5 bg-white">
  <!-- hour grid (horizontal lines) -->
  <div class="absolute inset-0">
  <div class="absolute inset-x-0 top-[8.33%] border-t border-stone-100"></div>
@@ -538,12 +530,10 @@ body { overflow-x: hidden; }
  </div>
  <!-- vertical day dividers -->
  <div class="pointer-events-none absolute inset-y-0 left-0 right-0">
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 1);"></div>
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 2);"></div>
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 3);"></div>
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 4);"></div>
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 5);"></div>
- <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/7 * 6);"></div>
+ <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/5 * 1);"></div>
+ <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/5 * 2);"></div>
+ <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/5 * 3);"></div>
+ <div class="absolute top-0 bottom-0 border-l border-stone-100" style="left: calc(100%/5 * 4);"></div>
  </div>
  <!-- today's column highlight -->
  <div id="todayColumnHighlight" class="pointer-events-none absolute top-0 bottom-0 bg-indigo-50/60" style="left: 362.857px; width: 120.952px;"></div>
@@ -21938,7 +21928,7 @@ document.addEventListener('DOMContentLoaded', function() {
  counterObserver.observe(counter);
  });
  const capacity = 40; // target bookings for today
- const days = 7; // columns
+ const days = 5; // columns (Mon-Fri)
  const rows = 12; // 8am - 8pm (12 blocks = 1h increments)
  const eventsLayer = document.getElementById('eventsLayer');
  if (!eventsLayer) return; // Exit if calendar elements don't exist
