@@ -285,9 +285,6 @@ body { overflow-x: hidden; }
  cursor: pointer;
  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.progressive-card.expanded {
- min-height: auto;
-}
 .progressive-card .initial-view {
  text-align: center;
  transition: all 0.3s ease;
@@ -300,14 +297,19 @@ body { overflow-x: hidden; }
  pointer-events: none;
  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
  display: none;
+ overflow-y: auto;
 }
 @media (max-width: 1023px) {
- .progressive-card.expanded .detailed-view {
- position: static;
- inset: auto;
+ .progressive-card.expanded {
+ min-height: auto;
+ height: auto;
+ align-items: stretch;
+ justify-content: flex-start;
+ padding: 1rem;
  }
- .progressive-card .detailed-view {
- padding: 0.75rem;
+ .progressive-card.expanded .detailed-view {
+ position: relative;
+ inset: auto;
  }
 }
  /* Increase font size and spacing for graph labels on mobile */
