@@ -307,11 +307,14 @@ body { overflow-x: hidden; }
  justify-content: flex-start;
  padding: 1rem;
  }
+ .progressive-card.expanded .initial-view {
+ display: none !important;
+ }
  .progressive-card.expanded .detailed-view {
  position: relative;
  inset: auto;
+ width: 100%;
  }
-}
  /* Increase font size and spacing for graph labels on mobile */
  svg text[y="265"] {
  font-size: 24px !important;
