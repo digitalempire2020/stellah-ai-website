@@ -27,11 +27,12 @@ npm run netlify-build  # Netlify build command (same as build)
 Build compiles `src/input.css` → `output.css` using Tailwind CLI v4 beta.
 
 ### Deployment
-The site auto-deploys to Netlify on git push to `main` branch.
+The site auto-deploys to GitHub Pages on git push to `main` branch.
 - Production URL: `https://www.stellah.ai`
-- Apex domain: `stellah.ai` redirects to `www` subdomain (301)
-- Build command: `npm run netlify-build`
-- Publish directory: `.` (root)
+- GitHub Pages URL: `https://digitalempire2020.github.io/stellah-ai-website`
+- Apex domain: `stellah.ai` redirects to `www` subdomain (via DNS)
+- Deploy time: ~1-2 minutes after push
+- GitHub Pages serves static files directly (no build step needed)
 
 ## Architecture
 
@@ -56,7 +57,8 @@ The site auto-deploys to Netlify on git push to `main` branch.
 - **No framework** - Vanilla JavaScript (ES6+), no build tools except Tailwind
 - **Tailwind CSS 4.x beta** - Compiled via `@tailwindcss/cli` (v4.0.0-beta.7)
 - **Express 4.x** - Static file serving + redirect middleware (dev only)
-- **Netlify** - Production hosting with edge redirects and security headers
+- **GitHub Pages** - Production hosting with global CDN and automatic SSL
+- **Legacy netlify.toml** - Kept for reference, not actively used
 
 ### Key Patterns
 
@@ -217,15 +219,24 @@ When committing:
 
 ## Deployment Notes
 
-Netlify automatically deploys from `main` branch. The build process:
-1. Runs `npm run netlify-build` (compiles `src/input.css` → `output.css` with --minify)
-2. Serves files from root directory (`publish = "."`)
-3. Applies redirects from `netlify.toml` (apex → www, HTTP → HTTPS, SPA fallback)
-4. Sets security headers (`X-Frame-Options`, `X-Content-Type-Options`)
+GitHub Pages automatically deploys from `main` branch. The process:
+1. Push to `main` branch triggers automatic deployment
+2. GitHub Pages serves files from root directory (no build step needed)
+3. `404.html` handles SPA routing (redirects to index.html via JavaScript)
+4. Custom domain configured via `CNAME` file (`www.stellah.ai`)
+5. `.nojekyll` prevents Jekyll processing
+
+GitHub Pages configuration:
+- **CNAME** - Points to `www.stellah.ai`
+- **.nojekyll** - Disables Jekyll, serves files as-is
+- **404.html** - SPA fallback routing via JavaScript
 
 Debugging production issues:
-- Check Netlify deploy logs for build errors
-- Test redirect rules in `netlify.toml` carefully—`force: true` redirects override all others
-- Verify `output.css` is generated and not in `.gitignore`
-- Ensure `main` branch is the default branch for auto-deploy
+- Check GitHub Actions tab for deployment status
+- Verify `CNAME` contains correct domain
+- Ensure `output.css` is committed (not in `.gitignore`)
+- DNS: Apex domain uses A records to GitHub IPs, www uses CNAME
 - Test on actual mobile devices, not just browser DevTools
+- GitHub Pages deployment typically takes 1-2 minutes
+
+Note: `server.js` and Express are only for local development. Production uses GitHub Pages static hosting.
