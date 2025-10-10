@@ -20402,7 +20402,7 @@ body { overflow-x: hidden; }
  <span>Your 3 Receptionists</span>
  </div>
  <div class="h-10 bg-stone-100 rounded-full overflow-hidden">
- <div class="h-full bg-stone-400 rounded-full flex items-center justify-end pr-4 text-white text-sm font-medium transition-all duration-[1875ms] ease-out time-allocation-bar" style="width: 0%" data-width="80%">
+ <div class="h-full bg-stone-400 rounded-full flex items-center justify-end pr-4 text-white text-sm font-medium transition-all duration-[1500ms] ease-out time-allocation-bar" style="width: 0%" data-width="80%">
  80% Admin Tasks
  </div>
  </div>
@@ -20413,7 +20413,7 @@ body { overflow-x: hidden; }
  <span class="text-stone-600">Same People</span>
  </div>
  <div class="h-10 bg-stone-100 rounded-full overflow-hidden">
- <div class="h-full bg-orange-500 rounded-full flex items-center justify-end pr-4 text-white text-sm font-medium transition-all duration-[1875ms] ease-out time-allocation-bar" style="width: 0%" data-width="85%">
+ <div class="h-full bg-orange-500 rounded-full flex items-center justify-end pr-4 text-white text-sm font-medium transition-all duration-[1500ms] ease-out time-allocation-bar" style="width: 0%" data-width="85%">
  85% Revenue Generation
  </div>
  </div>
@@ -22236,7 +22236,7 @@ document.addEventListener('DOMContentLoaded', function() {
  timeBars.forEach(bar => {
  setTimeout(() => {
  bar.style.width = bar.dataset.width;
- }, 375);
+ }, 300);
  });
  animateObserver.unobserve(entry.target);
  }
