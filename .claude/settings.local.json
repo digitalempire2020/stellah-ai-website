@@ -38,7 +38,9 @@
       "WebFetch(domain:www.stellah.ai)",
       "WebSearch",
       "Bash(git pull:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(mkdir:*)",
+      "Bash(gh api:*)"
     ],
     "deny": [],
     "ask": []
