@@ -240,3 +240,115 @@ Debugging production issues:
 - GitHub Pages deployment typically takes 1-2 minutes
 
 Note: `server.js` and Express are only for local development. Production uses GitHub Pages static hosting.
+
+## Debugging Best Practices (Lessons Learned)
+
+### ALWAYS Use Systematic Debugging - Never Guess-and-Check
+
+When a user reports a visual or layout bug:
+
+**❌ DON'T DO THIS (Anti-Pattern):**
+1. Make assumptions about the cause
+2. Try a quick fix based on the assumption
+3. Commit and hope it works
+4. When user says "still broken," try another guess
+5. Repeat until something sticks
+
+**✅ DO THIS INSTEAD (Systematic Approach):**
+
+#### Step 1: Comparative Analysis FIRST
+```bash
+# Example: Month 9 card appears misaligned
+# Compare working vs broken elements line-by-line
+
+# Extract Month 1 (working)
+sed -n '20167,20195p' index.html > month1.txt
+
+# Extract Month 9 (broken)
+sed -n '20271,20305p' index.html > month9.txt
+
+# Find differences
+diff month1.txt month9.txt
+```
+
+#### Step 2: Identify ALL Differences
+Don't stop at the first difference. List everything that's different:
+- Classes
+- Inline styles
+- Structure
+- Child elements
+- Attributes
+
+#### Step 3: Research Each Difference
+```bash
+# Found: Month 9 has "pulse-animation" class
+# Research what it does
+grep -A 5 "pulse-animation" index.html
+grep -A 5 "@keyframes pulse" index.html
+
+# Understand: It applies translateX(-50%) which shifts left
+```
+
+#### Step 4: Verify Root Cause
+Before making ANY changes:
+- Confirm the difference you found actually causes the issue
+- Check if removing/adding it would logically fix the problem
+- Consider side effects
+
+#### Step 5: Make Targeted Fix
+Now and ONLY now, make a single, targeted change that addresses the root cause.
+
+### Real Example: Month 9 Alignment Issue
+
+**What Went Wrong:**
+- Spent hours trying responsive class tweaks (sm:, md:, lg:)
+- Added text-center class (didn't address root cause)
+- Made multiple commits hoping one would work
+- User had to say "still broken" multiple times
+
+**What Should Have Been Done:**
+```bash
+# 1. Compare immediately
+grep -A 3 "rounded-full.*Month 1" index.html
+grep -A 3 "rounded-full.*Month 9" index.html
+
+# Would have shown:
+# Month 1: ... justify-center text-white font-semibold ...>
+# Month 9: ... justify-center text-white font-semibold ... pulse-animation>
+#                                                          ^^^^^^^^^^^^^^^^
+
+# 2. Research pulse-animation
+grep -A 5 "@keyframes pulse" index.html
+# Shows: transform: translateX(-50%) ← This shifts it left!
+
+# 3. Remove pulse-animation
+# Done in 3 minutes instead of hours
+```
+
+### Key Lessons:
+
+1. **When user says "still broken" - STOP GUESSING**
+   - Go back to Step 1 (Comparative Analysis)
+   - You missed something in your diagnosis
+
+2. **Use diff-based debugging**
+   - Extract working element → file1
+   - Extract broken element → file2
+   - `diff file1 file2` shows exactly what's different
+
+3. **Trust the user's eyes**
+   - If they say it's broken, it's broken
+   - Don't assume your fix worked without verification
+   - They can see the rendered page; you can't
+
+4. **Understand before modifying**
+   - Research what each class/style does
+   - Don't add/remove things "to see if it works"
+
+5. **One change at a time**
+   - Make the minimal change needed
+   - Verify it works before additional changes
+
+6. **Document the root cause in commit messages**
+   - Helps future debugging
+   - Example: "Remove pulse-animation which was applying translateX(-50%)"
