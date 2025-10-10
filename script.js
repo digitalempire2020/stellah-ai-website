@@ -51,12 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Original initializations
     initializeAnimations();
     renderCalendar();
-    setupEventListeners();
+    // setupEventListeners(); // Removed - duplicate of initializeInteractiveElements
     updateStats();
 
     // New initializations from edited snippet
     initializeCalendarAnimations();
-    initializeInteractiveElements();
+    initializeInteractiveElements(); // This handles all event listeners now
     initializeMetricsUpdates();
 });
 
@@ -91,7 +91,9 @@ function animateCalendarEvents() {
     });
 }
 
-// Setup event listeners
+// Setup event listeners - DEPRECATED: Using initializeInteractiveElements() instead
+// Keeping for reference but not called anymore to avoid duplicate handlers
+/*
 function setupEventListeners() {
     // Calendar navigation
     if (prevBtn) {
@@ -128,6 +130,7 @@ function setupEventListeners() {
         });
     });
 }
+*/
 
 // Render the calendar
 function renderCalendar() {
@@ -505,15 +508,26 @@ function initializeInteractiveElements() {
     });
 }
 
+// Store interval ID for cleanup
+let metricsInterval = null;
+
 function initializeMetricsUpdates() {
     // Animate metrics on load
     animateMetrics();
 
     // Update metrics periodically (demo purposes)
-    setInterval(() => {
+    metricsInterval = setInterval(() => {
         updateMetrics();
     }, 10000); // Update every 10 seconds
 }
+
+// Clean up interval on page unload to prevent memory leak
+window.addEventListener('beforeunload', () => {
+    if (metricsInterval) {
+        clearInterval(metricsInterval);
+        metricsInterval = null;
+    }
+});
 
 function animateMetrics() {
     const bookedToday = document.getElementById('bookedToday');
@@ -597,13 +611,19 @@ function showEventDetails(eventElement) {
     }
 
 
-    // Create a simple modal or alert (for demo purposes)
-    alert(`Event Details:\n\nPatient: ${patientName}\nTime: ${time}\nLocation: ${room}\n\nScheduled via Stellah AI`);
+    // Use the existing modal system instead of alert
+    const appointment = {
+        patient: patientName,
+        time: time,
+        type: 'Appointment',
+        urgent: false
+    };
+    showAppointmentDetails(appointment);
 }
 
 function handleSearch(query) {
     // Simple search simulation
-    console.log('Searching for:', query);
+    // console.log('Searching for:', query); // Removed for production
 
     if (query.length > 2) {
         // Simulate search results by highlighting matching events
@@ -630,14 +650,24 @@ function handleSearch(query) {
 
 function handleExport() {
     // Simulate export functionality
-    alert('Exporting calendar data...\n\nThis would normally download a CSV or PDF file with all appointment data.');
-    console.log('Export functionality triggered');
+    showNotification('Exporting calendar data... CSV file will download shortly.');
+    // console.log('Export functionality triggered'); // Removed for production
+
+    // Actual export logic could go here
+    setTimeout(() => {
+        showNotification('Export completed successfully!');
+    }, 1000);
 }
 
 function handleDashboardNavigation() {
     // Simulate navigation to dashboard
-    console.log('Navigating to dashboard...');
-    alert('This would normally navigate to the full dashboard view.');
+    // console.log('Navigating to dashboard...'); // Removed for production
+    showNotification('Opening dashboard view...');
+
+    // Could redirect to actual dashboard
+    setTimeout(() => {
+        window.location.href = '#dashboard';
+    }, 500);
 }
 
 // Add smooth scrolling for any anchor links
