@@ -35,7 +35,10 @@
       "Bash(cat:*)",
       "Bash(find:*)",
       "WebFetch(domain:30ba1be7-a24f-4de2-adec-6d85e8ba429a-00-1ptht9l830x4o.pike.replit.dev)",
-      "WebFetch(domain:www.stellah.ai)"
+      "WebFetch(domain:www.stellah.ai)",
+      "WebSearch",
+      "Bash(git pull:*)",
+      "Bash(sed:*)"
     ],
     "deny": [],
     "ask": []
