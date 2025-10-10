@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // For GitHub Pages - redirect apex to www
+        if (window.location.hostname === 'stellah.ai') {
+            window.location.replace('https://www.stellah.ai' + window.location.pathname);
+        } else {
+            // For actual 404s, redirect to home
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

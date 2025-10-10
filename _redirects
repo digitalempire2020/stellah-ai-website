@@ -1,9 +1,7 @@
-# Force HTTPS
-http://stellah.ai/*    https://www.stellah.ai/:splat    301!
-http://www.stellah.ai/* https://www.stellah.ai/:splat   301!
+# Cloudflare Pages Redirects
+# Force apex to www (Cloudflare handles HTTPS automatically)
+stellah.ai/* https://www.stellah.ai/:splat 301
+www.stellah.ai/* https://www.stellah.ai/:splat 301
 
-# Force non-www to www
-https://stellah.ai/*   https://www.stellah.ai/:splat    301!
-
-# SPA fallback - redirect all requests to index.html for client-side routing
-/*    /index.html   200
+# SPA fallback - serve index.html for all routes
+/* /index.html 200
