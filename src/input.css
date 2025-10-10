@@ -1,0 +1,706 @@
+/* Tailwind CSS import - using v4 syntax */
+@import "tailwindcss";
+
+/* ===================================
+   Base Styles & Resets
+   =================================== */
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Font family utilities */
+.font-sans {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+.font-geist {
+  font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+/* ===================================
+   Animation Classes
+   =================================== */
+
+/* Fade In Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+.fade-in-delay-4 { animation-delay: 0.4s; }
+.fade-in-delay-5 { animation-delay: 0.5s; }
+.fade-in-delay-6 { animation-delay: 0.6s; }
+
+/* Slide In Animations */
+.slide-in {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.slide-in-delay-1 { animation-delay: 0.2s; }
+.slide-in-delay-2 { animation-delay: 0.4s; }
+
+/* Blur In Animations */
+.blur-in {
+  opacity: 0;
+  filter: blur(10px);
+  animation: blurIn 1s ease-out forwards;
+}
+
+.blur-in-delay-1 { animation-delay: 0.3s; }
+.blur-in-delay-2 { animation-delay: 0.6s; }
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blurIn {
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes scrollMessages {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes eventFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes infiniteScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ===================================
+   Components
+   =================================== */
+
+/* Glass Card Effect */
+.glass-card {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Gradient Border */
+.gradient-border {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.2), rgba(234, 88, 12, 0.2));
+  padding: 1px;
+  border-radius: 16px;
+}
+
+.gradient-border-inner {
+  background: white;
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+/* Dashboard Link */
+.dashboard-link {
+  color: #ea580c;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  transition: all 0.3s ease;
+}
+
+.dashboard-link:hover {
+  color: #c2410c;
+}
+
+/* Credibility Text */
+.credibility-text {
+  transition: all 0.3s ease;
+}
+
+.credibility-text:hover {
+  text-shadow: 0 0 8px rgba(234, 88, 12, 0.6), 0 0 16px rgba(234, 88, 12, 0.4);
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 8px;
+  background: #E5E5E5;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Graph Animations */
+.line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+.line-draw.animate {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Water Effect */
+.water-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0%;
+  opacity: 0;
+  background: linear-gradient(to top,
+    rgba(255, 107, 53, 0.15) 0%,
+    rgba(251, 146, 60, 0.08) 50%,
+    transparent 100%);
+  transition: all 3s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.water-effect.animate {
+  height: 75%;
+  opacity: 1;
+}
+
+/* Graph Elements */
+.graph-element {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.graph-element.show {
+  opacity: 1;
+}
+
+/* Scroll Trigger */
+.scroll-trigger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-trigger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pulse Animation */
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-warning {
+  background: #FCD34D;
+  color: #92400E;
+}
+
+.badge-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.badge-success {
+  background: #10B981;
+  color: white;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+  }
+}
+
+/* Progressive Disclosure Card */
+.progressive-card {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressive-card .initial-view {
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.progressive-card .detailed-view {
+  position: absolute;
+  inset: 0.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
+  overflow-y: auto;
+  max-height: calc(100% - 1.5rem);
+}
+
+/* Mobile Progressive Card */
+@media (max-width: 1023px) {
+  .progressive-card.expanded {
+    min-height: auto;
+    height: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1rem;
+  }
+
+  .progressive-card.expanded .initial-view {
+    display: none !important;
+  }
+
+  .progressive-card.expanded .detailed-view {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  /* Graph label adjustments for mobile */
+  svg text[y="265"] {
+    font-size: 24px !important;
+    transform: translateY(15px);
+  }
+
+  svg text[y="280"] {
+    font-size: 24px !important;
+    transform: translateY(25px);
+  }
+
+  svg text#crisis-text {
+    font-size: 20px !important;
+  }
+
+  .tap-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #525252;
+    opacity: 0.7;
+  }
+
+  .progressive-card.expanded .tap-hint {
+    display: none;
+  }
+}
+
+/* Mobile: tap to toggle */
+.progressive-card.expanded .initial-view {
+  display: none;
+}
+
+.progressive-card.expanded .detailed-view {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Desktop: hover to reveal */
+@media (hover: hover) and (min-width: 1024px) {
+  .progressive-card:hover .initial-view {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+  }
+
+  .progressive-card:hover .detailed-view {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .progressive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+    min-height: 320px;
+  }
+}
+
+/* Soft Colors */
+.text-soft-orange {
+  color: #FB923C;
+}
+
+.text-soft-red {
+  color: #F87171;
+}
+
+/* Animate scroll messages */
+.animate-scroll-messages {
+  animation: scrollMessages 8s linear infinite;
+}
+
+/* ===================================
+   Calendar Specific Styles
+   =================================== */
+
+/* Calendar Events */
+.calendar-event {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.calendar-event:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-event.urgent {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.calendar-event.follow-up {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.calendar-event-animate {
+  animation: eventFadeIn 0.6s ease-out forwards;
+}
+
+/* ===================================
+   Story Section (WhatsApp Phone)
+   =================================== */
+
+.story-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.phone-showcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px auto 80px;
+  position: relative;
+}
+
+.iphone-container {
+  position: relative;
+}
+
+.chaos-indicator {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  background: #DC2626;
+  color: white;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+.iphone-mockup {
+  width: 245px;
+  height: 497px;
+  background: #1c1c1e;
+  border-radius: 29px;
+  padding: 6px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 18px;
+  background: #1c1c1e;
+  border-radius: 0 0 11px 11px;
+  z-index: 100;
+}
+
+.iphone-screen {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 23px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* iOS Status Bar and WhatsApp UI styles */
+.ios-status-bar {
+  background: #F6F6F6;
+  padding: 6px 17px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+  height: 31px;
+}
+
+.whatsapp-header {
+  background: #F7F7F7;
+  border-bottom: 0.5px solid #B2B2B2;
+  padding-bottom: 6px;
+}
+
+.chat-list {
+  background: #fff;
+  height: calc(100% - 130px);
+  overflow: hidden;
+  position: relative;
+}
+
+.chat-scroll-container {
+  animation: infiniteScroll 12s linear infinite;
+}
+
+.chat-item {
+  display: flex;
+  padding: 7px 12px;
+  position: relative;
+  border-bottom: 0.5px solid #E5E5E5;
+}
+
+/* Breakthrough Box */
+.breakthrough-box {
+  background: #F8F9FA;
+  border: 2px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 50px 40px;
+  margin: 80px auto 0;
+  max-width: 900px;
+  text-align: center;
+}
+
+/* ===================================
+   Results Section Styles
+   =================================== */
+
+.counter-animate {
+  display: inline-block;
+}
+
+.flow-connector {
+  position: relative;
+}
+
+.flow-connector::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(to bottom, #FF7A45, transparent);
+}
+
+.metric-card {
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.metric-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 122, 69, 0.15);
+}
+
+.before-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.before-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #DC2626, #EF4444);
+}
+
+.after-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.after-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FF7A45, #EA580C);
+}
+
+.revenue-impact {
+  position: relative;
+  background: linear-gradient(135deg,
+    rgba(255, 122, 69, 0.05) 0%,
+    rgba(255, 122, 69, 0.02) 50%,
+    rgba(255, 122, 69, 0.05) 100%);
+  border: 2px solid rgba(255, 122, 69, 0.2);
+  overflow: hidden;
+}
+
+.revenue-impact::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 122, 69, 0.1) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Progress Dots */
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 30px 0;
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E5E7EB;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #FF7A45;
+}
+
+/* ===================================
+   Accessibility
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================================
+   Responsive Adjustments
+   =================================== */
+
+@media (max-width: 768px) {
+  .story-section {
+    padding: 40px 20px;
+  }
+
+  .phone-showcase {
+    margin: 40px auto 60px;
+  }
+
+  .breakthrough-box {
+    padding: 30px 20px;
+  }
+}
