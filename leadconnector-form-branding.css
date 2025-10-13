@@ -23,7 +23,7 @@
 /* Branded Header (appears above iframe) */
 .stellah-form-header {
   background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
-  padding: 24px 24px 20px;
+  padding: 22px 24px;
   position: relative;
   overflow: hidden;
 }
@@ -44,7 +44,7 @@
   font-size: 18px;
   font-weight: 600;
   color: #FFFFFF;
-  margin: 0 0 12px 0;
+  margin: 0;
   letter-spacing: -0.01em;
   position: relative;
   z-index: 1;
@@ -198,13 +198,13 @@
   }
 
   .stellah-form-header {
-    padding: 20px 16px 16px;
+    padding: 18px 16px;
   }
 
   .stellah-form-header h2 {
     font-size: 16px;
     line-height: 1.3;
-    margin: 0 0 10px 0;
+    margin: 0;
   }
 
   .stellah-trust-badge {
