@@ -705,3 +705,50 @@ bellAnimationStyle.textContent = `
     }
 `;
 document.head.appendChild(bellAnimationStyle);
+// ===================================
+// Book Demo Modal Functions
+// ===================================
+
+// Open modal function
+function openBookDemoModal() {
+  const modal = document.getElementById('bookDemoModal');
+  if (!modal) return;
+  
+  document.body.classList.add('modal-active');
+  modal.classList.remove('hidden');
+  modal.classList.add('modal-open');
+  
+  // Load form embed script if not already loaded
+  if (!window.formEmbedLoaded) {
+    const script = document.createElement('script');
+    script.src = 'https://link.msgsndr.com/js/form_embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+    window.formEmbedLoaded = true;
+  }
+  
+  // Focus close button for accessibility
+  setTimeout(() => {
+    modal.querySelector('button[onclick*="close"]')?.focus();
+  }, 100);
+}
+
+// Close modal function
+function closeBookDemoModal() {
+  const modal = document.getElementById('bookDemoModal');
+  if (!modal) return;
+  
+  modal.classList.remove('modal-open');
+  modal.classList.add('hidden');
+  document.body.classList.remove('modal-active');
+}
+
+// ESC key to close modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('bookDemoModal');
+    if (modal && !modal.classList.contains('hidden')) {
+      closeBookDemoModal();
+    }
+  }
+});

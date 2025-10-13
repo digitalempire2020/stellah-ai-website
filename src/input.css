@@ -704,3 +704,58 @@ body {
     padding: 30px 20px;
   }
 }
+
+/* ===================================
+   Modal Animations
+   =================================== */
+
+/* Modal fade in animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal slide up animation */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal open state */
+.modal-open {
+  display: block !important;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+.modal-open > div:last-child > div {
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+/* Prevent body scroll when modal is active */
+body.modal-active {
+  overflow: hidden;
+}
+
+/* Mobile responsive modal */
+@media (max-width: 640px) {
+  #bookDemoModal > div:last-child > div {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  #bookDemoModal iframe {
+    height: calc(100vh - 80px) !important;
+    border-radius: 0 !important;
+  }
+}
