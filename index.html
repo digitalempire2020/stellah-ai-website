@@ -22299,6 +22299,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Book Demo Modal Functions
 // ===================================
 
+// Global timeout reference for loading state
+let loadingTimeout = null;
+
 // Open modal function
 function openBookDemoModal() {
   const modal = document.getElementById('bookDemoModal');
@@ -22314,10 +22317,15 @@ function openBookDemoModal() {
     loadingState.classList.remove('hidden');
   }
 
-  // Fallback: Hide loading state after 3 seconds if iframe doesn't load
-  setTimeout(() => {
+  // Clear any existing timeout
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+  }
+
+  // Fallback: Hide loading state after 1.5 seconds if iframe doesn't load
+  loadingTimeout = setTimeout(() => {
     hideFormLoading();
-  }, 3000);
+  }, 1500);
 
   // Load form embed script if not already loaded
   if (!window.formEmbedLoaded) {
@@ -22342,15 +22350,25 @@ function closeBookDemoModal() {
   modal.classList.remove('modal-open');
   modal.classList.add('hidden');
   document.body.classList.remove('modal-active');
+
+  // Clear loading timeout if modal is closed
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+    loadingTimeout = null;
+  }
 }
 
 // Hide form loading state
 function hideFormLoading() {
+  // Clear the fallback timeout since iframe loaded
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+    loadingTimeout = null;
+  }
+
   const loadingState = document.getElementById('formLoadingState');
-  if (loadingState) {
-    setTimeout(() => {
-      loadingState.classList.add('hidden');
-    }, 300); // Small delay for smooth transition
+  if (loadingState && !loadingState.classList.contains('hidden')) {
+    loadingState.classList.add('hidden');
   }
 }
 
