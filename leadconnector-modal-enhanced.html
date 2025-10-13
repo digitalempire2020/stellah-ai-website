@@ -1,0 +1,155 @@
+<!-- ===================================
+     STELLAH AI - ENHANCED BOOK DEMO MODAL
+     Replace the existing modal in index.html with this version
+     =================================== -->
+
+<!-- Book Demo Modal -->
+<div id="bookDemoModal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div class="fixed inset-0 bg-stone-900/70 backdrop-blur-sm" onclick="closeBookDemoModal()"></div>
+
+  <!-- Modal Card -->
+  <div class="fixed inset-0 flex items-center justify-center p-4">
+    <div class="modal-container relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+
+      <!-- Branded Header -->
+      <div class="stellah-form-header">
+        <!-- Close Button -->
+        <button onclick="closeBookDemoModal()" class="close-button" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <h2>Book Your Live Demo</h2>
+        <p>See how Stellah AI saved $100,000+ per year for health and wellness businesses</p>
+
+        <!-- Trust Badge -->
+        <div class="stellah-trust-badge">
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          No credit card required
+        </div>
+      </div>
+
+      <!-- Iframe Wrapper -->
+      <div class="stellah-iframe-wrapper">
+        <!-- Loading State -->
+        <div class="stellah-form-loading" id="formLoadingState">
+          <div class="stellah-spinner"></div>
+          <p>Loading your demo booking form...</p>
+        </div>
+
+        <!-- Form Iframe -->
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI"
+          id="inline-sbDZ68KbvhNSNVgdlYAI"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Book a Demo"
+          data-height="600"
+          data-layout-iframe-id="inline-sbDZ68KbvhNSNVgdlYAI"
+          data-form-id="sbDZ68KbvhNSNVgdlYAI"
+          title="Book a Demo"
+          onload="hideFormLoading()"
+          style="width:100%;height:600px;border:none;">
+        </iframe>
+      </div>
+
+      <!-- Footer Trust Indicators -->
+      <div class="stellah-form-footer">
+        <div class="stellah-trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>15-minute demo</span>
+        </div>
+        <div class="stellah-trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15v2m-6 0v-2m-2-4a2 2 0 012-2h8a2 2 0 012 2v4H4v-4z"/>
+            <path d="M9 5a2 2 0 114 0v2H9V5z"/>
+          </svg>
+          <span>Your data is secure</span>
+        </div>
+        <div class="stellah-trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+            <path d="M3 5l9 6 9-6"/>
+          </svg>
+          <span>Instant confirmation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// Enhanced Modal Functions
+function openBookDemoModal() {
+  const modal = document.getElementById('bookDemoModal');
+  const body = document.body;
+
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.classList.add('modal-open');
+    body.classList.add('modal-active');
+
+    // Reset loading state
+    const loadingState = document.getElementById('formLoadingState');
+    if (loadingState) {
+      loadingState.classList.remove('hidden');
+    }
+  }
+}
+
+function closeBookDemoModal() {
+  const modal = document.getElementById('bookDemoModal');
+  const body = document.body;
+
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.classList.remove('modal-open');
+    body.classList.remove('modal-active');
+  }
+}
+
+function hideFormLoading() {
+  const loadingState = document.getElementById('formLoadingState');
+  if (loadingState) {
+    setTimeout(() => {
+      loadingState.classList.add('hidden');
+    }, 300); // Small delay for smooth transition
+  }
+}
+
+// Close on escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const modal = document.getElementById('bookDemoModal');
+    if (modal && !modal.classList.contains('hidden')) {
+      closeBookDemoModal();
+    }
+  }
+});
+
+// Close when clicking backdrop
+document.addEventListener('click', function(event) {
+  const modal = document.getElementById('bookDemoModal');
+  if (event.target === modal) {
+    closeBookDemoModal();
+  }
+});
+</script>
+
+<style>
+/* Link to external CSS file or embed the styles here */
+/* For production, include leadconnector-form-branding.css in the <head> */
+</style>

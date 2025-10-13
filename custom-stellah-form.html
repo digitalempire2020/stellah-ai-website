@@ -1,0 +1,653 @@
+<!-- ===================================
+     STELLAH AI - CUSTOM BRANDED FORM
+     Alternative to LeadConnector iframe - Full brand control
+     This form would submit to your backend or LeadConnector API
+     =================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Your Demo - Stellah AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F8F9FA;
+      padding: 40px 20px;
+      color: #333333;
+      line-height: 1.6;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+      padding: 40px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .form-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-header p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.92);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 9999px;
+      padding: 8px 16px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .form-body {
+      padding: 40px 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 8px;
+    }
+
+    label .required {
+      color: #DC2626;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: #333333;
+      background: #FFFFFF;
+      transition: all 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #FF7A45;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 122, 69, 0.1);
+    }
+
+    input[type="text"]::placeholder,
+    input[type="email"]::placeholder,
+    input[type="tel"]::placeholder,
+    textarea::placeholder {
+      color: #999999;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .submit-button {
+      width: 100%;
+      background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(255, 122, 69, 0.3);
+      letter-spacing: 0.3px;
+      margin-top: 8px;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 122, 69, 0.4);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-footer {
+      background: #F8F9FA;
+      padding: 24px 32px;
+      border-top: 1px solid #E5E7EB;
+    }
+
+    .trust-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #666666;
+      font-weight: 500;
+    }
+
+    .trust-item svg {
+      width: 16px;
+      height: 16px;
+      color: #10B981;
+      flex-shrink: 0;
+    }
+
+    .error-message {
+      color: #DC2626;
+      font-size: 13px;
+      margin-top: 6px;
+      font-weight: 500;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .input-error {
+      border-color: #DC2626 !important;
+    }
+
+    .input-error:focus {
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+    }
+
+    .success-message {
+      background: #F0FDF4;
+      border: 2px solid #10B981;
+      color: #065F46;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-message h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #065F46;
+    }
+
+    .success-message p {
+      font-size: 16px;
+      font-weight: 400;
+      color: #047857;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0;
+      }
+
+      .form-container {
+        border-radius: 0;
+      }
+
+      .form-header {
+        padding: 32px 24px;
+      }
+
+      .form-header h1 {
+        font-size: 28px;
+      }
+
+      .form-header p {
+        font-size: 15px;
+      }
+
+      .form-body {
+        padding: 32px 24px;
+      }
+
+      .form-footer {
+        padding: 20px 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-items {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #FFFFFF;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .button-content .spinner {
+      display: none;
+    }
+
+    .submit-button.loading .button-text {
+      opacity: 0;
+    }
+
+    .submit-button.loading .spinner {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <!-- Header -->
+    <div class="form-header">
+      <h1>Book Your Live Demo</h1>
+      <p>See how Stellah AI saved $100,000+ per year for health and wellness businesses</p>
+      <div class="trust-badge">
+        <svg viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        No credit card required
+      </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="form-body">
+      <form id="demoForm" novalidate>
+        <!-- Name Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name<span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="John" required>
+            <div class="error-message" id="firstNameError">Please enter your first name</div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name<span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+            <div class="error-message" id="lastNameError">Please enter your last name</div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Work Email<span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="john@medicalpractice.com" required>
+          <div class="error-message" id="emailError">Please enter a valid email address</div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number<span class="required">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+          <div class="error-message" id="phoneError">Please enter your phone number</div>
+        </div>
+
+        <!-- Practice Name -->
+        <div class="form-group">
+          <label for="practiceName">Practice Name<span class="required">*</span></label>
+          <input type="text" id="practiceName" name="practiceName" placeholder="Your Medical Practice" required>
+          <div class="error-message" id="practiceNameError">Please enter your practice name</div>
+        </div>
+
+        <!-- Practice Type -->
+        <div class="form-group">
+          <label for="practiceType">Practice Type<span class="required">*</span></label>
+          <select id="practiceType" name="practiceType" required>
+            <option value="">Select your practice type</option>
+            <option value="medical">Medical Clinic</option>
+            <option value="dental">Dental Practice</option>
+            <option value="dermatology">Dermatology</option>
+            <option value="chiropractic">Chiropractic</option>
+            <option value="aesthetics">Aesthetics / Med Spa</option>
+            <option value="multi-location">Multi-Location Chain</option>
+            <option value="other">Other Healthcare</option>
+          </select>
+          <div class="error-message" id="practiceTypeError">Please select your practice type</div>
+        </div>
+
+        <!-- Monthly Leads -->
+        <div class="form-group">
+          <label for="monthlyLeads">Approximate Monthly Leads</label>
+          <select id="monthlyLeads" name="monthlyLeads">
+            <option value="">Select range</option>
+            <option value="0-100">0-100 leads</option>
+            <option value="100-500">100-500 leads</option>
+            <option value="500-1000">500-1,000 leads</option>
+            <option value="1000-2000">1,000-2,000 leads</option>
+            <option value="2000+">2,000+ leads</option>
+          </select>
+        </div>
+
+        <!-- Additional Comments -->
+        <div class="form-group">
+          <label for="comments">What challenges are you facing? (Optional)</label>
+          <textarea id="comments" name="comments" placeholder="Tell us about your current lead management challenges..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button" id="submitBtn">
+          <span class="button-content">
+            <span class="button-text">BOOK MY DEMO</span>
+            <span class="spinner"></span>
+          </span>
+        </button>
+      </form>
+
+      <!-- Success Message (hidden by default) -->
+      <div class="success-message" id="successMessage">
+        <h2>Thank You!</h2>
+        <p>We've received your demo request. Our team will contact you within 24 hours to schedule your personalized demo.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="form-footer">
+      <div class="trust-items">
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span>15-minute demo</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15v2m-6 0v-2m-2-4a2 2 0 012-2h8a2 2 0 012 2v4H4v-4z"/>
+            <path d="M9 5a2 2 0 114 0v2H9V5z"/>
+          </svg>
+          <span>Your data is secure</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+            <path d="M3 5l9 6 9-6"/>
+          </svg>
+          <span>Instant confirmation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Form validation and submission
+    const form = document.getElementById('demoForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMessage = document.getElementById('successMessage');
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Phone validation regex (basic)
+    const phoneRegex = /^[\d\s\-\(\)]+$/;
+
+    // Validate single field
+    function validateField(field) {
+      const fieldId = field.id;
+      const value = field.value.trim();
+      const errorElement = document.getElementById(fieldId + 'Error');
+      let isValid = true;
+
+      // Remove previous error state
+      field.classList.remove('input-error');
+      errorElement.classList.remove('show');
+
+      // Check if required field is empty
+      if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        field.classList.add('input-error');
+        errorElement.textContent = 'This field is required';
+        errorElement.classList.add('show');
+        return isValid;
+      }
+
+      // Email validation
+      if (fieldId === 'email' && value && !emailRegex.test(value)) {
+        isValid = false;
+        field.classList.add('input-error');
+        errorElement.textContent = 'Please enter a valid email address';
+        errorElement.classList.add('show');
+      }
+
+      // Phone validation
+      if (fieldId === 'phone' && value && !phoneRegex.test(value)) {
+        isValid = false;
+        field.classList.add('input-error');
+        errorElement.textContent = 'Please enter a valid phone number';
+        errorElement.classList.add('show');
+      }
+
+      return isValid;
+    }
+
+    // Validate all fields
+    function validateForm() {
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
+
+      requiredFields.forEach(field => {
+        if (!validateField(field)) {
+          isValid = false;
+        }
+      });
+
+      return isValid;
+    }
+
+    // Add real-time validation
+    const inputFields = form.querySelectorAll('input, select, textarea');
+    inputFields.forEach(field => {
+      field.addEventListener('blur', function() {
+        validateField(this);
+      });
+
+      field.addEventListener('input', function() {
+        // Clear error on input
+        if (this.classList.contains('input-error')) {
+          this.classList.remove('input-error');
+          const errorElement = document.getElementById(this.id + 'Error');
+          if (errorElement) {
+            errorElement.classList.remove('show');
+          }
+        }
+      });
+    });
+
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Validate form
+      if (!validateForm()) {
+        // Scroll to first error
+        const firstError = form.querySelector('.input-error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+
+      // Collect form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      try {
+        // REPLACE THIS URL WITH YOUR ACTUAL SUBMISSION ENDPOINT
+        // Option 1: Submit to LeadConnector API
+        // Option 2: Submit to your backend which then sends to LeadConnector
+        // Option 3: Use LeadConnector webhook URL
+
+        const response = await fetch('YOUR_SUBMISSION_ENDPOINT_HERE', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          // Success - hide form, show success message
+          form.style.display = 'none';
+          successMessage.classList.add('show');
+
+          // Optional: Track conversion
+          if (window.gtag) {
+            gtag('event', 'conversion', {
+              'send_to': 'YOUR_CONVERSION_ID',
+              'event_category': 'Form',
+              'event_label': 'Demo Booking'
+            });
+          }
+
+          // Optional: Redirect after 3 seconds
+          // setTimeout(() => {
+          //   window.location.href = '/thank-you';
+          // }, 3000);
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Something went wrong. Please try again or contact us directly.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+      }
+    });
+
+    // Phone number formatting (US format)
+    const phoneInput = document.getElementById('phone');
+    phoneInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+
+      if (value.length > 0) {
+        if (value.length <= 3) {
+          value = `(${value}`;
+        } else if (value.length <= 6) {
+          value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+        } else {
+          value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+        }
+      }
+
+      e.target.value = value;
+    });
+  </script>
+</body>
+</html>

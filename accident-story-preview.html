@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellah AI - The Accident That Changed Everything</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #FAFAFA, #FFFFFF);
+            color: #1F2937;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Card Component from Main Landing Page */
+        .card {
+            background: white;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        .progressive-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-success {
+            background: #10B981;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #FCD34D;
+            color: #92400E;
+        }
+
+        .badge-danger {
+            background: #EF4444;
+            color: white;
+        }
+
+        /* Scroll Animations */
+        .scroll-trigger {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-trigger.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Add stagger delay for cards */
+        .progressive-card:nth-child(1) { transition-delay: 0s; }
+        .progressive-card:nth-child(2) { transition-delay: 0.1s; }
+        .progressive-card:nth-child(3) { transition-delay: 0.2s; }
+        .progressive-card:nth-child(4) { transition-delay: 0.3s; }
+
+        /* Specialist Cards */
+        .specialist-card {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .specialist-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 122, 69, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .specialist-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 122, 69, 0.15);
+            border-color: #FF7A45;
+        }
+
+        .specialist-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Icon Styles */
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, rgba(255, 122, 69, 0.1), rgba(255, 122, 69, 0.2));
+            border-radius: 16px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.8s ease-out;
+            border-radius: 4px;
+        }
+
+        /* Revelation Section */
+        .revelation-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFFFFF);
+            border: 2px solid #FF7A45;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .revelation-box::before {
+            content: '💡';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            background: white;
+            padding: 0 10px;
+        }
+
+        /* Result Card */
+        .result-card {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        /* Comparison Section */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .wrong-solution {
+            background: #FEF2F2;
+            border: 2px solid #FCA5A5;
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .right-solution {
+            background: #F0FDF4;
+            border: 2px solid #86EFAC;
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .solution-icon {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 5px 15px;
+            font-size: 24px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .specialist-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+            }
+
+            .progressive-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #FF7A45, #EA580C);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 122, 69, 0.3);
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 122, 69, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 py-20">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in-up">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                The Accident That Changed <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Everything</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-12">
+                We discovered the solution by accident.
+            </p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
+                Our first client, Dr. Lee, had 4 receptionists drowning in WhatsApp messages.
+                They installed a DIY AI Chatbot. The obvious solution everyone tries first.
+            </p>
+            <div class="flex justify-center">
+                <svg class="w-8 h-8 text-gray-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Week Timeline Section -->
+    <section class="py-12 sm:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 bg-gradient-to-b from-stone-50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+                <p class="text-orange-600 font-semibold text-sm sm:text-base tracking-wide uppercase mb-3 sm:mb-4">The Breakdown</p>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight mb-4 sm:mb-6">The 5-Week Disaster Timeline</h2>
+                <p class="text-base sm:text-lg lg:text-xl text-stone-600 max-w-3xl mx-auto">What happens when you install a "smart" chatbot that's actually just a flowchart in disguise</p>
+            </div>
+
+            <div class="week-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Week 1 -->
+                <article class="card scroll-trigger progressive-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="p-4 sm:p-6">
+                        <!-- Header with week badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                                1
+                            </div>
+                            <span class="text-3xl sm:text-4xl">✅</span>
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-stone-900 tracking-tight mb-2">Week 1</h3>
+                        <p class="text-2xl sm:text-3xl font-bold text-green-600 mb-3">Perfect</p>
+                        <p class="text-sm sm:text-base text-stone-700 mb-4">It handled basic questions perfectly.</p>
+
+                        <!-- Chat Preview -->
+                        <div class="bg-stone-50 rounded-lg p-3 sm:p-4 border border-stone-200 mb-3">
+                            <div class="space-y-2">
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-2 rounded-2xl rounded-tr-sm text-sm max-w-[80%]">
+                                        What are your hours?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-2 rounded-2xl rounded-tl-sm text-sm max-w-[80%] text-stone-800">
+                                        We're open Mon-Fri 9-6!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs sm:text-sm text-stone-500 italic text-center">Simple. Done.</p>
+                    </div>
+                </article>
+
+                <!-- Week 3 -->
+                <article class="card scroll-trigger progressive-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="p-4 sm:p-6">
+                        <!-- Header with week badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                                3
+                            </div>
+                            <span class="text-3xl sm:text-4xl">⚠️</span>
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-stone-900 tracking-tight mb-2">Week 3</h3>
+                        <p class="text-2xl sm:text-3xl font-bold text-orange-600 mb-3">Memory Meltdown</p>
+                        <p class="text-sm sm:text-base text-stone-700 mb-4">The bot forgot everything mid-conversation.</p>
+
+                        <!-- Chat Preview -->
+                        <div class="bg-stone-50 rounded-lg p-3 sm:p-4 border border-stone-200 mb-3">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                        Any appointments this week?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        Yes! When?
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                        Thursday?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        What service?
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                        I just asked about Thursday...
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        Hello! How can I help?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs sm:text-sm text-orange-600 font-medium text-center">Started over. Every. Single. Time.</p>
+                    </div>
+                </article>
+
+                <!-- Week 4 -->
+                <article class="card scroll-trigger progressive-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                    <div class="p-4 sm:p-6">
+                        <!-- Header with week badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                                4
+                            </div>
+                            <span class="text-3xl sm:text-4xl">🔥</span>
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-stone-900 tracking-tight mb-2">Week 4</h3>
+                        <p class="text-2xl sm:text-3xl font-bold text-red-600 mb-3">Infinite Loop</p>
+                        <p class="text-sm sm:text-base text-stone-700 mb-4">Customer rage-quit. Left a 1-star review.</p>
+
+                        <!-- Chat Preview -->
+                        <div class="bg-stone-50 rounded-lg p-3 sm:p-4 border border-red-200 mb-3">
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        Book an appointment?
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                        What's Morpheus8 downtime?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        Book an appointment?
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <div class="bg-orange-500 text-white px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[80%]">
+                                        But the downtime?
+                                    </div>
+                                </div>
+                                <div class="flex justify-start">
+                                    <div class="bg-white border border-stone-200 px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[80%] text-stone-800">
+                                        Book an appointment?
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs sm:text-sm text-red-600 font-semibold text-center">⭐ "This bot is useless"</p>
+                    </div>
+                </article>
+
+                <!-- Week 5 -->
+                <article class="card scroll-trigger progressive-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-2 border-red-300">
+                    <div class="p-4 sm:p-6">
+                        <!-- Header with week badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-lg">
+                                5
+                            </div>
+                            <span class="text-3xl sm:text-4xl">💀</span>
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-stone-900 tracking-tight mb-2">Week 5</h3>
+                        <p class="text-2xl sm:text-3xl font-bold text-red-800 mb-3">The Truth</p>
+                        <p class="text-sm sm:text-base text-stone-700 mb-4">Dr. Lee realized the ugly truth.</p>
+
+                        <!-- Revelation Box -->
+                        <div class="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-3 sm:p-4 mb-3">
+                            <p class="text-sm sm:text-base text-red-900 font-semibold mb-2">They'd installed a vending machine that says "Hello, how can I help you?"</p>
+                            <p class="text-xs sm:text-sm text-red-700">The chatbot could only follow pre-programmed flows. When a patient asked "What about that thing for wrinkles but not the injection one?" - it couldn't reason.</p>
+                        </div>
+
+                        <div class="bg-stone-900 text-white rounded-lg p-3 text-center">
+                            <p class="text-xs sm:text-sm font-bold">This wasn't conversation.</p>
+                            <p class="text-xs sm:text-sm font-bold">It was a flowchart pretending to chat.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revelation Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="revelation-box scroll-trigger">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">That's When We Stepped In</h2>
+                <p class="text-xl text-center text-gray-700 mb-8">
+                    We realized everyone was solving the wrong problem.
+                </p>
+
+                <div class="comparison-container">
+                    <div class="wrong-solution">
+                        <span class="solution-icon">❌</span>
+                        <h3 class="text-xl font-bold mb-4 mt-4">Everyone Else</h3>
+                        <p class="text-gray-700">Trying to make chatbots smarter</p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li>• More AI training</li>
+                            <li>• More complex flows</li>
+                            <li>• More keywords to match</li>
+                        </ul>
+                    </div>
+
+                    <div class="right-solution">
+                        <span class="solution-icon">✅</span>
+                        <h3 class="text-xl font-bold mb-4 mt-4">Stellah</h3>
+                        <p class="text-gray-700">Making them specialists</p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li>• Focused expertise</li>
+                            <li>• Clear responsibilities</li>
+                            <li>• Perfect coordination</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 border border-orange-200 rounded-xl p-6 mt-8">
+                    <p class="text-lg text-center text-gray-800">
+                        <strong>Think about your practice:</strong> You don't have one super-human doing everything.
+                    </p>
+                    <p class="text-center text-gray-600 mt-2">
+                        You have a consultation specialist, a scheduling coordinator, and a clinic manager.
+                    </p>
+                    <p class="text-center text-gray-600 mt-2">
+                        Each exceptional at their role.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three Specialists Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-orange-50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">So We Built The Same Architecture in AI</h2>
+
+            <div class="specialist-grid grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <!-- Specialist 1 -->
+                <div class="specialist-card scroll-trigger">
+                    <div class="icon-wrapper">
+                        <span>🧠</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">AI #1: Intent Specialist</h3>
+                    <p class="text-gray-600 text-center">Only understands what patients really want</p>
+                    <div class="mt-6 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Decodes complex questions</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Understands context</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Identifies real needs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialist 2 -->
+                <div class="specialist-card scroll-trigger" style="animation-delay: 0.1s">
+                    <div class="icon-wrapper">
+                        <span>📅</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">AI #2: Scheduling Coordinator</h3>
+                    <p class="text-gray-600 text-center">Only handles perfect scheduling</p>
+                    <div class="mt-6 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Never double-books</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Optimizes provider time</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Handles rescheduling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialist 3 -->
+                <div class="specialist-card scroll-trigger" style="animation-delay: 0.2s">
+                    <div class="icon-wrapper">
+                        <span>🛡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">AI #3: Practice Guardian</h3>
+                    <p class="text-gray-600 text-center">Only protects your practice</p>
+                    <div class="mt-6 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Filters tire-kickers</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Qualifies patients</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-green-500">✓</span>
+                            <span class="text-sm text-gray-700">Protects team time</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-xl font-semibold text-gray-800">When they work together?</p>
+                <p class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500 mt-2">Magic happens.</p>
+                <p class="text-lg text-gray-600 mt-4">Actual conversation. Not flowchart tennis.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="result-card scroll-trigger">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">The Result</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <p class="text-5xl font-bold mb-2">72%</p>
+                        <p class="text-xl">Show Rate</p>
+                    </div>
+                    <div>
+                        <p class="text-5xl font-bold mb-2">$97,500</p>
+                        <p class="text-xl">Additional Revenue</p>
+                    </div>
+                    <div>
+                        <p class="text-5xl font-bold mb-2">90</p>
+                        <p class="text-xl">Days</p>
+                    </div>
+                </div>
+                <div class="bg-white/20 rounded-xl p-6 backdrop-blur">
+                    <p class="text-xl font-semibold">The Revelation:</p>
+                    <p class="text-lg mt-2">Every medical spa installing "AI chatbots" is making Dr. Lee's mistake.</p>
+                    <p class="text-lg mt-2">They're asking one bot to do three specialist jobs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Comparison -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-white rounded-2xl p-12 shadow-xl scroll-trigger">
+                <p class="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
+                    Three specialists beat one generalist.
+                </p>
+                <p class="text-4xl md:text-5xl font-bold mb-8">
+                    Every time.
+                </p>
+                <hr class="my-8 border-gray-200">
+                <p class="text-xl text-gray-600 italic mb-8">
+                    That's the difference between a chatbot and Stellah.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                    <div class="text-center">
+                        <p class="text-6xl mb-4">📝</p>
+                        <p class="text-2xl font-bold text-gray-400">Chatbots</p>
+                        <p class="text-xl text-gray-600 mt-2">Follow scripts</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-6xl mb-4">🧠</p>
+                        <p class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Stellah</p>
+                        <p class="text-xl text-gray-800 mt-2">Thinks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Stop Playing Flowchart Tennis?</h2>
+            <p class="text-xl text-gray-600 mb-12">Let three AI specialists handle your conversations while you focus on patients.</p>
+            <button class="cta-button" onclick="alert('Integration with main site CTA')">
+                See How Stellah Works →
+            </button>
+            <p class="text-sm text-gray-500 mt-6">No scripts. No flowcharts. Just thinking.</p>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animations - matching main landing page
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-trigger elements
+        document.querySelectorAll('.scroll-trigger').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add progress bars animation if they exist
+        window.addEventListener('scroll', () => {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    bar.style.width = bar.dataset.width || '100%';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
