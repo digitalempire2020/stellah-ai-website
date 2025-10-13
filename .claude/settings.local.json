@@ -40,7 +40,13 @@
       "Bash(git pull:*)",
       "Bash(sed:*)",
       "Bash(mkdir:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(PORT=5000 node server.js)",
+      "Bash(fuser:*)",
+      "Bash(echo $REPL_SLUG)",
+      "Bash(echo $REPL_OWNER)"
     ],
     "deny": [],
     "ask": []
