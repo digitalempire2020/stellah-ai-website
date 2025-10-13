@@ -22314,6 +22314,11 @@ function openBookDemoModal() {
     loadingState.classList.remove('hidden');
   }
 
+  // Fallback: Hide loading state after 3 seconds if iframe doesn't load
+  setTimeout(() => {
+    hideFormLoading();
+  }, 3000);
+
   // Load form embed script if not already loaded
   if (!window.formEmbedLoaded) {
     const script = document.createElement('script');
