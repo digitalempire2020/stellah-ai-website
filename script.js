@@ -817,16 +817,27 @@ function initializeAgentsSlider() {
         // Update transform
         slider.style.transform = `translateX(-${currentSlide * 100}%)`;
 
-        // Update dots
+        // Agent names for screen reader announcements
+        const agentNames = ['Client Care Specialist', 'Wellness Coordinator', 'Appointment Specialist'];
+
+        // Update dots and ARIA attributes
         dots.forEach((dot, index) => {
             if (index === currentSlide) {
                 dot.classList.remove('bg-stone-300');
                 dot.classList.add('bg-orange-500');
+                dot.setAttribute('aria-selected', 'true');
             } else {
                 dot.classList.remove('bg-orange-500');
                 dot.classList.add('bg-stone-300');
+                dot.setAttribute('aria-selected', 'false');
             }
         });
+
+        // Announce to screen readers
+        const statusEl = document.getElementById('sliderStatus');
+        if (statusEl) {
+            statusEl.textContent = `Showing ${agentNames[currentSlide]}, slide ${currentSlide + 1} of ${totalSlides}`;
+        }
     }
 
     // Navigate to specific slide with looping
@@ -888,11 +899,32 @@ function initializeAgentsSlider() {
         }
     });
 
-    // Keyboard navigation
+    // Keyboard navigation - only when slider container is focused
+    const sliderContainer = slider.closest('.relative');
+    let isSliderFocused = false;
+
+    // Track focus on slider and navigation buttons
+    const focusableElements = [prevBtn, nextBtn, ...dots];
+    focusableElements.forEach(el => {
+        el.addEventListener('focus', () => { isSliderFocused = true; });
+        el.addEventListener('blur', () => {
+            // Delay to check if focus moved to another slider element
+            setTimeout(() => {
+                const activeElement = document.activeElement;
+                isSliderFocused = focusableElements.some(el => el === activeElement);
+            }, 10);
+        });
+    });
+
+    // Only respond to arrow keys when slider has focus
     document.addEventListener('keydown', (e) => {
+        if (!isSliderFocused) return;
+
         if (e.key === 'ArrowLeft') {
+            e.preventDefault();  // Prevent page scroll
             goToSlide(currentSlide - 1);
         } else if (e.key === 'ArrowRight') {
+            e.preventDefault();  // Prevent page scroll
             goToSlide(currentSlide + 1);
         }
     });
@@ -901,13 +933,36 @@ function initializeAgentsSlider() {
     updateSlider();
 }
 
+// Pause infinite animations when section is out of viewport (performance)
+function initializeViewportAnimationControl() {
+    const section = document.getElementById('breakthrough');
+    if (!section) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                section.classList.add('in-viewport');
+            } else {
+                section.classList.remove('in-viewport');
+            }
+        });
+    }, {
+        threshold: 0,
+        rootMargin: '50px'  // Small buffer zone
+    });
+
+    observer.observe(section);
+}
+
 // Initialize on DOM load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         initializeBreakthroughAnimations();
         initializeAgentsSlider();
+        initializeViewportAnimationControl();
     });
 } else {
     initializeBreakthroughAnimations();
     initializeAgentsSlider();
+    initializeViewportAnimationControl();
 }

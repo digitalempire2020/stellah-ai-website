@@ -20844,11 +20844,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- BREAKTHROUGH SECTION: The Moment We Cracked It -->
-<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<section id="breakthrough" class="breakthrough-section py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" aria-labelledby="breakthrough-heading">
 
     <!-- Section Header -->
     <div class="text-center mb-16 scroll-trigger animate-in-1">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-normal font-geist tracking-tight text-stone-900 mb-4">
+        <h2 id="breakthrough-heading" class="text-3xl sm:text-4xl lg:text-5xl font-normal font-geist tracking-tight text-stone-900 mb-4">
             The Moment We <span class="text-gradient-orange">Cracked It</span>
         </h2>
         <div class="w-24 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto"></div>
@@ -21058,11 +21058,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </button>
 
             <!-- Dot Indicators -->
-            <div class="flex justify-center gap-2 mt-6" id="sliderDots">
-                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-orange-500 transition-all" aria-label="Agent 1"></button>
-                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-stone-300 transition-all" aria-label="Agent 2"></button>
-                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-stone-300 transition-all" aria-label="Agent 3"></button>
+            <div class="flex justify-center gap-2 mt-6" id="sliderDots" role="tablist" aria-label="AI Team Members">
+                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-orange-500 transition-all" role="tab" aria-selected="true" aria-label="Client Care Specialist" aria-controls="agent-1"></button>
+                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-stone-300 transition-all" role="tab" aria-selected="false" aria-label="Wellness Coordinator" aria-controls="agent-2"></button>
+                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-stone-300 transition-all" role="tab" aria-selected="false" aria-label="Appointment Specialist" aria-controls="agent-3"></button>
             </div>
+            <!-- Live region for screen reader announcements -->
+            <div class="sr-only" role="status" aria-live="polite" aria-atomic="true" id="sliderStatus"></div>
         </div>
 
         <!-- Connection Flow Visual -->
