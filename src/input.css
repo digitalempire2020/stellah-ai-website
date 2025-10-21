@@ -759,3 +759,236 @@ body.modal-active {
     border-radius: 0 !important;
   }
 }
+
+/* ===================================
+   Breakthrough Section Styles
+   =================================== */
+
+/* Additional animation keyframes for breakthrough section */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitchShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes smoothFlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%); }
+  100% { transform: translateX(100%) translateY(100%); }
+}
+
+@keyframes assembleAgents {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Scroll trigger animation classes */
+.scroll-trigger.animate-in-2 {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.scroll-trigger.animate-in-3 {
+  animation: fadeInUp 0.6s ease-out 0.4s forwards;
+}
+
+.scroll-trigger.slide-left {
+  animation: slideInLeft 0.7s ease-out forwards;
+}
+
+.scroll-trigger.slide-right {
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+/* Chat bubble components - MINIMAL VERSION */
+.chat-bubble {
+  position: relative;
+  padding: 16px 20px;
+  border-radius: 18px;
+  max-width: 85%;
+  word-wrap: break-word;
+}
+
+.chat-bubble-patient {
+  background: white;
+  border: 2px solid #e7e5e4;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.chat-bubble-bot-stuck {
+  background: #fef2f2;
+  border: 2px dashed #fca5a5;
+  margin-left: auto;
+  margin-right: 0;
+  animation: glitchShake 0.3s infinite;
+  position: relative;
+}
+
+.chat-bubble-bot-stuck::after {
+  content: "⚠ STUCK";
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: #dc2626;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.chat-bubble-sarah {
+  background: #fff7ed;
+  border: 2px solid #FF7A45;
+  margin-left: auto;
+  margin-right: 0;
+  animation: smoothFlow 2s ease-in-out infinite;
+}
+
+.chat-bubble-sarah::after {
+  content: "✓ BOOKED";
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: #16a34a;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* MINIMAL Failure zone styling */
+.failure-zone {
+  background: white;
+  border: 2px solid #fca5a5;
+}
+
+/* MINIMAL Success zone styling */
+.success-zone {
+  background: white;
+  border: 2px solid #FF7A45;
+}
+
+/* MINIMAL Insight quote styling - WHITE BACKGROUND */
+.insight-quote {
+  background: white;
+  border: 3px solid #FF7A45;
+  position: relative;
+  overflow: hidden;
+}
+
+/* AI Agent cards - ALL ORANGE GRADIENTS */
+.agent-card {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.agent-card.visible {
+  animation: assembleAgents 0.6s ease-out forwards;
+}
+
+.agent-card:nth-child(1) { animation-delay: 0s; }
+.agent-card:nth-child(2) { animation-delay: 0.2s; }
+.agent-card:nth-child(3) { animation-delay: 0.4s; }
+
+/* MINIMAL Comparison cards - OUTDATED GREYISH TONE */
+.copilot-card {
+  background: linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%);
+  border: 2px solid #d6d3d1;
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+
+.copilot-card:hover {
+  border-color: #a8a29e;
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.ai-pilot-card {
+  background: white;
+  border: 3px solid #FF7A45;
+  box-shadow: 0 10px 40px rgba(255, 122, 69, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-pilot-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 122, 69, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+.ai-pilot-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(255, 122, 69, 0.25);
+}
+
+/* Typography */
+.stat-number {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Utility classes */
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.badge-failure {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.badge-breakthrough {
+  background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+  color: white;
+}
+
+/* Slider dot indicators */
+.slider-dot {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.slider-dot:hover {
+  transform: scale(1.2);
+}
