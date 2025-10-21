@@ -805,7 +805,17 @@ function initializeAgentsSlider() {
     const nextBtn = document.getElementById('nextAgent');
     const dots = document.querySelectorAll('.slider-dot');
 
-    if (!slider || !prevBtn || !nextBtn || !dots.length) return;
+    if (!slider || !prevBtn || !nextBtn || !dots.length) {
+        console.error('Slider initialization failed - missing elements:', {
+            slider: !!slider,
+            prevBtn: !!prevBtn,
+            nextBtn: !!nextBtn,
+            dotsCount: dots.length
+        });
+        return;
+    }
+
+    console.log('Breakthrough slider initialized successfully');
 
     const totalSlides = 3;
     let currentSlide = 0;
