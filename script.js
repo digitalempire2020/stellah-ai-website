@@ -814,8 +814,12 @@ function initializeAgentsSlider() {
 
     // Update slider position and UI
     function updateSlider() {
+        console.log('updateSlider called, currentSlide:', currentSlide);
+
         // Update transform
-        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        const transformValue = `translateX(-${currentSlide * 100}%)`;
+        slider.style.transform = transformValue;
+        console.log('Applied transform:', transformValue);
 
         // Agent names for screen reader announcements
         const agentNames = ['Client Care Specialist', 'Wellness Coordinator', 'Appointment Specialist'];
@@ -854,18 +858,27 @@ function initializeAgentsSlider() {
     }
 
     // Previous slide (loops to last)
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Previous button clicked, current slide:', currentSlide);
         goToSlide(currentSlide - 1);
     });
 
     // Next slide (loops to first)
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Next button clicked, current slide:', currentSlide);
         goToSlide(currentSlide + 1);
     });
 
     // Dot navigation
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Dot clicked:', index);
             goToSlide(index);
         });
     });
