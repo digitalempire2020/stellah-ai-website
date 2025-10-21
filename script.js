@@ -776,11 +776,6 @@ function initializeBreakthroughAnimations() {
                     entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
                 }
 
-                // Handle agent cards
-                if (entry.target.classList.contains('agent-card')) {
-                    entry.target.classList.add('visible');
-                }
-
                 // Unobserve after animation
                 observer.unobserve(entry.target);
             }
@@ -789,11 +784,6 @@ function initializeBreakthroughAnimations() {
 
     // Observe all scroll-trigger elements
     document.querySelectorAll('.scroll-trigger').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Observe agent cards
-    document.querySelectorAll('.agent-card').forEach(el => {
         observer.observe(el);
     });
 }
