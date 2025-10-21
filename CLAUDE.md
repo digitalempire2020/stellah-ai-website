@@ -103,6 +103,106 @@ Multi-layer redirect strategy ensures all traffic goes to `https://www.stellah.a
 - Progressive cards use different interaction patterns: desktop hover vs mobile tap (see src/input.css:322-403)
 - Test on mobile: animations should be performant (60fps), no horizontal scroll
 
+## Brand Identity & Typography
+
+**⚠️ CRITICAL: Follow these guidelines for ALL design implementations. Typography = Brand Identity.**
+
+### Typography Standards
+
+**Font Families** (REQUIRED for all new designs/sections)
+- **Headings**: `font-geist` - Custom brand font for all H1/H2/H3/H4
+- **Body Text**: `font-sans` (Inter) - All paragraphs, lists, UI text
+- **Never use**: Generic system fonts or default Tailwind sans-serif
+
+**Font Weights** (Brand Personality: Elegant, Not Heavy)
+- **H1/H2**: `font-normal` (400) or `font-light` (300) - NEVER `font-bold`
+- **H3/H4**: `font-semibold` (600) - NOT `font-bold` (700)
+- **Body text**: `font-normal` (400) or `font-light` (300)
+- **Emphasis/CTAs only**: `font-bold` (700) - Use sparingly
+
+**Letter Spacing** (Modern, Clean Look)
+- **All headings**: Must include `tracking-tight`
+- **Brand text/logos**: Always `tracking-tight`
+- **Body text**: Default tracking (no class needed)
+
+**Font Size Scale** (Moderate, Refined)
+- **H1**: `text-[40px] sm:text-6xl lg:text-7xl` (hero only)
+- **H2**: `text-3xl sm:text-4xl` (NOT 5xl/6xl - too large)
+- **H3**: `text-2xl sm:text-3xl` (NOT 4xl - keep moderate)
+- **Body**: `text-base` or `text-lg` (NOT xl/2xl unless intentional)
+
+### Brand Colors
+
+**Primary Palette**
+- **Primary Orange**: `#FF7A45` - Main brand color, CTAs, highlights
+- **Dark Orange**: `#EA580C` - Gradients, hover states, emphasis
+- **Gradient**: `linear-gradient(135deg, #FF7A45 0%, #EA580C 100%)`
+
+**Neutral Palette**
+- **Background**: White (`bg-white`) or Stone-50 (`bg-stone-50`)
+- **Text Primary**: `text-stone-900` (headings, important text)
+- **Text Secondary**: `text-stone-700` (body text)
+- **Text Tertiary**: `text-stone-600` (labels, less important)
+- **Text Muted**: `text-stone-500` (hints, disabled states)
+- **Borders**: `border-stone-200` (light), `border-stone-300` (medium)
+
+**Usage Rules**
+- Backgrounds should be white or very light stone tints
+- Avoid heavy use of colored backgrounds (keep minimal, clean)
+- Orange is accent only - use strategically, not everywhere
+- Dark backgrounds only for intentional pattern breaks
+
+### Complete Typography Checklist (Use for Every New Design)
+
+Before implementing any HTML/design:
+
+```html
+<!-- 1. Add fonts in <head> if not already present -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- 2. Add font definitions in <style> -->
+<style>
+.font-sans {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+.font-geist {
+    font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+</style>
+
+<!-- 3. Apply to body -->
+<body class="font-sans">
+
+<!-- 4. Apply to headings -->
+<h2 class="font-geist font-normal tracking-tight">Heading Text</h2>
+<h3 class="font-geist font-semibold tracking-tight">Subheading</h3>
+```
+
+**Quick Validation**
+- ✅ Do all headings use `font-geist`?
+- ✅ Do all headings have `tracking-tight`?
+- ✅ Are H2s using `font-normal` (NOT `font-bold`)?
+- ✅ Are H3/H4s using `font-semibold` (NOT `font-bold`)?
+- ✅ Is body using `font-sans`?
+- ✅ Do colors match brand (#FF7A45, stone grays)?
+
+### Why This Matters
+
+**Wrong Typography:**
+- Generic sans-serif → Looks like any SaaS
+- `font-bold` everywhere → Looks heavy, less premium
+- Normal tracking → Looks spread out, less modern
+- **Result**: Generic, unprofessional, not Stellah
+
+**Correct Typography:**
+- Geist + Inter → Distinct brand identity
+- `font-normal`/`font-semibold` → Elegant, refined
+- `tracking-tight` → Modern, clean, premium
+- **Result**: Looks like Stellah, professional, trustworthy
+
+**Brand Perception Impact**: Typography is 50% of brand identity. Getting it wrong undermines the entire premium positioning.
+
 ## Common Development Workflows
 
 ### Updating Tailwind Styles
