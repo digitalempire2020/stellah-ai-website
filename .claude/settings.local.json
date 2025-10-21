@@ -46,7 +46,9 @@
       "Bash(PORT=5000 node server.js)",
       "Bash(fuser:*)",
       "Bash(echo $REPL_SLUG)",
-      "Bash(echo $REPL_OWNER)"
+      "Bash(echo $REPL_OWNER)",
+      "Bash(pkill:*)",
+      "WebFetch(domain:pagespeed.web.dev)"
     ],
     "deny": [],
     "ask": []

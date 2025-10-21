@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Moment We Cracked It - Design Preview</title>
+
+    <!-- Brand Fonts: Geist & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <style>
+        /* Brand Typography */
+        .font-sans {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+        }
+        .font-geist {
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+        }
+    </style>
+    <style>
+        /* Custom animations for scroll triggers */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glitchShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        @keyframes smoothFlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes lightbulbPulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% {
+                transform: scale(1.05);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes assembleAgents {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Scroll trigger classes */
+        .scroll-trigger {
+            opacity: 0;
+        }
+
+        .scroll-trigger.animate-in-1 {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .scroll-trigger.animate-in-2 {
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
+        }
+
+        .scroll-trigger.animate-in-3 {
+            animation: fadeInUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .scroll-trigger.slide-left {
+            animation: slideInLeft 0.7s ease-out forwards;
+        }
+
+        .scroll-trigger.slide-right {
+            animation: slideInRight 0.7s ease-out forwards;
+        }
+
+        /* Chat bubble components */
+        .chat-bubble {
+            position: relative;
+            padding: 16px 20px;
+            border-radius: 18px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        .chat-bubble-patient {
+            background: linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 100%);
+            border: 1px solid #d6d3d1;
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .chat-bubble-bot-stuck {
+            background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+            border: 2px dashed #dc2626;
+            margin-left: auto;
+            margin-right: 0;
+            animation: glitchShake 0.3s infinite;
+            position: relative;
+        }
+
+        .chat-bubble-bot-stuck::after {
+            content: "⚠ STUCK";
+            position: absolute;
+            top: -12px;
+            right: 12px;
+            background: #dc2626;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .chat-bubble-sarah {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+            border: 2px solid #f97316;
+            margin-left: auto;
+            margin-right: 0;
+            animation: smoothFlow 2s ease-in-out infinite;
+        }
+
+        .chat-bubble-sarah::after {
+            content: "✓ BOOKED";
+            position: absolute;
+            top: -12px;
+            right: 12px;
+            background: #16a34a;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Failure zone styling */
+        .failure-zone {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #fca5a5;
+        }
+
+        /* Success zone styling */
+        .success-zone {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #fbbf24;
+        }
+
+        /* Insight quote styling */
+        .insight-quote {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .insight-quote::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(251, 191, 36, 0.1) 0%, transparent 60%);
+            animation: lightbulbPulse 3s ease-in-out infinite;
+        }
+
+        /* AI Agent cards */
+        .agent-card {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .agent-card.visible {
+            animation: assembleAgents 0.6s ease-out forwards;
+        }
+
+        .agent-card:nth-child(1) { animation-delay: 0s; }
+        .agent-card:nth-child(2) { animation-delay: 0.2s; }
+        .agent-card:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Comparison cards - MINIMAL DESIGN */
+        .copilot-card {
+            background: white;
+            border: 2px solid #d6d3d1;
+            transition: all 0.3s ease;
+        }
+
+        .copilot-card:hover {
+            border-color: #a8a29e;
+            transform: translateY(-2px);
+        }
+
+        .ai-pilot-card {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border: 3px solid #FF7A45;
+            box-shadow: 0 10px 40px rgba(255, 122, 69, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-pilot-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .ai-pilot-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(255, 122, 69, 0.3);
+        }
+
+        /* Typography */
+        .stat-number {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Utility classes */
+        .text-gradient-orange {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-failure {
+            background: #fca5a5;
+            color: #7f1d1d;
+        }
+
+        .badge-success {
+            background: #86efac;
+            color: #14532d;
+        }
+
+        .badge-breakthrough {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 antialiased font-sans">
+
+    <!-- Main Section Container -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16 scroll-trigger animate-in-1">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-normal font-geist tracking-tight text-stone-900 mb-4">
+                The Moment We <span class="text-gradient-orange">Cracked It</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent mx-auto"></div>
+        </div>
+
+        <!-- 1. THE HOOK - The Failure -->
+        <div class="failure-zone rounded-3xl p-8 sm:p-12 mb-12 scroll-trigger animate-in-2">
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="badge badge-failure mb-6">THE FAILURE</span>
+                <div class="stat-number mb-4">$4,000</div>
+                <p class="text-xl sm:text-2xl font-normal text-stone-800 mb-4">
+                    Dr. Lee spent this on a Flow-Based Chatbot setup.
+                </p>
+                <p class="text-lg text-stone-700 mb-2">
+                    <strong class="text-red-600">It failed in 5 days.</strong>
+                </p>
+                <p class="text-base text-stone-600 italic">
+                    Not because the flows were wrong.<br>
+                    But because real conversations don't follow flowcharts.
+                </p>
+            </div>
+        </div>
+
+        <!-- 2. THE PAIN - Conversation Examples -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+
+            <!-- Bot Failure Column -->
+            <div class="failure-zone rounded-3xl p-8 scroll-trigger slide-left">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white text-2xl">
+                        🤖
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold tracking-tight text-stone-900">Flow-Based Chatbot</h3>
+                        <span class="badge badge-failure text-xs">STUCK</span>
+                    </div>
+                </div>
+
+                <!-- Patient Message -->
+                <div class="mb-4">
+                    <div class="chat-bubble chat-bubble-patient">
+                        <p class="text-sm text-stone-600 font-medium mb-1">Patient</p>
+                        <p class="text-stone-900">
+                            "Does laser hair removal work on dark skin? I've heard it can cause burns."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bot Stuck Response -->
+                <div class="mb-6">
+                    <div class="chat-bubble chat-bubble-bot-stuck">
+                        <p class="text-sm text-stone-700 font-medium mb-2">Chatbot</p>
+                        <p class="text-stone-900 font-mono text-sm">
+                            [ERROR: No flow configured for skin tone concerns]
+                        </p>
+                        <p class="text-stone-700 text-xs mt-2 italic">
+                            ⚠ Unable to respond - patient query outside predefined paths
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-red-100 border-l-4 border-red-500 p-4 rounded-lg">
+                    <p class="text-sm text-red-800 font-semibold">
+                        Result: Patient left chat. Lead lost.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sarah Success Column -->
+            <div class="success-zone rounded-3xl p-8 scroll-trigger slide-right">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl">
+                        👩
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold tracking-tight text-stone-900">Sarah (Receptionist)</h3>
+                        <span class="badge badge-success text-xs">45 SECONDS</span>
+                    </div>
+                </div>
+
+                <!-- Patient Message -->
+                <div class="mb-4">
+                    <div class="chat-bubble chat-bubble-patient">
+                        <p class="text-sm text-stone-600 font-medium mb-1">Patient</p>
+                        <p class="text-stone-900">
+                            "Does laser hair removal work on dark skin? I've heard it can cause burns."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sarah Response -->
+                <div class="mb-6">
+                    <div class="chat-bubble chat-bubble-sarah">
+                        <p class="text-sm text-stone-700 font-medium mb-2">Sarah</p>
+                        <p class="text-stone-900">
+                            "Great question! We use the latest Nd:YAG laser that's safe for all skin tones, including darker skin. Dr. Lee does a free skin assessment first to ensure you're a good candidate. Which area are you looking to treat? I have consultation slots Wednesday 3pm or Thursday 11am."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded-lg">
+                    <p class="text-sm text-green-800 font-semibold mb-2">
+                        Result: Appointment booked
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded">✓ Addressed concern</span>
+                        <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded">✓ Qualified lead</span>
+                        <span class="text-xs bg-green-200 text-green-900 px-2 py-1 rounded">✓ Booked appointment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. THE INSIGHT - Engineer's Quote -->
+        <div class="insight-quote rounded-3xl p-10 sm:p-16 mb-12 scroll-trigger animate-in-1">
+            <div class="relative z-10 text-center max-w-4xl mx-auto">
+                <div class="text-6xl mb-6">💡</div>
+                <blockquote class="text-2xl sm:text-3xl font-normal font-geist tracking-tight text-white mb-6 leading-relaxed">
+                    "Sarah's not following a script.<br>
+                    She's <span class="text-yellow-300">making decisions.</span>"
+                </blockquote>
+                <p class="text-lg sm:text-xl text-stone-300 font-normal mb-6">
+                    "What if we build an AI that actually <span class="text-yellow-300 font-bold">THINKS</span> like Sarah...<br>
+                    instead of just following pre-programmed paths?"
+                </p>
+                <p class="text-stone-400 italic">— Lead Engineer, after watching Sarah work</p>
+            </div>
+        </div>
+
+        <!-- 4. THE BREAKTHROUGH - 3 AI Agents -->
+        <div class="mb-12 scroll-trigger animate-in-2">
+            <div class="text-center mb-12">
+                <span class="badge badge-breakthrough mb-4">THE BREAKTHROUGH</span>
+                <h3 class="text-2xl sm:text-3xl font-normal font-geist tracking-tight text-stone-900 mb-4">
+                    We Built 3 Specialized AI Agents That Work Together
+                </h3>
+                <p class="text-lg text-stone-600 max-w-3xl mx-auto">
+                    They don't follow flowcharts. They make real-time decisions. They adapt to whatever patients say.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <!-- Agent 1: Reader -->
+                <div class="agent-card bg-white rounded-2xl p-8 border-2 border-stone-200 hover:border-orange-400 transition-all">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-3xl mb-4 mx-auto">
+                        👁️
+                    </div>
+                    <h4 class="text-xl font-semibold tracking-tight text-stone-900 mb-2 text-center">The Reader</h4>
+                    <p class="text-stone-600 text-center mb-4">
+                        Analyzes intent and context from patient messages
+                    </p>
+                    <div class="bg-blue-50 rounded-lg p-3 text-sm text-stone-700">
+                        Detects: concern about safety, interest in service, needs reassurance
+                    </div>
+                </div>
+
+                <!-- Agent 2: Strategist -->
+                <div class="agent-card bg-white rounded-2xl p-8 border-2 border-stone-200 hover:border-orange-400 transition-all">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white text-3xl mb-4 mx-auto">
+                        🧠
+                    </div>
+                    <h4 class="text-xl font-semibold tracking-tight text-stone-900 mb-2 text-center">The Strategist</h4>
+                    <p class="text-stone-600 text-center mb-4">
+                        Determines best response strategy in real-time
+                    </p>
+                    <div class="bg-purple-50 rounded-lg p-3 text-sm text-stone-700">
+                        Strategy: Address safety concern → Qualify → Offer specific times
+                    </div>
+                </div>
+
+                <!-- Agent 3: Executor -->
+                <div class="agent-card bg-white rounded-2xl p-8 border-2 border-stone-200 hover:border-orange-400 transition-all">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white text-3xl mb-4 mx-auto">
+                        ⚡
+                    </div>
+                    <h4 class="text-xl font-semibold tracking-tight text-stone-900 mb-2 text-center">The Executor</h4>
+                    <p class="text-stone-600 text-center mb-4">
+                        Crafts response and handles follow-up automatically
+                    </p>
+                    <div class="bg-green-50 rounded-lg p-3 text-sm text-stone-700">
+                        Output: Personalized response + appointment booking + calendar integration
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connection Flow Visual -->
+            <div class="mt-8 text-center">
+                <div class="inline-flex items-center gap-4 bg-stone-100 rounded-full px-6 py-3">
+                    <span class="text-blue-600 font-bold">READ</span>
+                    <svg class="w-6 h-6 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <span class="text-purple-600 font-bold">STRATEGIZE</span>
+                    <svg class="w-6 h-6 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                    <span class="text-green-600 font-bold">EXECUTE</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. THE DIFFERENTIATOR - Co-Pilot vs AI-Pilot -->
+        <div class="scroll-trigger animate-in-3">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl sm:text-3xl font-normal font-geist tracking-tight text-stone-900 mb-4">
+                    Why Stellah Is Different
+                </h3>
+                <p class="text-lg text-stone-600">
+                    Most chatbots are co-pilots. Stellah is an AI-pilot.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+                <!-- Co-Pilot Card (Old Way) - MINIMAL DESIGN -->
+                <div class="copilot-card rounded-3xl p-8 sm:p-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-stone-200 flex items-center justify-center text-2xl">
+                            🛩️
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold tracking-tight text-stone-800">Traditional Chatbots</h4>
+                            <p class="text-stone-600 font-semibold">CO-PILOT Mode</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-stone-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-800 font-semibold">Humans still drive the conversation</p>
+                                <p class="text-stone-600 text-sm">Staff must monitor and intervene constantly</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-stone-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-800 font-semibold">Bot just routes to pre-written responses</p>
+                                <p class="text-stone-600 text-sm">Rigid flowcharts can't handle real conversations</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-stone-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-800 font-semibold">Breaks when patients go off-script</p>
+                                <p class="text-stone-600 text-sm">No ability to adapt to unexpected questions</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6 bg-stone-100 rounded-lg p-4 text-center border border-stone-200">
+                        <p class="text-stone-700 font-semibold text-sm">
+                            Result: Staff still overwhelmed, leads still lost
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AI-Pilot Card (New Way) -->
+                <div class="ai-pilot-card rounded-3xl p-8 sm:p-10 relative z-10">
+                    <div class="flex items-center gap-3 mb-6 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-2xl">
+                            🚀
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold tracking-tight text-stone-900">Stellah AI</h4>
+                            <p class="text-orange-600 font-bold">AI-PILOT Mode</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 relative z-10">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-900 font-bold">AI drives conversations autonomously</p>
+                                <p class="text-stone-700 text-sm">Trained on 10,000+ real patient interactions</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-900 font-bold">Makes contextual decisions in real-time</p>
+                                <p class="text-stone-700 text-sm">Understands nuance, intent, and emotional cues</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <div>
+                                <p class="text-stone-900 font-bold">Humans only handle complex exceptions</p>
+                                <p class="text-stone-700 text-sm">95% of conversations fully automated</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="mt-6 bg-gradient-to-r from-green-100 to-green-50 rounded-lg p-4 text-center border-2 border-green-400 relative z-10">
+                        <p class="text-green-800 font-bold text-sm">
+                            Result: 80+ staff hours freed, $3.7M+ revenue generated
+                        </p>
+                    </div>
+
+                    <!-- Badge overlay -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <span class="bg-gradient-to-r from-yellow-400 to-orange-400 text-stone-900 px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                            ⭐ THE STELLAH DIFFERENCE
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-16 text-center scroll-trigger animate-in-1">
+            <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-3xl p-10 sm:p-12 border-2 border-orange-200">
+                <h3 class="text-2xl sm:text-3xl font-normal font-geist tracking-tight text-stone-900 mb-4">
+                    Ready to Switch from Co-Pilot to AI-Pilot?
+                </h3>
+                <p class="text-lg text-stone-700 mb-8 max-w-2xl mx-auto">
+                    See how Stellah's AI agents handle real patient conversations — no flowcharts, no scripts, just intelligent automation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        Watch AI in Action
+                    </button>
+                    <button class="bg-white hover:bg-stone-50 text-stone-900 font-bold py-4 px-8 rounded-full text-lg border-2 border-stone-300 transition-all transform hover:scale-105">
+                        See Live Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add animation class based on element's data attributes or default classes
+                    if (entry.target.classList.contains('slide-left')) {
+                        entry.target.style.animation = 'slideInLeft 0.7s ease-out forwards';
+                    } else if (entry.target.classList.contains('slide-right')) {
+                        entry.target.style.animation = 'slideInRight 0.7s ease-out forwards';
+                    } else {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                    }
+
+                    // Handle agent cards specifically
+                    if (entry.target.classList.contains('agent-card')) {
+                        entry.target.classList.add('visible');
+                    }
+
+                    // Unobserve after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-trigger elements
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.scroll-trigger').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Also observe agent cards
+            document.querySelectorAll('.agent-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+
+</body>
+</html>

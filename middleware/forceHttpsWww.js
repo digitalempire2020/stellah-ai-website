@@ -3,6 +3,11 @@ function forceHttpsWww(req, res, next) {
   const hostname = req.hostname || req.headers.host || 'stellah.ai';
   const isHttps = req.headers['x-forwarded-proto'] === 'https' || req.secure || req.protocol === 'https';
 
+  // Skip redirects for localhost and Replit dev environments
+  if (hostname.includes('localhost') || hostname.includes('127.0.0.1') || hostname.includes('.replit.dev') || hostname.includes('.replit.app')) {
+    return next();
+  }
+
   // Debug logging (disabled in production)
   // console.log(`Request - Host: ${req.headers.host}, Hostname: ${hostname}, Proto: ${req.headers['x-forwarded-proto']}, Secure: ${req.secure}, IsHttps: ${isHttps}`);
 
