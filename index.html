@@ -22323,6 +22323,42 @@ function toggleAccordion(button) {
  chevron.style.transform = 'rotate(0deg)';
  }
 }
+
+function toggleMoreFAQs() {
+ const moreFAQs = document.getElementById('moreFAQs');
+ const button = document.getElementById('showMoreFAQs');
+ const chevron = document.getElementById('moreFAQsChevron');
+ const buttonText = button.querySelector('span');
+
+ if (moreFAQs.classList.contains('hidden')) {
+  // Show more FAQs
+  moreFAQs.classList.remove('hidden');
+  buttonText.textContent = 'Show Less FAQs';
+  chevron.style.transform = 'rotate(180deg)';
+
+  // Animate in the FAQ items with stagger
+  const faqItems = moreFAQs.querySelectorAll('.accordion-item');
+  faqItems.forEach((item, index) => {
+   setTimeout(() => {
+    item.classList.remove('opacity-0', 'translate-y-4');
+   }, index * 100); // 100ms stagger
+  });
+ } else {
+  // Hide FAQs
+  const faqItems = moreFAQs.querySelectorAll('.accordion-item');
+  faqItems.forEach(item => {
+   item.classList.add('opacity-0', 'translate-y-4');
+  });
+
+  // Wait for animation to complete before hiding
+  setTimeout(() => {
+   moreFAQs.classList.add('hidden');
+   buttonText.textContent = 'Show More FAQs';
+   chevron.style.transform = 'rotate(0deg)';
+  }, 300);
+ }
+}
+
 function showDashboard() {
  document.getElementById('dashboard-modal').classList.remove('hidden');
  document.body.style.overflow = 'hidden';
