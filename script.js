@@ -986,6 +986,47 @@ function initializeViewportAnimationControl() {
     observer.observe(section);
 }
 
+// ===================================
+// Multi-Outlet Chains Benefits Auto-Scroll
+// ===================================
+function autoScrollChainsBenefits() {
+    // Find the scrollable container in the multi-outlet chains section
+    const sections = document.querySelectorAll('section');
+    let container = null;
+
+    // Find the section containing "Why Multi-Outlet Chains Choose Stellah"
+    sections.forEach(section => {
+        if (section.textContent.includes('Why Multi-Outlet Chains Choose')) {
+            container = section.querySelector('.overflow-x-auto');
+        }
+    });
+
+    if (!container) return;
+
+    const cards = container.querySelectorAll('article');
+    if (cards.length === 0) return;
+
+    let currentCard = 0;
+
+    const scrollToNext = () => {
+        if (currentCard < cards.length) {
+            cards[currentCard].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            currentCard++;
+        } else {
+            // Scroll back to start
+            currentCard = 0;
+            cards[0].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        }
+    };
+
+    // Start auto-scrolling
+    scrollToNext();
+    const interval = setInterval(scrollToNext, 2500);
+
+    // Stop after one full cycle plus return to start
+    setTimeout(() => clearInterval(interval), (cards.length + 1) * 2500);
+}
+
 // Initialize on DOM load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
