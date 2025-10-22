@@ -917,11 +917,27 @@ body.modal-active {
 /* AI Agent cards - ALL ORANGE GRADIENTS */
 .agent-card {
   opacity: 1;  /* Visible by default - critical for slider */
-  transition: all 0.3s ease;
+  transform: scale(0.95) translateY(10px);  /* Slightly smaller and lower */
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Optional enhancement animation - removed to fix visibility issue */
-/* Cards are always visible for slider functionality */
+/* When parent container is animated, trigger card entrance */
+#agentsSliderContainer.animate-agents .agent-card {
+  transform: scale(1) translateY(0);  /* Full size, natural position */
+}
+
+/* Staggered delays for each card */
+#agentsSliderContainer.animate-agents .agent-slide:nth-child(1) .agent-card {
+  transition-delay: 0s;
+}
+
+#agentsSliderContainer.animate-agents .agent-slide:nth-child(2) .agent-card {
+  transition-delay: 0.15s;
+}
+
+#agentsSliderContainer.animate-agents .agent-slide:nth-child(3) .agent-card {
+  transition-delay: 0.3s;
+}
 
 /* MINIMAL Comparison cards - OUTDATED GREYISH TONE */
 .copilot-card {

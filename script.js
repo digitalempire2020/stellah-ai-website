@@ -786,6 +786,25 @@ function initializeBreakthroughAnimations() {
     document.querySelectorAll('.scroll-trigger').forEach(el => {
         observer.observe(el);
     });
+
+    // Observe agents slider container for card entrance animation
+    const sliderContainer = document.getElementById('agentsSliderContainer');
+    if (sliderContainer) {
+        const sliderObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    console.log('Agents slider container in view - triggering animation');
+                    sliderContainer.classList.add('animate-agents');
+                    sliderObserver.unobserve(sliderContainer);
+                }
+            });
+        }, {
+            threshold: 0.2,  // Trigger when 20% visible
+            rootMargin: '0px'
+        });
+
+        sliderObserver.observe(sliderContainer);
+    }
 }
 
 // Agents Slider Functionality
