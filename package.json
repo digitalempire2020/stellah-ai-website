@@ -5,11 +5,18 @@
   "scripts": {
     "start": "node server.js",
     "build": "npx @tailwindcss/cli -i ./src/input.css -o ./output.css --minify",
+    "build:prod": "npm run optimize-images && npm run build && npm run minify-html",
+    "optimize-images": "node optimize-images.js",
+    "minify-html": "node minify-html.js",
     "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./output.css --watch",
-    "netlify-build": "npm run build",
+    "netlify-build": "npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["medical", "ai", "marketing"],
+  "keywords": [
+    "medical",
+    "ai",
+    "marketing"
+  ],
   "author": "",
   "license": "ISC",
   "description": "Stellah AI Marketing Website",
@@ -18,6 +25,8 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0-beta.7",
+    "html-minifier-terser": "^7.2.0",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.0.0-beta.7"
   }
 }

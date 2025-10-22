@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.backup-*
+index.html.backup-*
+optimize-images.js
+minify-html.js
