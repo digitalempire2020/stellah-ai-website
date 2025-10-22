@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Pre-Demo Quiz - Stellah AI</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="output.css">
+
+    <style>
+        /* Brand Typography */
+        .font-sans {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+        .font-geist {
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+
+        /* Make iframe responsive */
+        #quiz-container {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        #KCsE1zyHTWJ81ypZpuom {
+            width: 100%;
+            min-height: 600px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-stone-50 text-stone-900 antialiased font-sans" style="letter-spacing: -0.01em;">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2">
+                    <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-orange-500/10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                            <polyline points="16 7 22 7 22 13"></polyline>
+                        </svg>
+                    </span>
+                    <span class="font-geist font-semibold text-xl tracking-tight text-stone-900">Stellah AI</span>
+                </a>
+
+                <!-- Back to Home -->
+                <a href="/" class="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+                    ← Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Intro Section -->
+        <div class="text-center mb-8">
+            <h1 class="font-geist font-normal tracking-tight text-3xl sm:text-4xl text-stone-900 mb-3">
+                Before We Schedule Your Demo
+            </h1>
+            <p class="text-stone-600 text-lg">
+                Help us customize your demo by answering a few quick questions.
+            </p>
+        </div>
+
+        <!-- Quiz Embed Container -->
+        <div id="quiz-container" class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-8">
+            <iframe
+                src="https://api.leadconnectorhq.com/widget/quiz/KCsE1zyHTWJ81ypZpuom"
+                style="border:none;width:100%;"
+                scrolling="no"
+                id="KCsE1zyHTWJ81ypZpuom"
+                title="Pre-Demo Quiz">
+            </iframe>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="mt-6 text-center">
+            <p class="text-sm text-stone-500">
+                This will only take 2-3 minutes and helps us provide the most relevant demo for your practice.
+            </p>
+        </div>
+    </main>
+
+    <!-- Quiz Embed Script -->
+    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
+</body>
+</html>
