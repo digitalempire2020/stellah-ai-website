@@ -86,6 +86,55 @@ Key animation functions in script.js:
 - `initializeMetricsUpdates()` (line 514) - Counter animations with 10s interval updates
 - `animateCalendarEvents()` (line 84) - Event appearance with 100ms stagger
 
+**Parent Container Trigger Pattern** (for complex nested animations):
+When animating elements inside containers with `overflow: hidden` (like sliders), Intersection Observer may not trigger on child elements. Use this pattern:
+
+✅ **When to use:**
+- Elements inside sliders/carousels that need entrance animations
+- Nested components where direct observation fails
+- Situations where children need to be visible immediately but animated on scroll
+
+❌ **When NOT to use:**
+- Simple scroll-triggered animations (use standard Intersection Observer)
+- Elements that can afford to start hidden (opacity: 0)
+
+**Implementation:**
+```javascript
+// Watch PARENT container, not children
+const container = document.getElementById('parentContainer');
+const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+        container.classList.add('animate-children');  // Trigger via class
+        observer.unobserve(container);  // One-time trigger
+    }
+}, { threshold: 0.2 });
+observer.observe(container);
+```
+
+```css
+/* Children visible but offset */
+.child-element {
+    opacity: 1;  /* Always visible for functionality */
+    transform: scale(0.95) translateY(10px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Parent class triggers child animations */
+.parentContainer.animate-children .child-element {
+    transform: scale(1) translateY(0);
+}
+
+/* Stagger with nth-child delays */
+.parentContainer.animate-children .child:nth-child(2) {
+    transition-delay: 0.15s;
+}
+```
+
+**Example:** Breakthrough section agent cards (index.html:20981, script.js:790-807)
+- Cards always visible for slider functionality
+- Container triggers animation when scrolled into view
+- Staggered entrance: 0s, 0.15s, 0.3s delays
+
 #### 4. Redirect Architecture
 Multi-layer redirect strategy ensures all traffic goes to `https://www.stellah.ai`:
 - **netlify.toml** (lines 6-31) - Netlify edge redirects with `force: true`
