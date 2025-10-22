@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Branded Scrolling Cards Preview - Stellah AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/output.css">
+    <style>
+        /* Brand Typography */
+        .font-sans {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+        .font-geist {
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+
+        /* Scrolling container styles */
+        .scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 122, 69, 0.3) transparent;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 122, 69, 0.05);
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #FF7A45, #EA580C);
+            border-radius: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #EA580C;
+        }
+
+        /* Card hover effects */
+        .benefit-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(255, 122, 69, 0.15);
+            background: linear-gradient(to bottom, white, #FFF7F5);
+            border-color: #FF7A45;
+        }
+
+        /* Gradient fade edges */
+        .fade-left {
+            background: linear-gradient(90deg, white, rgba(255,255,255,0.8), transparent);
+        }
+
+        .fade-right {
+            background: linear-gradient(270deg, white, rgba(255,255,255,0.8), transparent);
+        }
+
+        /* Number badge animation */
+        .number-badge {
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .number-badge {
+            background: linear-gradient(135deg, #FF7A45, #EA580C);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Icon container animation */
+        .icon-container {
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .icon-container {
+            background: linear-gradient(135deg, #FF7A45, #EA580C);
+            transform: scale(1.05);
+        }
+
+        .benefit-card:hover .icon-container svg {
+            color: white;
+        }
+
+        /* Smooth snap scrolling */
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+
+        .snap-start {
+            scroll-snap-align: start;
+        }
+
+        /* Progress dots */
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            background: #e7e5e4;
+            border-radius: 50%;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .scroll-dot.active {
+            width: 24px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #FF7A45, #EA580C);
+        }
+    </style>
+</head>
+<body class="font-sans bg-stone-50">
+
+    <section class="max-w-7xl mx-auto mt-12 sm:mt-16 md:mt-20 px-4 md:px-6">
+        <div class="bg-white rounded-3xl shadow-xl border border-stone-200 overflow-hidden">
+            <div class="p-8 sm:p-12">
+                <!-- Header Section -->
+                <div class="mb-10">
+                    <div class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 px-4 py-2 mb-6">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                                <path d="M9 22v-4h6v4"/>
+                                <path d="M8 6h.01"/>
+                                <path d="M16 6h.01"/>
+                                <path d="M12 6h.01"/>
+                            </svg>
+                        </span>
+                        <span class="text-xs font-medium text-orange-700">Multi-Outlet Chains</span>
+                    </div>
+
+                    <h2 class="font-geist font-normal tracking-tight text-4xl sm:text-5xl text-stone-900 mb-3">
+                        Why Chains Choose
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent font-normal">Stellah</span>
+                    </h2>
+                    <p class="text-lg text-stone-600 font-light">
+                        Six compelling reasons medical chains trust us with their growth
+                    </p>
+                </div>
+
+                <!-- Scrolling Cards Container -->
+                <div class="relative rounded-2xl bg-gradient-to-b from-stone-50 to-white border border-stone-200 p-8 overflow-hidden">
+                    <!-- Dot pattern background -->
+                    <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(circle, #e7e5e4 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+                    <!-- Top gradient line -->
+                    <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-orange-400 to-transparent"></div>
+
+                    <!-- Scroll affordance header -->
+                    <div class="relative flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-medium text-stone-500 uppercase tracking-wide">Benefits</h3>
+                        <div class="inline-flex items-center gap-2 text-xs text-stone-500 px-3 py-1.5 rounded-full bg-stone-100 border border-stone-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="18 8 22 12 18 16"></polyline>
+                                <polyline points="6 8 2 12 6 16"></polyline>
+                                <line x1="2" x2="22" y1="12" y2="12"></line>
+                            </svg>
+                            Swipe to explore
+                        </div>
+                    </div>
+
+                    <!-- Gradient fade edges -->
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 left-0 w-20 fade-left z-10"></div>
+                    <div aria-hidden="true" class="pointer-events-none absolute inset-y-0 right-0 w-20 fade-right z-10"></div>
+
+                    <!-- Cards Container -->
+                    <div class="relative -mx-4 px-4">
+                        <div class="scroll-container flex gap-5 overflow-x-auto scroll-smooth snap-x pb-4" id="scrollContainer">
+
+                            <!-- Card 1: Unified -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(0)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                                            <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                                            <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">01</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Unified Across All Outlets</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    One AI brain managing all locations. Consistent service whether patients contact Orchard or Jurong branch.
+                                </p>
+                            </article>
+
+                            <!-- Card 2: Scales -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(1)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M16 7h6v6"></path>
+                                            <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">02</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Scales Without Hiring</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    2,500 leads or 10,000 leads – No recruitment, no training, no CPF calculations.
+                                </p>
+                            </article>
+
+                            <!-- Card 3: Staff Turnover -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(2)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                                            <path d="M21 3v5h-5"></path>
+                                            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">03</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Staff Turnover Impact Elimination</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    Your best appointment setter quits? Performance doesn't drop. Knowledge stays in the AI.
+                                </p>
+                            </article>
+
+                            <!-- Card 4: Data Control -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(3)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                            <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                                            <path d="M3 12A9 3 0 0 0 21 12"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">04</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Your Data, Your Control</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    Every conversation logged. Know exactly what patients want, when they ask, and what converts.
+                                </p>
+                            </article>
+
+                            <!-- Card 5: Zero Integration -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(4)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22v-5"></path>
+                                            <path d="M9 8V2"></path>
+                                            <path d="M15 8V2"></path>
+                                            <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">05</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Zero Integration Headache</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    We handle everything. Your team just watches appointments appear in the calendar.
+                                </p>
+                            </article>
+
+                            <!-- Card 6: Local Support -->
+                            <article class="benefit-card snap-start flex-none w-[300px] bg-white rounded-xl border-2 border-stone-200 p-6 cursor-pointer" onclick="scrollToCard(5)">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div class="icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                    </div>
+                                    <span class="number-badge rounded-full bg-stone-100 border border-stone-300 px-2.5 py-1 text-xs font-semibold text-stone-700">06</span>
+                                </div>
+                                <h3 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-2">Singapore-Based Support</h3>
+                                <p class="text-stone-600 leading-relaxed">
+                                    Local team that understands your market. No offshore call centers.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- Progress Dots -->
+                    <div class="flex justify-center gap-2 mt-6" id="progressDots">
+                        <span class="scroll-dot active" onclick="scrollToCard(0)"></span>
+                        <span class="scroll-dot" onclick="scrollToCard(1)"></span>
+                        <span class="scroll-dot" onclick="scrollToCard(2)"></span>
+                        <span class="scroll-dot" onclick="scrollToCard(3)"></span>
+                        <span class="scroll-dot" onclick="scrollToCard(4)"></span>
+                        <span class="scroll-dot" onclick="scrollToCard(5)"></span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="autoScroll()" class="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 text-white font-medium hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Auto-scroll Demo
+                    </button>
+                    <button onclick="resetScroll()" class="inline-flex items-center justify-center gap-2 rounded-full bg-white border-2 border-stone-300 px-6 py-3 text-stone-700 font-medium hover:border-orange-400 hover:text-orange-600 transition-all duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                            <path d="M3 3v5h5"></path>
+                        </svg>
+                        Reset Position
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Info -->
+    <div class="max-w-4xl mx-auto mt-8 px-4 mb-12">
+        <div class="p-6 bg-green-50 border border-green-200 rounded-xl">
+            <h3 class="font-bold text-green-900 mb-3">✅ Branded Scrolling Cards Features</h3>
+            <ul class="text-green-700 text-sm list-disc list-inside space-y-1">
+                <li>Stellah brand colors: Orange (#FF7A45, #EA580C) and Stone palette</li>
+                <li>Correct typography: Geist for headings with tracking-tight, Inter for body</li>
+                <li>Font weights: Normal/light for main heading, semibold for card titles</li>
+                <li>Light theme with white background (brand standard)</li>
+                <li>Horizontal scrolling with smooth snap points</li>
+                <li>Progress dots indicator with active state</li>
+                <li>Hover effects with elevation and color transitions</li>
+                <li>Auto-scroll demonstration feature</li>
+                <li>Fully responsive design</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const dots = document.querySelectorAll('.scroll-dot');
+        let autoScrollInterval;
+        let currentCard = 0;
+
+        // Update active dot based on scroll position
+        container.addEventListener('scroll', () => {
+            const cards = container.querySelectorAll('.benefit-card');
+            const scrollLeft = container.scrollLeft;
+            const containerWidth = container.clientWidth;
+
+            cards.forEach((card, index) => {
+                const cardLeft = card.offsetLeft;
+                const cardWidth = card.offsetWidth;
+
+                if (scrollLeft >= cardLeft - 50 && scrollLeft < cardLeft + cardWidth - 50) {
+                    updateActiveDot(index);
+                    currentCard = index;
+                }
+            });
+        });
+
+        function updateActiveDot(index) {
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function scrollToCard(index) {
+            const cards = container.querySelectorAll('.benefit-card');
+            if (cards[index]) {
+                cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+        }
+
+        function autoScroll() {
+            // Clear any existing interval
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+            }
+
+            // Reset to start
+            currentCard = 0;
+            scrollToCard(0);
+
+            // Start auto-scrolling
+            autoScrollInterval = setInterval(() => {
+                currentCard++;
+                if (currentCard >= 6) {
+                    currentCard = 0;
+                }
+                scrollToCard(currentCard);
+
+                // Stop after one complete cycle
+                if (currentCard === 5) {
+                    setTimeout(() => {
+                        clearInterval(autoScrollInterval);
+                        // Return to start after a pause
+                        setTimeout(() => scrollToCard(0), 1500);
+                    }, 2500);
+                }
+            }, 2500);
+        }
+
+        function resetScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+            }
+            currentCard = 0;
+            scrollToCard(0);
+        }
+    </script>
+</body>
+</html>
