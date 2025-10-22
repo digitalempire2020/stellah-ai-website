@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>6-Section Accordion Preview - Stellah AI</title>
+    <link rel="stylesheet" href="/output.css">
+    <style>
+        /* Accordion Styles */
+        .accordion-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item:hover {
+            border-color: #fed7aa;
+            transform: translateX(4px);
+        }
+
+        .accordion-item.active {
+            border-color: #FF7A45;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+            background: linear-gradient(to bottom, white, #FFF7F5);
+        }
+
+        .accordion-header {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background: #FAFAF9;
+        }
+
+        .accordion-item.active .accordion-header {
+            background: white;
+            border-bottom: 1px solid #fed7aa;
+        }
+
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .accordion-icon {
+            width: 42px;
+            height: 42px;
+            padding: 10px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .accordion-item.active .accordion-icon {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            transform: scale(1.1);
+        }
+
+        .accordion-item.active .accordion-icon svg {
+            color: white;
+        }
+
+        .accordion-chevron {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            color: #78716c;
+        }
+
+        .accordion-item.active .accordion-chevron {
+            transform: rotate(180deg);
+            color: #EA580C;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 300px;
+        }
+
+        .accordion-inner {
+            padding: 24px;
+            padding-top: 0;
+            color: #57534e;
+            line-height: 1.8;
+        }
+
+        /* Number badges */
+        .number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #f5f5f4;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 600;
+            color: #78716c;
+            margin-right: 12px;
+            transition: all 0.3s;
+        }
+
+        .accordion-item.active .number-badge {
+            background: linear-gradient(135deg, #FF7A45, #EA580C);
+            color: white;
+            transform: scale(1.15);
+        }
+
+        /* Auto-advance progress */
+        .progress-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 10s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            stroke: #FF7A45;
+            stroke-width: 2;
+            fill: transparent;
+            stroke-dasharray: 88;
+            stroke-dashoffset: 88;
+        }
+
+        .accordion-item.active .progress-ring-circle {
+            stroke-dashoffset: 0;
+        }
+
+        /* Entrance animation */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .accordion-item {
+            animation: slideDown 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .accordion-item:nth-child(1) { animation-delay: 0.1s; }
+        .accordion-item:nth-child(2) { animation-delay: 0.2s; }
+        .accordion-item:nth-child(3) { animation-delay: 0.3s; }
+        .accordion-item:nth-child(4) { animation-delay: 0.4s; }
+        .accordion-item:nth-child(5) { animation-delay: 0.5s; }
+        .accordion-item:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="font-sans bg-stone-50 p-8">
+
+    <!-- Preview Header -->
+    <div class="max-w-4xl mx-auto mb-8 p-4 bg-teal-50 border border-teal-200 rounded-lg">
+        <h1 class="text-xl font-bold text-teal-900">🎯 6-Section Accordion Preview</h1>
+        <p class="text-teal-700 text-sm mt-1">Each benefit as its own expandable section - auto-rotates every 10 seconds</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl sm:text-5xl font-light text-stone-900 tracking-tight font-geist">
+                Why Multi-Outlet Chains Choose Stellah
+            </h2>
+        </div>
+
+        <!-- Accordion Container -->
+        <div class="accordion-container">
+
+            <!-- Item 1: Unified -->
+            <div class="accordion-item active" onclick="toggleAccordion(0)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">1</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                                <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                                <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Unified Across All Outlets</h3>
+                    </div>
+                    <div class="relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                        <svg class="progress-ring" width="32" height="32">
+                            <circle class="progress-ring-circle" cx="16" cy="16" r="14"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>One AI brain managing all locations. Consistent service whether patients contact your Orchard or Jurong branch. No more confusion when patients call different outlets - they get the same professional experience everywhere.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Multi-location sync</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Unified database</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: Scales -->
+            <div class="accordion-item" onclick="toggleAccordion(1)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">2</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <path d="M16 7h6v6"></path>
+                                <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Scales Without Hiring</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>2,500 leads or 10,000 leads – Same AI, no additional staff needed. No recruitment headaches, no training costs, no CPF calculations. Your AI scales instantly with your marketing campaigns.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Unlimited capacity</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Zero hiring costs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Staff Turnover -->
+            <div class="accordion-item" onclick="toggleAccordion(2)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">3</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                                <path d="M21 3v5h-5"></path>
+                                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Staff Turnover Impact Elimination</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Your best appointment setter quits? Performance doesn't drop. Institutional knowledge stays in the AI, not in departing employees. No more starting from scratch with new hires.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Knowledge retention</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Consistent quality</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: Data Control -->
+            <div class="accordion-item" onclick="toggleAccordion(3)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">4</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                                <path d="M3 12A9 3 0 0 0 21 12"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Your Data, Your Control</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Every conversation logged and accessible. Know exactly what patients want, when they ask, and what converts. Use these insights to optimize your services and marketing.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Full transparency</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Analytics ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5: Zero Integration -->
+            <div class="accordion-item" onclick="toggleAccordion(4)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">5</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <path d="M12 22v-5"></path>
+                                <path d="M9 8V2"></path>
+                                <path d="M15 8V2"></path>
+                                <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Zero Integration Headache</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>We handle everything - setup, maintenance, updates. Your team just watches appointments appear in the calendar. No IT department needed, no technical knowledge required.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Plug & play</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Full support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6: Local Support -->
+            <div class="accordion-item" onclick="toggleAccordion(5)">
+                <div class="accordion-header">
+                    <div class="accordion-title">
+                        <span class="number-badge">6</span>
+                        <div class="accordion-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-stone-900">Singapore-Based Support</h3>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-inner">
+                        <p>Local team that understands Singapore's healthcare landscape. Same timezone, same language, same understanding of your market. No offshore call centers or language barriers.</p>
+                        <div class="mt-4 flex items-center gap-3 text-sm">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Local expertise</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">Quick response</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Features Info -->
+        <div class="mt-8 p-4 bg-teal-50 border border-teal-200 rounded-lg">
+            <h3 class="font-bold text-teal-900 mb-2">6-Section Accordion Features:</h3>
+            <ul class="text-teal-700 text-sm list-disc list-inside">
+                <li>Each benefit gets its own expandable section</li>
+                <li>Auto-rotates through sections every 10 seconds</li>
+                <li>Progress ring shows time until next section</li>
+                <li>Numbered badges for easy reference</li>
+                <li>Smooth entrance animations with stagger</li>
+                <li>Tags show key features at a glance</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let autoRotateTimer;
+        const totalItems = 6;
+
+        function toggleAccordion(index) {
+            // Clear auto-rotate when user interacts
+            clearInterval(autoRotateTimer);
+
+            const items = document.querySelectorAll('.accordion-item');
+            const clickedItem = items[index];
+
+            // Close all items
+            items.forEach((item, i) => {
+                if (i !== index) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle clicked item
+            clickedItem.classList.toggle('active');
+
+            // Update current index
+            if (clickedItem.classList.contains('active')) {
+                currentIndex = index;
+            }
+
+            // Restart auto-rotate
+            startAutoRotate();
+        }
+
+        function startAutoRotate() {
+            autoRotateTimer = setInterval(() => {
+                // Move to next item
+                currentIndex = (currentIndex + 1) % totalItems;
+
+                // Open next item
+                const items = document.querySelectorAll('.accordion-item');
+                items.forEach((item, i) => {
+                    if (i === currentIndex) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // Reset progress animation
+                const activeCircle = items[currentIndex].querySelector('.progress-ring-circle');
+                if (activeCircle) {
+                    activeCircle.style.strokeDashoffset = '88';
+                    void activeCircle.offsetWidth; // Force reflow
+                    activeCircle.style.strokeDashoffset = '0';
+                }
+            }, 10000); // 10 seconds per item
+        }
+
+        // Start auto-rotate on load
+        startAutoRotate();
+
+        // Pause on hover
+        const container = document.querySelector('.accordion-container');
+        container.addEventListener('mouseenter', () => {
+            clearInterval(autoRotateTimer);
+        });
+        container.addEventListener('mouseleave', () => {
+            startAutoRotate();
+        });
+    </script>
+
+</body>
+</html>
