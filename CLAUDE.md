@@ -53,6 +53,36 @@ The site auto-deploys to GitHub Pages on git push to `main` branch.
 - **netlify.toml** - Netlify configuration: redirects, headers, build settings
 - **visual-assets-implementation.md** - Design decisions and future visual enhancements
 
+### Clean URLs (No .html Extension)
+
+**IMPORTANT: All new pages should use clean URLs without .html extensions.**
+
+Instead of creating files like `page-name.html`, create a folder structure:
+```
+page-name/
+  └── index.html
+```
+
+This creates a clean URL: `stellah.ai/page-name` (no .html extension)
+
+**Implementation:**
+1. Create a directory with the desired URL path (e.g., `quiz-before-demo/`)
+2. Place an `index.html` file inside that directory
+3. Adjust asset paths in the HTML to go up one level (e.g., `href="../output.css"`)
+
+**Examples:**
+- ❌ **Wrong**: `quiz-before-demo.html` → URL: `/quiz-before-demo.html`
+- ✅ **Correct**: `quiz-before-demo/index.html` → URL: `/quiz-before-demo`
+
+**Benefits:**
+- Professional, clean URLs without file extensions
+- Better SEO and user experience
+- Consistent with modern web standards
+- Works seamlessly with GitHub Pages
+
+**Note for Preview Files:**
+Preview files (like `preview-*.html`) can remain as `.html` files since they're not user-facing URLs and are temporary/testing files.
+
 ### Technology Stack
 - **No framework** - Vanilla JavaScript (ES6+), no build tools except Tailwind
 - **Tailwind CSS 4.x beta** - Compiled via `@tailwindcss/cli` (v4.0.0-beta.7)
