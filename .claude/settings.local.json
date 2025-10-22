@@ -48,7 +48,9 @@
       "Bash(echo $REPL_SLUG)",
       "Bash(echo $REPL_OWNER)",
       "Bash(pkill:*)",
-      "WebFetch(domain:pagespeed.web.dev)"
+      "WebFetch(domain:pagespeed.web.dev)",
+      "Bash(kill:*)",
+      "Bash(node optimize-performance.js:*)"
     ],
     "deny": [],
     "ask": []
