@@ -8,10 +8,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
 <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://link.msgsndr.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.leadconnectorhq.com; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com https://api.leadconnectorhq.com; frame-ancestors 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://link.msgsndr.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.leadconnectorhq.com; img-src 'self' data: https://images.unsplash.com https://www.googletagmanager.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com https://api.leadconnectorhq.com;">
 <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=()">
 <title>Stellah AI | AI-Powered Medical Practice Lead Management & Appointment Conversion</title>
 
@@ -406,225 +405,72 @@ body { overflow-x: hidden; }
  }
 }
 
-/* Mobile Navigation Styles */
-/* Sticky Header */
-.header-sticky {
- position: fixed;
- top: 0;
- left: 0;
- right: 0;
- z-index: 50;
- transition: all 0.3s ease;
- background: rgba(255, 255, 255, 0.95);
- backdrop-filter: blur(10px);
- -webkit-backdrop-filter: blur(10px);
- }
-
- .header-scrolled {
- padding-top: 0.5rem;
- padding-bottom: 0.5rem;
- box-shadow: 0 2px 8px rgba(0,0,0,0.1);
- }
-
- /* Hamburger Menu Styles */
- .hamburger {
- width: 24px;
- height: 24px;
- position: relative;
- cursor: pointer;
- -webkit-tap-highlight-color: transparent;
- display: block;
- }
-
- .hamburger span {
- display: block;
- position: absolute;
- height: 2px;
- width: 100%;
- background: #1f2937;
- border-radius: 2px;
- opacity: 1;
- left: 0;
- transform: rotate(0deg);
- transition: 0.25s ease-in-out;
- }
-
- .hamburger span:nth-child(1) {
- top: 0px;
- }
-
- .hamburger span:nth-child(2) {
- top: 8px;
- }
-
- .hamburger span:nth-child(3) {
- top: 16px;
- }
-
- .hamburger.active span:nth-child(1) {
- top: 8px;
- transform: rotate(135deg);
- }
-
- .hamburger.active span:nth-child(2) {
- opacity: 0;
- left: -60px;
- }
-
- .hamburger.active span:nth-child(3) {
- top: 8px;
- transform: rotate(-135deg);
- }
-
- /* Slide-out Menu */
- .mobile-menu {
- position: fixed;
- top: 0;
- right: -100%;
- width: 80%;
- max-width: 400px;
- height: 100vh;
- background: white;
- z-index: 60;
- transition: right 0.3s ease;
- overflow-y: auto;
- box-shadow: -2px 0 10px rgba(0,0,0,0.1);
- }
-
- .mobile-menu.open {
- right: 0;
- }
-
- /* Menu Overlay */
- .menu-overlay {
- position: fixed;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- background: rgba(0, 0, 0, 0.5);
- z-index: 55;
- opacity: 0;
- pointer-events: none;
- transition: opacity 0.3s ease;
- }
-
- .menu-overlay.active {
- opacity: 1;
- pointer-events: all;
- }
-
- /* Quick Jump Navigation */
- .quick-nav {
- position: fixed;
- bottom: 70px;
- right: 20px;
- z-index: 40;
- }
-
- .quick-nav-button {
- width: 56px;
- height: 56px;
- background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
- border-radius: 28px;
- display: flex;
- align-items: center;
- justify-content: center;
- box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
- cursor: pointer;
- transition: transform 0.3s ease;
- border: none;
- color: white;
- -webkit-tap-highlight-color: transparent;
- }
-
- .quick-nav-button:active {
- transform: scale(0.9);
- }
-
- .quick-nav-button.open {
- transform: rotate(180deg);
- }
-
- .quick-nav-menu {
- position: absolute;
- bottom: 70px;
- right: 0;
- background: white;
- border-radius: 12px;
- box-shadow: 0 4px 20px rgba(0,0,0,0.15);
- padding: 8px;
- min-width: 180px;
- opacity: 0;
- pointer-events: none;
- transform: translateY(10px) scale(0.9);
- transition: all 0.3s ease;
- }
-
- .quick-nav-menu.open {
- opacity: 1;
- pointer-events: all;
- transform: translateY(0) scale(1);
- }
-
- .quick-nav-item {
- display: block;
- padding: 12px;
- color: #1f2937;
- text-decoration: none;
- border-bottom: 1px solid #e5e7eb;
- transition: background-color 0.2s;
- -webkit-tap-highlight-color: transparent;
- }
-
- .quick-nav-item:last-child {
- border-bottom: none;
- }
-
- .quick-nav-item:active {
- background-color: #f3f4f6;
- }
-
-/* Scroll Progress Indicator */
+/* Scroll Progress Bar */
 .scroll-progress {
  position: fixed;
  top: 0;
  left: 0;
+ width: 100%;
  height: 3px;
- background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
- z-index: 51;
- transition: width 0.2s ease;
-}
-
-/* Scroll Progress Bar */
-.scroll-progress-bar {
- position: fixed;
- top: 0;
- left: 0;
- width: 0%;
- height: 3px;
- background: linear-gradient(90deg, #FF7A45 0%, #EA580C 100%);
+ background: rgba(0, 0, 0, 0.05);
  z-index: 9999;
- transition: width 0.1s ease-out;
  pointer-events: none;
 }
 
-/* Desktop hide mobile elements */
-@media (min-width: 768px) {
- .mobile-only {
- display: none !important;
- }
- .hamburger {
- display: none !important;
- }
- .mobile-menu {
- display: none !important;
- }
- .menu-overlay {
- display: none !important;
- }
- .quick-nav {
- display: none !important;
+.scroll-progress-bar {
+ height: 100%;
+ background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+ width: 0%;
+ transition: width 0.15s ease-out;
+}
+
+/* Back to Top Button */
+.back-to-top {
+ position: fixed;
+ bottom: 24px;
+ right: 24px;
+ width: 48px;
+ height: 48px;
+ border-radius: 50%;
+ background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+ color: white;
+ border: none;
+ box-shadow: 0 4px 12px rgba(255, 122, 69, 0.4);
+ cursor: pointer;
+ opacity: 0;
+ visibility: hidden;
+ transform: scale(0.8);
+ transition: all 0.3s ease;
+ z-index: 9998;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.back-to-top.show {
+ opacity: 1;
+ visibility: visible;
+ transform: scale(1);
+}
+
+.back-to-top:hover {
+ transform: scale(1.1);
+ box-shadow: 0 6px 16px rgba(255, 122, 69, 0.5);
+}
+
+.back-to-top:active {
+ transform: scale(0.95);
+}
+
+.back-to-top svg {
+ width: 24px;
+ height: 24px;
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+ .back-to-top {
+  display: none;
  }
 }
 </style>
@@ -637,46 +483,17 @@ body { overflow-x: hidden; }
 </noscript>
 </head>
 <body class="font-sans selection:bg-orange-200 selection:text-stone-900 text-stone-900 bg-white">
-<!-- Scroll Progress Indicator -->
-<div class="scroll-progress" style="width: 0%"></div>
-
-<!-- Mobile Menu Overlay -->
-<div class="menu-overlay" id="menuOverlay"></div>
-
-<!-- Slide-out Mobile Menu -->
-<nav class="mobile-menu" id="mobileMenu">
-  <div class="p-6 border-b border-stone-200">
-    <h2 class="font-geist font-semibold text-xl tracking-tight">Menu</h2>
-  </div>
-  <div>
-    <a href="#transformation" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Save $100k/Year</a>
-    <a href="#breakthrough" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Zero Missed Leads</a>
-    <a href="#hero-section" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Watch AI Book</a>
-    <a href="#results" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Proven Results</a>
-    <a href="#footer" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Book Demo</a>
-  </div>
-  <div class="p-6">
-    <button class="w-full bg-orange-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors" onclick="window.location.href='#book-demo'">
-      Book Your Free Demo
-    </button>
-  </div>
-</nav>
-
-<!-- Quick Jump Navigation (Mobile Only) -->
-<div class="quick-nav mobile-only">
-  <div class="quick-nav-menu" id="quickNavMenu">
-    <a href="#transformation" class="quick-nav-item">💰 Save $100k</a>
-    <a href="#breakthrough" class="quick-nav-item">🎯 Zero Missed</a>
-    <a href="#hero-section" class="quick-nav-item">🤖 Watch AI Book</a>
-    <a href="#results" class="quick-nav-item">📈 Proven Results</a>
-    <a href="#footer" class="quick-nav-item">📅 Book Demo</a>
-  </div>
-  <button class="quick-nav-button" id="quickNavBtn">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 18l6-6-6-6"/>
-    </svg>
-  </button>
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress">
+ <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 </div>
+
+<!-- Back to Top Button (Mobile) -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <polyline points="18 15 12 9 6 15"></polyline>
+ </svg>
+</button>
 
 <!-- SVG Icon Sprites (optimized) -->
 <svg style="display: none;" aria-hidden="true">
@@ -711,15 +528,12 @@ body { overflow-x: hidden; }
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNJW4X5S"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
-<!-- Scroll Progress Bar -->
-<div class="scroll-progress-bar" id="scrollProgressBar"></div>
 <!-- Background -->
 <!-- <div class="spline-container fixed top-0 w-full h-screen -z-10" style="pointer-events: none;">
  <iframe src="https://my.spline.design/flowingribbon-TlkEaNrvCCNZuJBNJN3LXpRF" frameborder="0" width="100%" height="100%" style="pointer-events: none;"></iframe>
 </div> -->
 <!-- Header -->
-<header class="header-sticky sticky top-0 z-50 border-b backdrop-blur bg-white/70 border-stone-200/70" id="stickyHeader">
+<header class="sticky top-0 z-50 border-b backdrop-blur bg-white/70 border-stone-200/70">
  <div class="mx-auto max-w-7xl px-6">
  <div class="flex h-16 items-center justify-between">
  <a href="#" class="flex items-center gap-3">
@@ -728,23 +542,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </span>
  <span class="font-geist text-xl tracking-tight text-stone-900">Stellah AI</span>
  </a>
-
- <!-- Desktop Navigation (hidden on mobile) -->
- <nav class="hidden md:flex items-center gap-4 sm:gap-8">
- <a href="#transformation" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Save $100k/Year</a>
- <a href="#breakthrough" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Zero Missed Leads</a>
- <a href="#hero-section" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Watch AI Book</a>
- <a href="#results" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Proven Results</a>
- <a href="#footer" class="bg-orange-500 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-orange-600 transition-colors">Book Demo</a>
+ <nav class="flex items-center gap-4 sm:gap-8">
+ <a href="#breakthrough" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Process</a>
+ <a href="#results" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Results</a>
+ <a href="#faq" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">FAQ</a>
  </nav>
-
- <!-- Hamburger Menu Button (mobile only) -->
- <button class="hamburger mobile-only md:hidden" id="hamburgerBtn" aria-label="Menu">
- <span></span>
- <span></span>
- <span></span>
- </button>
-
  <div class="hidden lg:block">
  <span class="text-xs text-orange-600 font-medium">Only 2 spots remaining this month</span>
  </div>
@@ -752,7 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
 </header>
 <!-- HERO SECTION -->
-<section class="relative" id="hero-section">
+<section class="relative">
  <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6">
  <div class="max-w-4xl sm:pt-20 lg:pt-28 text-center mr-auto ml-auto pt-16">
  <h1 class="text-[40px] sm:text-6xl lg:text-7xl leading-[1.05] font-light text-stone-900 tracking-tight font-geist">
@@ -762,7 +564,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  Here's how medical chains save $100,000+ per year on staff costs – while their teams finally focus on patient care
  </p>
  <!-- Live Calendar Demo Section -->
- <div class="mt-16 lg:mt-20" id="calendar-demo">
+ <div class="mt-16 lg:mt-20">
  <div class="relative rounded-2xl">
  <!-- subtle glow -->
  <div class="absolute inset-0 -m-px rounded-2xl" style="background: linear-gradient(120deg, rgba(99,102,241,.22), rgba(56,189,248,.22), rgba(16,185,129,.22)); filter: blur(12px); opacity: .6;"></div>
@@ -20718,7 +20520,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </section>
 </section>
 <!-- TRANSFORMATION SECTION -->
-<section class="lg:mt-28 mt-20" id="transformation">
+<section class="lg:mt-28 mt-20">
  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
  <!-- Headline -->
  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light text-center leading-tight mb-8 sm:mb-12 text-stone-900 font-geist animate-on-scroll">
@@ -21503,8 +21305,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </div>
-
-    <!-- Calendar Demo Section -->
 
     <!-- CTA Section -->
     <div class="mt-16 text-center scroll-trigger animate-in-1">
@@ -22704,7 +22504,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
  </div>
 </section>
-<footer class="border-t border-stone-200" id="footer">
+<footer class="border-t border-stone-200">
  <div class="mx-auto max-w-7xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
  <div class="flex items-center gap-2 text-stone-600">
  <span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-orange-500/10">
@@ -23380,215 +23180,79 @@ updateAgentSlider();
 <!-- Form Embed Script -->
 <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
 
-<!-- Mobile Navigation JavaScript -->
+<!-- Scroll Progress Bar Script -->
 <script>
-// Mobile Navigation Script
-(function() {
-  console.log('🔧 Mobile Navigation Script Loading...');
+// Wait for EVERYTHING to load (images, fonts, etc.)
+window.addEventListener('load', function() {
+  console.log('🎯 Scroll Progress Bar: Page fully loaded, starting...');
 
-  // Elements
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const quickNavBtn = document.getElementById('quickNavBtn');
-  const quickNavMenu = document.getElementById('quickNavMenu');
-  const header = document.getElementById('stickyHeader');
-  const scrollProgress = document.querySelector('.scroll-progress');
-  const scrollProgressBar = document.getElementById('scrollProgressBar');
+  const progressBar = document.getElementById('scrollProgressBar');
 
-  console.log('📋 Element Check:');
-  console.log('   hamburgerBtn:', hamburgerBtn ? '✅ Found' : '❌ NOT FOUND');
-  console.log('   mobileMenu:', mobileMenu ? '✅ Found' : '❌ NOT FOUND');
-  console.log('   menuOverlay:', menuOverlay ? '✅ Found' : '❌ NOT FOUND');
-
-  // Hamburger Menu Toggle
-  if (hamburgerBtn) {
-    console.log('🍔 Attaching click event to hamburger button...');
-    hamburgerBtn.addEventListener('click', function(event) {
-      console.log('🖱️ Hamburger button clicked!');
-      event.stopPropagation();
-
-      const isOpen = hamburgerBtn.classList.contains('active');
-
-      if (isOpen) {
-        // Close menu
-        console.log('   → Closing menu');
-        hamburgerBtn.classList.remove('active');
-        mobileMenu.classList.remove('open');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-        console.log('   → Menu closed ✅');
-      } else {
-        // Open menu
-        console.log('   → Opening menu');
-        hamburgerBtn.classList.add('active');
-        mobileMenu.classList.add('open');
-        menuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        console.log('   → Menu classes added:');
-        console.log('      - hamburgerBtn.active:', hamburgerBtn.classList.contains('active'));
-        console.log('      - mobileMenu.open:', mobileMenu.classList.contains('open'));
-        console.log('      - menuOverlay.active:', menuOverlay.classList.contains('active'));
-      }
-    });
-    console.log('✅ Hamburger event listener attached');
-  } else {
-    console.error('❌ Hamburger button not found! Cannot attach event listener.');
+  if (!progressBar) {
+    console.error('❌ Progress bar element NOT found!');
+    return;
   }
 
-  // Close menu when overlay is clicked
-  if (menuOverlay) {
-    menuOverlay.addEventListener('click', function() {
-      hamburgerBtn.classList.remove('active');
-      mobileMenu.classList.remove('open');
-      menuOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  }
+  console.log('✅ Progress bar found!');
+  console.log('Debug info:');
+  console.log('- body.scrollHeight:', document.body.scrollHeight);
+  console.log('- documentElement.scrollHeight:', document.documentElement.scrollHeight);
+  console.log('- body.offsetHeight:', document.body.offsetHeight);
+  console.log('- innerHeight:', window.innerHeight);
 
-  // Close menu when menu item is clicked
-  const menuItems = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
-  menuItems.forEach(item => {
-    item.addEventListener('click', function() {
-      hamburgerBtn.classList.remove('active');
-      mobileMenu.classList.remove('open');
-      menuOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  });
-
-  // Quick Jump Navigation Toggle
-  if (quickNavBtn && quickNavMenu) {
-    quickNavBtn.addEventListener('click', function() {
-      const isOpen = quickNavBtn.classList.contains('open');
-
-      if (isOpen) {
-        quickNavBtn.classList.remove('open');
-        quickNavMenu.classList.remove('open');
-      } else {
-        quickNavBtn.classList.add('open');
-        quickNavMenu.classList.add('open');
-      }
-    });
-
-    // Close quick nav when item is clicked
-    const quickNavItems = quickNavMenu.querySelectorAll('a');
-    quickNavItems.forEach(item => {
-      item.addEventListener('click', function() {
-        quickNavBtn.classList.remove('open');
-        quickNavMenu.classList.remove('open');
-      });
-    });
-
-    // Close quick nav when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!quickNavBtn.contains(e.target) && !quickNavMenu.contains(e.target)) {
-        quickNavBtn.classList.remove('open');
-        quickNavMenu.classList.remove('open');
-      }
-    });
-  }
-
-  // Scroll Progress Indicator
   function updateScrollProgress() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+    const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    // Try body.scrollHeight as fallback
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
+    );
+    const windowHeight = window.innerHeight;
 
-    if (scrollProgress) {
-      scrollProgress.style.width = scrollPercentage + '%';
-    }
-    if (scrollProgressBar) {
-      scrollProgressBar.style.width = scrollPercentage + '%';
-    }
+    const scrollableHeight = documentHeight - windowHeight;
+    const scrollPercentage = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+
+    progressBar.style.width = scrollPercentage + '%';
   }
 
-  // Header scroll effect
-  let lastScroll = 0;
-  function handleScroll() {
-    const currentScroll = window.pageYOffset;
+  // Update on scroll
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
-    // Update scroll progress
-    updateScrollProgress();
+  // Update on resize (in case content shifts)
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
 
-    // Header shrink effect on mobile
-    if (window.innerWidth <= 768 && header) {
-      if (currentScroll > 50) {
-        header.classList.add('header-scrolled');
-      } else {
-        header.classList.remove('header-scrolled');
-      }
+  // Initial update
+  updateScrollProgress();
+
+  console.log('✅ Scroll tracking active!');
+});
+
+// Back to Top Button
+(function() {
+  const backToTopBtn = document.getElementById('backToTop');
+
+  if (!backToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
     }
+  }, { passive: true });
 
-    lastScroll = currentScroll;
-  }
-
-  // Add scroll event listener
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', handleScroll);
-
-  // Initial call
-  handleScroll();
-
-  // Smooth scrolling for anchor links - Enhanced with debugging
-  console.log('🔗 Setting up smooth scroll navigation...');
-  const navLinks = document.querySelectorAll('a[href^="#"]');
-  console.log(`   Found ${navLinks.length} navigation links`);
-
-  navLinks.forEach((anchor, index) => {
-    const linkHref = anchor.getAttribute('href');
-
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      console.log(`🖱️ Navigation link clicked: ${href}`);
-
-      if (href === '#' || href === '#book-demo') {
-        console.log('   → Special link, allowing default behavior');
-        return;
-      }
-
-      e.preventDefault();
-      console.log('   → Default prevented, initiating smooth scroll');
-
-      const target = document.querySelector(href);
-
-      if (target) {
-        console.log('   → Target found ✅');
-
-        // Close mobile menu if it's open
-        if (hamburgerBtn && mobileMenu && hamburgerBtn.classList.contains('active')) {
-          console.log('   → Closing mobile menu first');
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('open');
-          if (menuOverlay) menuOverlay.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-
-        const offsetTop = target.offsetTop - 70; // Account for sticky header
-        console.log(`   → Scrolling to position: ${offsetTop}px`);
-
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-
-        console.log('   → Scroll initiated ✅');
-      } else {
-        console.error(`   ❌ ERROR: Target "${href}" not found in DOM!`);
-        // Log all available sections for debugging
-        console.log('   Available sections:',
-          Array.from(document.querySelectorAll('[id]'))
-            .map(el => '#' + el.id)
-            .filter(id => id.startsWith('#'))
-        );
-      }
+  // Scroll to top when clicked
+  backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   });
-
-  console.log('✅ Smooth scroll navigation setup complete');
-
-  console.log('🎉 Mobile Navigation Script Loaded Successfully!');
-  console.log('================================================\n');
 })();
 </script>
 
