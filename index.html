@@ -407,9 +407,8 @@ body { overflow-x: hidden; }
 }
 
 /* Mobile Navigation Styles */
-@media (max-width: 768px) {
- /* Sticky Header */
- .header-sticky {
+/* Sticky Header */
+.header-sticky {
  position: fixed;
  top: 0;
  left: 0;
@@ -585,7 +584,6 @@ body { overflow-x: hidden; }
  .quick-nav-item:active {
  background-color: #f3f4f6;
  }
-}
 
 /* Scroll Progress Indicator */
 .scroll-progress {
@@ -612,7 +610,7 @@ body { overflow-x: hidden; }
 }
 
 /* Desktop hide mobile elements */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
  .mobile-only {
  display: none !important;
  }
@@ -23386,6 +23384,8 @@ updateAgentSlider();
 <script>
 // Mobile Navigation Script
 (function() {
+  console.log('🔧 Mobile Navigation Script Loading...');
+
   // Elements
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -23396,25 +23396,44 @@ updateAgentSlider();
   const scrollProgress = document.querySelector('.scroll-progress');
   const scrollProgressBar = document.getElementById('scrollProgressBar');
 
+  console.log('📋 Element Check:');
+  console.log('   hamburgerBtn:', hamburgerBtn ? '✅ Found' : '❌ NOT FOUND');
+  console.log('   mobileMenu:', mobileMenu ? '✅ Found' : '❌ NOT FOUND');
+  console.log('   menuOverlay:', menuOverlay ? '✅ Found' : '❌ NOT FOUND');
+
   // Hamburger Menu Toggle
   if (hamburgerBtn) {
-    hamburgerBtn.addEventListener('click', function() {
+    console.log('🍔 Attaching click event to hamburger button...');
+    hamburgerBtn.addEventListener('click', function(event) {
+      console.log('🖱️ Hamburger button clicked!');
+      event.stopPropagation();
+
       const isOpen = hamburgerBtn.classList.contains('active');
 
       if (isOpen) {
         // Close menu
+        console.log('   → Closing menu');
         hamburgerBtn.classList.remove('active');
         mobileMenu.classList.remove('open');
         menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        console.log('   → Menu closed ✅');
       } else {
         // Open menu
+        console.log('   → Opening menu');
         hamburgerBtn.classList.add('active');
         mobileMenu.classList.add('open');
         menuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        console.log('   → Menu classes added:');
+        console.log('      - hamburgerBtn.active:', hamburgerBtn.classList.contains('active'));
+        console.log('      - mobileMenu.open:', mobileMenu.classList.contains('open'));
+        console.log('      - menuOverlay.active:', menuOverlay.classList.contains('active'));
       }
     });
+    console.log('✅ Hamburger event listener attached');
+  } else {
+    console.error('❌ Hamburger button not found! Cannot attach event listener.');
   }
 
   // Close menu when overlay is clicked
@@ -23567,6 +23586,9 @@ updateAgentSlider();
   });
 
   console.log('✅ Smooth scroll navigation setup complete');
+
+  console.log('🎉 Mobile Navigation Script Loaded Successfully!');
+  console.log('================================================\n');
 })();
 </script>
 
