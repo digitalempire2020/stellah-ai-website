@@ -23511,23 +23511,62 @@ updateAgentSlider();
   // Initial call
   handleScroll();
 
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  // Smooth scrolling for anchor links - Enhanced with debugging
+  console.log('🔗 Setting up smooth scroll navigation...');
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+  console.log(`   Found ${navLinks.length} navigation links`);
+
+  navLinks.forEach((anchor, index) => {
+    const linkHref = anchor.getAttribute('href');
+
     anchor.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      if (href === '#') return;
+      console.log(`🖱️ Navigation link clicked: ${href}`);
+
+      if (href === '#' || href === '#book-demo') {
+        console.log('   → Special link, allowing default behavior');
+        return;
+      }
 
       e.preventDefault();
+      console.log('   → Default prevented, initiating smooth scroll');
+
       const target = document.querySelector(href);
+
       if (target) {
+        console.log('   → Target found ✅');
+
+        // Close mobile menu if it's open
+        if (hamburgerBtn && mobileMenu && hamburgerBtn.classList.contains('active')) {
+          console.log('   → Closing mobile menu first');
+          hamburgerBtn.classList.remove('active');
+          mobileMenu.classList.remove('open');
+          if (menuOverlay) menuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+
         const offsetTop = target.offsetTop - 70; // Account for sticky header
+        console.log(`   → Scrolling to position: ${offsetTop}px`);
+
         window.scrollTo({
           top: offsetTop,
           behavior: 'smooth'
         });
+
+        console.log('   → Scroll initiated ✅');
+      } else {
+        console.error(`   ❌ ERROR: Target "${href}" not found in DOM!`);
+        // Log all available sections for debugging
+        console.log('   Available sections:',
+          Array.from(document.querySelectorAll('[id]'))
+            .map(el => '#' + el.id)
+            .filter(id => id.startsWith('#'))
+        );
       }
     });
   });
+
+  console.log('✅ Smooth scroll navigation setup complete');
 })();
 </script>
 
