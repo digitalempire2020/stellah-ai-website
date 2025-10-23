@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90-Day Transformation Section - Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #fafaf9;
+            padding: 2rem 1rem;
+        }
+
+        /* Progress Dots */
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 2rem 0;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d6d3d1;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #FF7A45;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Revenue Card */
+        .revenue-card {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffffff 100%);
+            border: 2px solid #FF7A45;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .revenue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 122, 69, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Counter Animation */
+        .counter-animate {
+            display: inline-block;
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .fade-in-delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .fade-in-delay-3 { animation-delay: 0.6s; opacity: 0; }
+
+        /* Flow connector */
+        .flow-connector {
+            position: relative;
+        }
+
+        /* Preview label */
+        .preview-label {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #1f2937;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            z-index: 50;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .preview-info {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-info h2 {
+            color: #1e40af;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .preview-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .preview-info li {
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .preview-info li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-label">
+        📱 PREVIEW MODE
+    </div>
+
+    <!-- Preview Info Banner -->
+    <div class="preview-info">
+        <h2>90-Day Transformation Section - Preview</h2>
+        <ul>
+            <li><strong>New unified section</strong> combining "The Impact in Numbers" + "The Bottom Line Result"</li>
+            <li><strong>Heading:</strong> "90-Day Transformation" (clean, no subheading)</li>
+            <li><strong>Layout:</strong> 3 metric cards + 1 featured revenue card</li>
+            <li><strong>Mobile optimized:</strong> Stacks vertically with clear hierarchy</li>
+            <li><strong>Narrative flow:</strong> Operational metrics → Revenue impact</li>
+            <li><strong>Changes:</strong> Removed redundant timeline references (cleaner presentation)</li>
+        </ul>
+    </div>
+
+    <!-- Main Preview Section -->
+    <section class="py-12" style="background: linear-gradient(to bottom, #ffffff, #fafaf9);">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Progress indicator -->
+            <div class="progress-dots fade-in">
+                <div class="progress-dot"></div>
+                <div class="progress-dot active"></div>
+            </div>
+
+            <!-- 90-Day Transformation Section -->
+            <div class="mb-12 fade-in fade-in-delay-1 flow-connector">
+                <!-- Section Header -->
+                <div class="text-center mb-10">
+                    <h3 class="text-xl sm:text-2xl font-semibold text-stone-900">
+                        90-Day Transformation
+                    </h3>
+                </div>
+
+                <!-- Three Key Metrics Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+
+                    <!-- Response Time -->
+                    <div class="metric-card bg-white border-2 border-[#FF7A45]/20 rounded-xl p-6 text-center shadow-lg">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-[#FF7A45] to-[#EA580C] rounded-full flex items-center justify-center mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1.86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1.78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center gap-2 mb-2">
+                            <p class="text-3xl font-bold text-[#FF7A45] counter-animate" data-target="15">15</p>
+                            <span class="text-lg font-medium text-stone-700">seconds</span>
+                        </div>
+                        <p class="text-sm font-semibold text-stone-800 mb-1">Response Time</p>
+                        <div class="text-xs text-stone-600 bg-stone-50 rounded-lg px-3 py-2 mt-2">
+                            <span class="line-through text-stone-400">Was: 6 hours</span> → <span class="text-[#10B981] font-semibold">Now: 15 sec</span>
+                        </div>
+                    </div>
+
+                    <!-- Show Rate -->
+                    <div class="metric-card bg-white border-2 border-[#FF7A45]/20 rounded-xl p-6 text-center shadow-lg">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-[#FF7A45] to-[#EA580C] rounded-full flex items-center justify-center mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                    <path d="m22 7-8.5 8.5L9 11l-7 7"></path>
+                                    <path d="M16 7h6v6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <p class="text-3xl font-bold text-[#FF7A45] counter-animate" data-target="72">72</p>
+                            <span class="text-lg font-medium text-stone-700">%</span>
+                        </div>
+                        <p class="text-sm font-semibold text-stone-800 mb-1">Show Rate</p>
+                        <div class="text-xs text-stone-600 bg-stone-50 rounded-lg px-3 py-2 mt-2">
+                            <span class="line-through text-stone-400">Was: 40%</span> → <span class="text-[#10B981] font-semibold">Now: 72%</span>
+                        </div>
+                    </div>
+
+                    <!-- Cost Savings -->
+                    <div class="metric-card bg-white border-2 border-[#FF7A45]/20 rounded-xl p-6 text-center shadow-lg">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-[#FF7A45] to-[#EA580C] rounded-full flex items-center justify-center mx-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                    <line x1="12" x2="12" y1="2" y2="22"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline justify-center gap-1 mb-2">
+                            <span class="text-xl font-bold text-orange-600">$</span>
+                            <p class="text-3xl font-bold text-[#FF7A45] counter-animate" data-target="114">114</p>
+                            <span class="text-lg font-medium text-stone-700">K/year</span>
+                        </div>
+                        <p class="text-sm font-semibold text-stone-800 mb-1">Cost Savings</p>
+                        <div class="text-xs text-stone-600 bg-stone-50 rounded-lg px-3 py-2 mt-2">
+                            <span class="line-through text-stone-400">Was: $168K</span> → <span class="text-[#10B981] font-semibold">Now: $54K</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Revenue Card -->
+                <div class="revenue-card rounded-2xl p-8 sm:p-10 max-w-3xl mx-auto text-center shadow-2xl">
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-center gap-4 mb-6">
+                            <div>
+                                <p class="text-5xl sm:text-6xl font-bold text-[#EA580C] counter-animate mb-2" data-target="97500" data-prefix="$">$97,500</p>
+                                <p class="text-xl sm:text-2xl font-semibold text-[#EA580C]">Additional Revenue Generated</p>
+                            </div>
+                        </div>
+
+                        <div class="max-w-xl mx-auto">
+                            <p class="text-sm text-stone-600">
+                                From improved conversions and 80% reduction in no-shows
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Comparison Guide -->
+            <div class="mt-12 p-6 bg-white rounded-xl border-2 border-stone-200 max-w-3xl mx-auto">
+                <h4 class="text-lg font-semibold text-stone-900 mb-4">📱 Mobile Preview Guide</h4>
+                <p class="text-sm text-stone-600 mb-3">To test mobile view:</p>
+                <ul class="text-sm text-stone-600 space-y-2 ml-4">
+                    <li>• <strong>Chrome/Edge:</strong> Press F12 → Click device icon → Select "iPhone SE"</li>
+                    <li>• <strong>Firefox:</strong> Press F12 → Click responsive icon → Select "iPhone SE"</li>
+                    <li>• <strong>Safari:</strong> Develop → Enter Responsive Design Mode</li>
+                </ul>
+                <div class="mt-4 pt-4 border-t border-stone-200">
+                    <p class="text-xs text-stone-500">
+                        <strong>Expected mobile behavior:</strong> Cards stack vertically, revenue card remains full-width and emphasized
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Counter animation function
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const prefix = element.getAttribute('data-prefix') || '';
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = prefix + Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = prefix + target.toLocaleString();
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Initialize counters on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter-animate');
+
+            // Delay counter start for better effect
+            setTimeout(() => {
+                counters.forEach(counter => animateCounter(counter));
+            }, 800);
+        });
+    </script>
+</body>
+</html>
