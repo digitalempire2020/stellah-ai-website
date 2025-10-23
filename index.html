@@ -598,6 +598,18 @@ body { overflow-x: hidden; }
  transition: width 0.2s ease;
 }
 
+/* Scroll Progress Bar */
+.scroll-progress-bar {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 0%;
+ height: 3px;
+ background: linear-gradient(90deg, #FF7A45 0%, #EA580C 100%);
+ z-index: 1000;
+ transition: width 0.1s ease-out;
+}
+
 /* Desktop hide mobile elements */
 @media (min-width: 769px) {
  .mobile-only {
@@ -638,12 +650,11 @@ body { overflow-x: hidden; }
     <h2 class="font-geist font-semibold text-xl tracking-tight">Menu</h2>
   </div>
   <div>
-    <a href="#hero" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Home</a>
-    <a href="#why-stellah" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Why Stellah</a>
-    <a href="#how-it-works" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">How It Works</a>
-    <a href="#success-stories" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Success Stories</a>
-    <a href="#live-demo" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Live Demo</a>
-    <a href="#get-started" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Get Started</a>
+    <a href="#hero-section" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Instant ROI</a>
+    <a href="#breakthrough" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Never Miss</a>
+    <a href="#calendar-demo" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Watch AI</a>
+    <a href="#transformation" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Results</a>
+    <a href="#footer" class="block px-6 py-4 text-stone-700 hover:text-stone-900 hover:bg-stone-50 transition-colors">Get Started</a>
   </div>
   <div class="p-6">
     <button class="w-full bg-orange-500 text-white px-4 py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors" onclick="window.location.href='#book-demo'">
@@ -655,11 +666,11 @@ body { overflow-x: hidden; }
 <!-- Quick Jump Navigation (Mobile Only) -->
 <div class="quick-nav mobile-only">
   <div class="quick-nav-menu" id="quickNavMenu">
-    <a href="#hero" class="quick-nav-item">🏠 Home</a>
-    <a href="#why-stellah" class="quick-nav-item">🎯 Why Stellah</a>
-    <a href="#how-it-works" class="quick-nav-item">⚙️ How It Works</a>
-    <a href="#success-stories" class="quick-nav-item">⭐ Success Stories</a>
-    <a href="#live-demo" class="quick-nav-item">🎬 Live Demo</a>
+    <a href="#hero-section" class="quick-nav-item">🏠 Instant ROI</a>
+    <a href="#breakthrough" class="quick-nav-item">🎯 Never Miss</a>
+    <a href="#calendar-demo" class="quick-nav-item">⚙️ Watch AI</a>
+    <a href="#transformation" class="quick-nav-item">⭐ Results</a>
+    <a href="#footer" class="quick-nav-item">🎬 Get Started</a>
   </div>
   <button class="quick-nav-button" id="quickNavBtn">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -701,6 +712,9 @@ body { overflow-x: hidden; }
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNJW4X5S"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress-bar" id="scrollProgressBar"></div>
 <!-- Background -->
 <!-- <div class="spline-container fixed top-0 w-full h-screen -z-10" style="pointer-events: none;">
  <iframe src="https://my.spline.design/flowingribbon-TlkEaNrvCCNZuJBNJN3LXpRF" frameborder="0" width="100%" height="100%" style="pointer-events: none;"></iframe>
@@ -718,11 +732,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
  <!-- Desktop Navigation (hidden on mobile) -->
  <nav class="hidden md:flex items-center gap-4 sm:gap-8">
- <a href="#why-stellah" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Why Stellah</a>
- <a href="#how-it-works" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">How It Works</a>
- <a href="#success-stories" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Success Stories</a>
- <a href="#live-demo" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Live Demo</a>
- <a href="#get-started" class="bg-orange-500 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-orange-600 transition-colors">Get Started</a>
+ <a href="#hero-section" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Instant ROI</a>
+ <a href="#breakthrough" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Never Miss</a>
+ <a href="#calendar-demo" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Watch AI</a>
+ <a href="#transformation" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Results</a>
+ <a href="#footer" class="bg-orange-500 text-white px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-orange-600 transition-colors">Get Started</a>
  </nav>
 
  <!-- Hamburger Menu Button (mobile only) -->
@@ -739,7 +753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
 </header>
 <!-- HERO SECTION -->
-<section class="relative">
+<section class="relative" id="hero-section">
  <div class="max-w-7xl mr-auto ml-auto pr-6 pl-6">
  <div class="max-w-4xl sm:pt-20 lg:pt-28 text-center mr-auto ml-auto pt-16">
  <h1 class="text-[40px] sm:text-6xl lg:text-7xl leading-[1.05] font-light text-stone-900 tracking-tight font-geist">
@@ -749,7 +763,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  Here's how medical chains save $100,000+ per year on staff costs – while their teams finally focus on patient care
  </p>
  <!-- Live Calendar Demo Section -->
- <div class="mt-16 lg:mt-20">
+ <div class="mt-16 lg:mt-20" id="calendar-demo">
  <div class="relative rounded-2xl">
  <!-- subtle glow -->
  <div class="absolute inset-0 -m-px rounded-2xl" style="background: linear-gradient(120deg, rgba(99,102,241,.22), rgba(56,189,248,.22), rgba(16,185,129,.22)); filter: blur(12px); opacity: .6;"></div>
@@ -20705,7 +20719,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </section>
 </section>
 <!-- TRANSFORMATION SECTION -->
-<section class="lg:mt-28 mt-20">
+<section class="lg:mt-28 mt-20" id="transformation">
  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
  <!-- Headline -->
  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light text-center leading-tight mb-8 sm:mb-12 text-stone-900 font-geist animate-on-scroll">
@@ -21490,6 +21504,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </div>
+
+    <!-- Calendar Demo Section -->
+    <div id="calendar-demo"></div>
 
     <!-- CTA Section -->
     <div class="mt-16 text-center scroll-trigger animate-in-1">
@@ -22689,7 +22706,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
  </div>
 </section>
-<footer class="border-t border-stone-200">
+<footer class="border-t border-stone-200" id="footer">
  <div class="mx-auto max-w-7xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
  <div class="flex items-center gap-2 text-stone-600">
  <span class="inline-flex h-6 w-6 items-center justify-center rounded-md bg-orange-500/10">
@@ -23377,6 +23394,7 @@ updateAgentSlider();
   const quickNavMenu = document.getElementById('quickNavMenu');
   const header = document.getElementById('stickyHeader');
   const scrollProgress = document.querySelector('.scroll-progress');
+  const scrollProgressBar = document.getElementById('scrollProgressBar');
 
   // Hamburger Menu Toggle
   if (hamburgerBtn) {
@@ -23460,6 +23478,9 @@ updateAgentSlider();
 
     if (scrollProgress) {
       scrollProgress.style.width = scrollPercentage + '%';
+    }
+    if (scrollProgressBar) {
+      scrollProgressBar.style.width = scrollPercentage + '%';
     }
   }
 
