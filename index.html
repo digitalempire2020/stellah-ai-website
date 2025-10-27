@@ -23004,6 +23004,12 @@ function openBookDemoModal() {
   const modal = document.getElementById('bookDemoModal');
   if (!modal) return;
 
+  // Lazy load iframe on first open (saves 1.3MB on initial page load)
+  const iframe = document.getElementById('inline-sbDZ68KbvhNSNVgdlYAI');
+  if (iframe && !iframe.src && iframe.dataset.src) {
+    iframe.src = iframe.dataset.src;
+  }
+
   document.body.classList.add('modal-active');
   modal.classList.remove('hidden');
   modal.classList.add('modal-open');
@@ -23123,9 +23129,9 @@ updateAgentSlider();
 
       <!-- Iframe Wrapper -->
       <div class="stellah-iframe-wrapper">
-        <!-- Form Iframe -->
+        <!-- Form Iframe - Lazy loaded on modal open to save 1.3MB initial payload -->
         <iframe
-          src="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI"
+          data-src="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI"
           id="inline-sbDZ68KbvhNSNVgdlYAI"
           data-layout="{'id':'INLINE'}"
           data-trigger-type="alwaysShow"
