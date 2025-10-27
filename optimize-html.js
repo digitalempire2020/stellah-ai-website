@@ -115,15 +115,17 @@ if (cssInsertionPattern.test(html)) {
 }
 
 // Step 8: Replace inline styles with CSS class
-// Only replace opacity and transform, keep positioning (left, top, width, height)
-const inlineStylePattern = /style="opacity: 0; transform: scale\(0\.98\); (left: [^;]+; top: [^;]+; width: [^;]+; height: [^;]+;)"/g;
+// This needs to ADD the class to existing classes, not replace them
+// Pattern matches the div with class attribute followed by style attribute
+const eventPattern = /(<div class="[^"]+)(" style="opacity: 0; transform: scale\(0\.98\); )(left: [^;]+; top: [^;]+; width: [^;]+; height: [^;]+;)(")/g;
 
 let styleCount = 0;
-html = html.replace(inlineStylePattern, (match, positioning) => {
+html = html.replace(eventPattern, (match, classStart, styleMiddle, positioning, styleEnd) => {
   styleCount++;
-  return `class="calendar-event-initial" style="${positioning}"`;
+  // Add calendar-event-initial to existing classes and remove opacity/transform from inline styles
+  return `${classStart} calendar-event-initial" style="${positioning}${styleEnd}`;
 });
-console.log(`✅ Replaced ${styleCount} inline styles with CSS class`);
+console.log(`✅ Added calendar-event-initial class to ${styleCount} calendar events`);
 
 // Step 9: Write optimized HTML
 fs.writeFileSync(outputFile, html, 'utf8');

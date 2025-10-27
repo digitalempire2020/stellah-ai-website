@@ -21,10 +21,32 @@ Both commands can run simultaneously: `npm run dev` watches for CSS changes whil
 ### Build
 ```bash
 npm run build       # Minify Tailwind CSS for production (uses --minify flag)
-npm run netlify-build  # Netlify build command (same as build)
+npm run build:prod  # Full production build: optimize images + Tailwind + minify HTML
+npm run netlify-build  # Netlify build command (runs build:prod)
 ```
 
 Build compiles `src/input.css` → `output.css` using Tailwind CLI v4 beta.
+
+### Production Optimization Pipeline
+The `build:prod` command runs a three-step optimization pipeline:
+
+1. **Image Optimization** (`npm run optimize-images`)
+   - Converts PNG images to WebP format using Sharp
+   - Resizes to appropriate dimensions (e.g., 192x192px for profile images)
+   - Target: 99%+ size reduction for large images
+   - Example: 1.18MB PNG → 3.56KB WebP
+
+2. **Tailwind Compilation** (`npm run build`)
+   - Compiles `src/input.css` → `output.css`
+   - Applies `--minify` flag for production
+
+3. **HTML Minification** (`npm run minify-html`)
+   - Uses `html-minifier-terser` to reduce HTML size
+   - Collapses whitespace, removes comments, minifies inline CSS/JS
+   - Creates timestamped backup: `index.html.backup-pre-minification-{timestamp}`
+   - Target: ~3% size reduction (70KB from 2.4MB file)
+
+**Note:** Always run `npm run build:prod` before deploying to ensure all optimizations are applied.
 
 ### Deployment
 The site auto-deploys to GitHub Pages on git push to `main` branch.
@@ -37,21 +59,29 @@ The site auto-deploys to GitHub Pages on git push to `main` branch.
 ## Architecture
 
 ### File Structure
-- **index.html** - Main SPA (~22k lines, includes most content inline for performance)
+- **index.html** - Main SPA (~2.4MB, includes most content inline for performance)
 - **script.js** - Interactive features: calendar system, scroll animations, metrics counters (~700 lines)
 - **style.css** - Legacy custom styles (549 lines, pre-Tailwind code)
 - **src/input.css** - Tailwind v4 source file with custom animations and component styles
-- **output.css** - Compiled Tailwind output (generated, not in git)
-- **server.js** - Express server (port 5000) with redirect middleware
-- **middleware/forceHttpsWww.js** - Redirect logic for apex → www and HTTP → HTTPS
-- **attached_assets/** - Images and screenshots (timestamped filenames)
+- **output.css** - Compiled Tailwind output (generated, committed to git for GitHub Pages)
+- **server.js** - Express server (port 5000) for local development with SPA routing
+- **Build/Optimization Scripts**:
+  - **optimize-html.js** - SVG sprite consolidation (reduces repeated inline SVGs to `<use>` references)
+  - **optimize-images.js** - WebP conversion and image resizing using Sharp
+  - **minify-html.js** - HTML minification with html-minifier-terser (creates timestamped backups)
+- **attached_assets/** - Images and screenshots (timestamped filenames, some converted to WebP)
 - **Preview files**:
   - **breakthrough-preview.html** - AI evolution timeline and transformation story
   - **accident-story-preview.html** - Alternative marketing narrative
   - **preview-mobile-calendar.html** - Mobile calendar testing
   - **preview-12hr-time.html** - Time format testing
-- **netlify.toml** - Netlify configuration: redirects, headers, build settings
-- **visual-assets-implementation.md** - Design decisions and future visual enhancements
+  - **mobile-nav-preview.html** - Mobile navigation testing
+- **Documentation**:
+  - **netlify.toml** - Legacy Netlify configuration (not actively used, kept for reference)
+  - **visual-assets-implementation.md** - Design decisions and future visual enhancements
+  - **PERFORMANCE-OPTIMIZATIONS.md** - Performance optimization history and PageSpeed improvements
+  - **Design guides** - COLOR-PALETTE-REFERENCE.md, DESIGN-SUMMARY.md, breakthrough-section-design-guide.md
+  - **Form documentation** - FORM-REDESIGN-GUIDE.md, FORM-IMPLEMENTATION-CHECKLIST.md, etc.
 
 ### Clean URLs (No .html Extension)
 
@@ -165,15 +195,23 @@ observer.observe(container);
 - Container triggers animation when scrolled into view
 - Staggered entrance: 0s, 0.15s, 0.3s delays
 
-#### 4. Redirect Architecture
-Multi-layer redirect strategy ensures all traffic goes to `https://www.stellah.ai`:
-- **netlify.toml** (lines 6-31) - Netlify edge redirects with `force: true`
-  - HTTP → HTTPS (both apex and www)
-  - Apex domain → www subdomain (both HTTP and HTTPS)
-  - SPA fallback (all routes → index.html with 200 status)
-- **server.js** (lines 8-17) - Application-level apex domain check for dev server
-- **middleware/forceHttpsWww.js** - Checks `x-forwarded-proto` header for HTTPS detection
-- Redirects are 301 permanent for SEO
+#### 4. Server & SPA Routing
+**Local Development (server.js):**
+- Simple Express server serves static files from root directory
+- Wildcard route (`app.get('*')`) serves `index.html` for all non-.html paths
+- Supports clean URLs and SPA routing during development
+- Port 5000, listens on `0.0.0.0` for Replit/cloud environments
+
+**Production (GitHub Pages):**
+- Static file hosting with automatic HTTPS and CDN
+- Custom domain: `www.stellah.ai` (configured via CNAME file)
+- `404.html` handles SPA routing via JavaScript redirect to index.html
+- DNS: Apex domain (`stellah.ai`) redirects to www subdomain
+
+**Legacy Redirect Configuration (netlify.toml):**
+- Kept for reference but not actively used
+- Contains HTTP→HTTPS and apex→www redirect rules
+- Security headers: X-Frame-Options, X-Content-Type-Options
 
 #### 5. Mobile-First Responsive Design
 - All major sections have mobile layouts (vertical timelines, stacked cards)
@@ -327,8 +365,31 @@ Preview files are standalone HTML files for testing specific features:
 - Current previews:
   - `breakthrough-preview.html` - AI transformation story (main marketing narrative)
   - `accident-story-preview.html` - Alternative accident prevention story
-  - `preview-mobile-calendar.html` - Calendar mobile layout testing
+  - `preview-mobile-calendar.html` - Mobile calendar testing
   - `preview-12hr-time.html` - Time format testing
+  - `mobile-nav-preview.html` - Mobile navigation testing
+
+### Running HTML Optimizations
+The `optimize-html.js` script consolidates repeated SVG icons into reusable sprite symbols:
+
+**What it does:**
+1. Creates SVG sprite definitions (inbox, clock, location, sparkle icons)
+2. Replaces ~200+ repeated inline SVG elements with `<use href="#icon-name"/>` references
+3. Adds CSS classes for calendar event initial states
+4. Reduces HTML size by eliminating SVG duplication
+
+**When to run:**
+- After adding new repeated SVG icons to the page
+- As part of `npm run build:prod` before deployment
+- When you notice many duplicate inline SVGs in the HTML
+
+**How it works:**
+```bash
+node optimize-html.js
+# Output: "✅ Replaced 47 inbox icons, 35 clock icons..." etc.
+```
+
+The script directly modifies `index.html` in place. Backup files are created by `minify-html.js`, not this script.
 
 ### Adding New Sections
 When adding content sections:
@@ -353,22 +414,34 @@ This narrative structure is core to the site's effectiveness. Visual elements ar
 - Progressive cards (reveal detailed "after" state on interaction)
 
 ### Security Headers
-The site implements strict security headers in `netlify.toml` (lines 34-38):
+Security headers are configured in `netlify.toml` (legacy, for reference):
 - `X-Frame-Options: DENY` - Prevents clickjacking/embedding
 - `X-Content-Type-Options: nosniff` - Prevents MIME type confusion
 
+**Note:** GitHub Pages doesn't use `netlify.toml`. Security headers on production should be verified via browser DevTools or security header checkers.
+
 When adding external resources:
 - Update CSP in `<meta>` tags within `index.html` if needed
-- Test that new assets load correctly with security headers
+- Add DNS prefetch hints for third-party domains (Google Tag Manager, Analytics, etc.)
 - Prefer same-origin resources to avoid CORS issues
 
 ### Performance Considerations
-- Target: <200ms additional load time for animations/interactions
-- All animations use hardware-accelerated properties (transform, opacity) for 60fps
-- Intersection Observer API used for scroll-triggered animations (efficient, low reflow)
-- Large inline HTML (~2.4MB) trades file size for fewer HTTP requests
-- Images in `attached_assets/` are PNG/JPG screenshots (consider WebP conversion for performance)
-- Tailwind output is minified in production (--minify flag)
+- **Target:** <200ms additional load time for animations/interactions
+- **Animation Performance:** All animations use hardware-accelerated properties (transform, opacity) for 60fps
+- **Scroll Performance:** Intersection Observer API for efficient scroll-triggered animations (low reflow)
+- **File Size Strategy:** Large inline HTML (~2.4MB) trades file size for fewer HTTP requests
+- **Image Optimization:**
+  - Run `npm run optimize-images` to convert PNG/JPG to WebP (99%+ size reduction)
+  - Profile image optimized: 1.18MB PNG → 3.56KB WebP
+  - Use `<picture>` elements with WebP sources and fallbacks
+- **HTML Optimization:**
+  - Run `npm run minify-html` before deployment (~3% size reduction)
+  - SVG sprite consolidation via `optimize-html.js` (reduces repeated inline SVGs)
+  - Inline CSS/JS minification included
+- **CSS Optimization:** Tailwind output minified in production (--minify flag, ~120KB)
+- **Third-Party Resources:** DNS prefetch hints for Google Tag Manager, Analytics, Unsplash
+
+**PageSpeed Baseline:** Mobile performance improved from 33/100 to 50-60+ after optimizations (see PERFORMANCE-OPTIMIZATIONS.md)
 
 ### Git Workflow
 Recent commits focus on mobile optimization and performance:

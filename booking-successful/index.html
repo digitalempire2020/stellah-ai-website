@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Appointment Confirmed | Stellah AI</title>
+    <meta name="description" content="Your appointment has been confirmed. We look forward to showing you how Stellah AI can transform your medical practice.">
+
+    <!-- Tailwind CSS -->
+    <link href="../output.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .font-sans {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        }
+        .font-geist {
+            font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes circleGrow {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-scaleIn {
+            animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .checkmark-path {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+        }
+
+        .checkmark-circle {
+            animation: circleGrow 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+            opacity: 0;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .delay-500 {
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        .gradient-orange {
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+        }
+    </style>
+</head>
+<body class="font-sans bg-stone-50 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="max-w-2xl w-full">
+
+        <!-- Success Icon -->
+        <div class="flex justify-center mb-8 animate-scaleIn">
+            <div class="relative">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Circle -->
+                    <circle class="checkmark-circle" cx="60" cy="60" r="54" fill="#FF7A45" fill-opacity="0.1" stroke="#FF7A45" stroke-width="2"/>
+                    <!-- Checkmark -->
+                    <path class="checkmark-path" d="M35 60 L52 77 L85 44" stroke="#FF7A45" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 sm:p-12 animate-fadeInUp delay-200">
+
+            <!-- Heading -->
+            <div class="text-center mb-8">
+                <h1 class="font-geist font-normal tracking-tight text-3xl sm:text-4xl text-stone-900 mb-3">
+                    Thank You for Booking!
+                </h1>
+                <p class="text-lg text-stone-600">
+                    Your appointment has been confirmed
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <div class="w-20 h-1 gradient-orange mx-auto rounded-full mb-8"></div>
+
+            <!-- Confirmation Details -->
+            <div class="mb-8 animate-fadeInUp delay-300">
+                <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+                    <h2 class="font-geist font-semibold tracking-tight text-xl text-stone-900 mb-4">
+                        What Happens Next?
+                    </h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-[#FF7A45] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            <span class="text-stone-700">
+                                <strong class="font-semibold text-stone-900">Confirmation email</strong> sent to your inbox with appointment details
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-[#FF7A45] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            <span class="text-stone-700">
+                                <strong class="font-semibold text-stone-900">Calendar invite</strong> added so you don't miss the demo
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-[#FF7A45] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                            <span class="text-stone-700">
+                                <strong class="font-semibold text-stone-900">Reminder notification</strong> 24 hours before your scheduled time
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-[#FF7A45] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span class="text-stone-700">
+                                <strong class="font-semibold text-stone-900">Personalized demo</strong> prepared based on your practice's needs
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- What to Expect -->
+            <div class="mb-8 animate-fadeInUp delay-400">
+                <h3 class="font-geist font-semibold tracking-tight text-lg text-stone-900 mb-3">
+                    During Your Demo
+                </h3>
+                <p class="text-stone-700 mb-3">
+                    We'll show you exactly how Stellah AI's three specialized assistants can help your practice:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-lg p-4 border border-orange-200">
+                        <div class="text-2xl mb-2">📅</div>
+                        <div class="font-semibold text-stone-900 text-sm">Auto-Schedule</div>
+                        <div class="text-xs text-stone-600 mt-1">Appointments booked 24/7</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-lg p-4 border border-orange-200">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <div class="font-semibold text-stone-900 text-sm">Smart Qualify</div>
+                        <div class="text-xs text-stone-600 mt-1">High-value leads identified</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-lg p-4 border border-orange-200">
+                        <div class="text-2xl mb-2">🔄</div>
+                        <div class="font-semibold text-stone-900 text-sm">Follow-Up Master</div>
+                        <div class="text-xs text-stone-600 mt-1">Never lose a lead again</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp delay-500">
+                <a href="/" class="flex-1 text-center gradient-orange text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Return to Home
+                </a>
+                <a href="mailto:support@stellah.ai" class="flex-1 text-center bg-stone-100 text-stone-900 font-semibold py-3 px-6 rounded-lg hover:bg-stone-200 transition-all duration-300 border border-stone-300">
+                    Contact Support
+                </a>
+            </div>
+
+            <!-- Footer Note -->
+            <div class="mt-8 pt-6 border-t border-stone-200 text-center animate-fadeInUp delay-500">
+                <p class="text-sm text-stone-500">
+                    Need to reschedule? Reply to your confirmation email or contact us at
+                    <a href="mailto:support@stellah.ai" class="text-[#FF7A45] hover:text-[#EA580C] font-semibold">support@stellah.ai</a>
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Trust Badge -->
+        <div class="text-center mt-8 animate-fadeInUp delay-500">
+            <p class="text-stone-600 text-sm">
+                Join 100+ medical practices already using Stellah AI
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Navigation Preview - Stellah AI</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Typography */
+        .font-sans {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+        .font-geist {
+            font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        }
+
+        /* Mobile Navigation Styles */
+        .header-sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Hamburger Menu Styles */
+        .hamburger {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: #1f2937;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: 0.25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 8px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 16px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        /* Slide-out Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 60;
+            transition: right 0.3s ease-in-out;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 55;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Touch-optimized menu items */
+        .menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            min-height: 48px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 16px;
+            color: #1f2937;
+            text-decoration: none;
+            position: relative;
+            transition: background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-item:active {
+            background-color: #f3f4f6;
+        }
+
+        /* Quick Jump Navigation */
+        .quick-nav {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 40;
+        }
+
+        .quick-nav-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: #FF7A45;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 122, 69, 0.4);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s;
+        }
+
+        .quick-nav-button:active {
+            transform: scale(0.95);
+        }
+
+        .quick-nav-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transform-origin: bottom right;
+            transform: scale(0);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .quick-nav-menu.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .quick-nav-item {
+            display: block;
+            padding: 12px 16px;
+            min-width: 180px;
+            white-space: nowrap;
+            color: #1f2937;
+            text-decoration: none;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .quick-nav-item:last-child {
+            border-bottom: none;
+        }
+
+        .quick-nav-item:active {
+            background-color: #f3f4f6;
+        }
+
+        /* Bottom CTA Bar */
+        .bottom-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 12px 16px;
+            z-index: 45;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .bottom-cta.visible {
+            transform: translateY(0);
+        }
+
+        .cta-button {
+            width: 100%;
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Touch-optimized cards */
+        .touch-card {
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 16px;
+            position: relative;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s;
+        }
+
+        .touch-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .touch-card.expanded {
+            background: #f9fafb;
+        }
+
+        .touch-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .touch-card.expanded .touch-card-content {
+            max-height: 500px;
+            padding-top: 12px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 35;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .back-to-top:active {
+            transform: scale(0.9);
+        }
+
+        /* Ensure content doesn't hide under fixed header */
+        .content-wrapper {
+            padding-top: 80px;
+        }
+
+        /* Progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #FF7A45 0%, #EA580C 100%);
+            z-index: 51;
+            transition: width 0.2s ease;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-stone-900 bg-stone-50">
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" style="width: 0%"></div>
+
+    <!-- Sticky Header -->
+    <header class="header-sticky bg-white" id="stickyHeader">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-orange-500/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                        <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
+                </span>
+                <span class="font-geist font-semibold text-lg tracking-tight">Stellah AI</span>
+            </div>
+
+            <!-- Desktop Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="#why-stellah" class="text-sm text-stone-600 hover:text-stone-900 transition-colors">Why Stellah</a>
+                <a href="#how-it-works" class="text-sm text-stone-600 hover:text-stone-900 transition-colors">How It Works</a>
+                <a href="#success-stories" class="text-sm text-stone-600 hover:text-stone-900 transition-colors">Success Stories</a>
+                <a href="#live-demo" class="text-sm text-stone-600 hover:text-stone-900 transition-colors">Live Demo</a>
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors">
+                    Get Started
+                </button>
+            </nav>
+
+            <!-- Hamburger Menu Button (mobile only) -->
+            <button class="hamburger mobile-only" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Slide-out Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="p-6 border-b border-stone-200">
+            <h2 class="font-geist font-semibold text-xl tracking-tight">Menu</h2>
+        </div>
+        <div>
+            <a href="#hero" class="menu-item">Home</a>
+            <a href="#why-stellah" class="menu-item">Why Stellah</a>
+            <a href="#how-it-works" class="menu-item">How It Works</a>
+            <a href="#success-stories" class="menu-item">Success Stories</a>
+            <a href="#live-demo" class="menu-item">Live Demo</a>
+            <a href="#get-started" class="menu-item">Get Started</a>
+        </div>
+        <div class="p-6">
+            <button class="cta-button" onclick="bookDemo()">
+                Book Your Free Demo
+            </button>
+        </div>
+    </nav>
+
+    <!-- Quick Jump Navigation -->
+    <div class="quick-nav mobile-only">
+        <div class="quick-nav-menu" id="quickNavMenu">
+            <a href="#hero" class="quick-nav-item">🏠 Home</a>
+            <a href="#why-stellah" class="quick-nav-item">🎯 Why Stellah</a>
+            <a href="#how-it-works" class="quick-nav-item">⚙️ How It Works</a>
+            <a href="#success-stories" class="quick-nav-item">⭐ Success Stories</a>
+            <a href="#live-demo" class="quick-nav-item">🎬 Live Demo</a>
+        </div>
+        <button class="quick-nav-button" id="quickNavBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Bottom CTA Bar (Mobile Only) -->
+    <div class="bottom-cta mobile-only" id="bottomCTA">
+        <button class="cta-button" onclick="bookDemo()">
+            Book Your Demo - Save $3,000
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="content-wrapper">
+
+        <!-- Hero Section -->
+        <section id="hero" class="px-4 py-12 max-w-5xl mx-auto">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-geist font-normal tracking-tight mb-6">
+                Medical Practices Are <span class="text-orange-500">Drowning</span> in 2,000+ Monthly Leads
+            </h1>
+            <p class="text-lg text-stone-700 mb-8">
+                Your staff can't respond fast enough. Patients book elsewhere. You're losing $50,000+ monthly while paying 4 people to fail.
+            </p>
+            <button class="cta-button max-w-sm" onclick="bookDemo()">
+                See How We Fix This →
+            </button>
+        </section>
+
+        <!-- Why Stellah Section with Touch Cards -->
+        <section id="why-stellah" class="px-4 py-12 bg-white">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-8">
+                    The Brutal Reality
+                </h2>
+
+                <!-- Touch-optimized expandable cards -->
+                <div class="touch-card" onclick="toggleCard(this)">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-lg">📱 6-Hour Response Time</h3>
+                        <svg class="w-5 h-5 text-stone-400 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="touch-card-content">
+                        <p class="text-stone-700">
+                            While your staff handles current patients, new leads wait hours. By the time you respond, they've already booked with your competitor who replied in 5 minutes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="touch-card" onclick="toggleCard(this)">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-lg">💸 40% Show Rate</h3>
+                        <svg class="w-5 h-5 text-stone-400 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="touch-card-content">
+                        <p class="text-stone-700">
+                            More than half your booked appointments never show up. Each no-show costs $500+ in lost revenue and wasted staff time.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="touch-card" onclick="toggleCard(this)">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-lg">😓 Staff Burnout</h3>
+                        <svg class="w-5 h-5 text-stone-400 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="touch-card-content">
+                        <p class="text-stone-700">
+                            Your team juggles WhatsApp, Instagram, phone calls, and walk-ins simultaneously. They're overwhelmed, making mistakes, and considering quitting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="px-4 py-12">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-8">
+                    Enter Stellah's 3 AI Specialists
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- AI Agent Cards (touch-optimized) -->
+                    <div class="touch-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0">
+                                S
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">The Scheduler</h3>
+                                <p class="text-stone-700 text-sm">
+                                    Responds in 15 seconds, books appointments directly into your calendar, sends confirmations. Never sleeps, never takes breaks.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="touch-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0">
+                                Q
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">The Qualifier</h3>
+                                <p class="text-stone-700 text-sm">
+                                    Pre-screens every lead, identifies insurance, understands needs. Only sends qualified, ready-to-buy patients to your team.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="touch-card">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0">
+                                F
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">The Follow-Up Master</h3>
+                                <p class="text-stone-700 text-sm">
+                                    Nurtures leads for 90 days, sends appointment reminders, re-engages dropped conversations. Turns "maybe later" into booked appointments.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories Section -->
+        <section id="success-stories" class="px-4 py-12 bg-white">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-8">
+                    90-Day Transformation
+                </h2>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="text-center p-4 bg-stone-50 rounded-lg">
+                        <div class="text-3xl font-bold text-orange-500 mb-1">15s</div>
+                        <div class="text-sm text-stone-700">Response Time</div>
+                    </div>
+                    <div class="text-center p-4 bg-stone-50 rounded-lg">
+                        <div class="text-3xl font-bold text-orange-500 mb-1">72%</div>
+                        <div class="text-sm text-stone-700">Show Rate</div>
+                    </div>
+                    <div class="text-center p-4 bg-stone-50 rounded-lg">
+                        <div class="text-3xl font-bold text-orange-500 mb-1">$114K</div>
+                        <div class="text-sm text-stone-700">Cost Savings</div>
+                    </div>
+                    <div class="text-center p-4 bg-stone-50 rounded-lg">
+                        <div class="text-3xl font-bold text-orange-500 mb-1">$97K</div>
+                        <div class="text-sm text-stone-700">New Revenue</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Demo Section -->
+        <section id="live-demo" class="px-4 py-12">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-4">
+                    See Stellah in Action
+                </h2>
+                <p class="text-stone-700 mb-8">
+                    Watch how our AI handles real patient conversations
+                </p>
+
+                <!-- Placeholder for demo -->
+                <div class="bg-stone-100 rounded-lg p-12">
+                    <p class="text-stone-500">Demo Video Placeholder</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="px-4 py-12 bg-white">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-8">
+                    Common Questions
+                </h2>
+
+                <div class="space-y-4">
+                    <div class="touch-card" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold">Will patients know it's AI?</h3>
+                            <svg class="w-5 h-5 text-stone-400 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="touch-card-content">
+                            <p class="text-stone-700">
+                                Stellah responds naturally using your clinic's voice. Patients care about getting quick answers, not who's typing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="touch-card" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold">What about my staff?</h3>
+                            <svg class="w-5 h-5 text-stone-400 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="touch-card-content">
+                            <p class="text-stone-700">
+                                Stellah handles repetitive tasks so your staff can focus on high-value patient care. They'll thank you for the help.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Started Section -->
+        <section id="get-started" class="px-4 py-12 mb-20">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-2xl sm:text-3xl font-geist font-normal tracking-tight mb-4">
+                    Ready to Transform Your Practice?
+                </h2>
+                <p class="text-stone-700 mb-8">
+                    Join 200+ medical practices already using Stellah
+                </p>
+                <button class="cta-button max-w-sm mx-auto" onclick="bookDemo()">
+                    Book Your Free Demo Today
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Sticky header scroll behavior
+        let lastScroll = 0;
+        const header = document.getElementById('stickyHeader');
+        const bottomCTA = document.getElementById('bottomCTA');
+        const backToTopBtn = document.getElementById('backToTop');
+        const scrollProgress = document.querySelector('.scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            // Header shrink on scroll
+            if (currentScroll > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+
+            // Show bottom CTA after scrolling past hero
+            if (currentScroll > 500) {
+                bottomCTA.classList.add('visible');
+            } else {
+                bottomCTA.classList.remove('visible');
+            }
+
+            // Show back to top button
+            if (currentScroll > 800) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+
+            // Update scroll progress
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (currentScroll / scrollHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+
+            lastScroll = currentScroll;
+        });
+
+        // Hamburger menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        menuOverlay.addEventListener('click', () => {
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Quick navigation toggle
+        const quickNavBtn = document.getElementById('quickNavBtn');
+        const quickNavMenu = document.getElementById('quickNavMenu');
+
+        quickNavBtn.addEventListener('click', () => {
+            quickNavMenu.classList.toggle('active');
+        });
+
+        // Close quick nav when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.quick-nav')) {
+                quickNavMenu.classList.remove('active');
+            }
+        });
+
+        // Close quick nav when clicking a link
+        document.querySelectorAll('.quick-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                quickNavMenu.classList.remove('active');
+            });
+        });
+
+        // Back to top functionality
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Touch card toggle
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+            const icon = card.querySelector('svg');
+            if (icon) {
+                icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : '';
+            }
+        }
+
+        // Book demo function
+        function bookDemo() {
+            // In production, this would open the booking modal or redirect
+            alert('Book Demo functionality would go here');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80; // Account for sticky header
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add touch feedback for all clickable elements
+        document.querySelectorAll('button, a, .touch-card').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.opacity = '0.8';
+            });
+            element.addEventListener('touchend', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -50,7 +50,14 @@
       "Bash(pkill:*)",
       "WebFetch(domain:pagespeed.web.dev)",
       "Bash(git ls-tree:*)",
-      "Bash(killall node:*)"
+      "Bash(killall node:*)",
+      "Read(///**)",
+      "Bash(node /home/runner/workspace/optimize-html.js:*)",
+      "Bash(echo:*)",
+      "Bash(node -c /home/runner/workspace/index.html)",
+      "Bash(netstat:*)",
+      "Bash(ss:*)",
+      "Bash(node -c:*)"
     ],
     "deny": [],
     "ask": []
