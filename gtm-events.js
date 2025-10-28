@@ -91,28 +91,28 @@
     }
 
     // ============================================
-    // 2. CTA BUTTON TRACKING
+    // 2. BUTTON TRACKING (With Specific Labels)
     // ============================================
 
     /**
-     * Track "Book Demo" CTA clicks
+     * Generic button click tracking with descriptive labels
      */
-    window.trackBookDemoClick = function(location) {
-        pushEvent('cta_click', {
-            'cta_name': 'Book Demo',
-            'cta_location': location, // 'hero', 'middle', 'bottom', 'nav'
-            'cta_type': 'primary'
+    window.trackButtonClick = function(buttonName, buttonLocation, buttonType) {
+        pushEvent('button_click', {
+            'button_name': buttonName,      // e.g., "Book Demo", "Show More FAQ"
+            'button_location': buttonLocation, // e.g., "Hero Section", "FAQ Section"
+            'button_type': buttonType || 'cta'  // 'cta', 'navigation', 'interaction'
         });
     };
 
     /**
-     * Track Dashboard view clicks
+     * Track navigation link clicks
      */
-    window.trackDashboardClick = function() {
-        pushEvent('cta_click', {
-            'cta_name': 'View Dashboard',
-            'cta_location': 'hero_credibility',
-            'cta_type': 'secondary'
+    window.trackNavLinkClick = function(linkText, linkDestination) {
+        pushEvent('nav_click', {
+            'link_text': linkText,           // e.g., "FAQ", "Features", "Pricing"
+            'link_destination': linkDestination, // e.g., "#faq", "#features"
+            'click_type': 'navigation'
         });
     };
 

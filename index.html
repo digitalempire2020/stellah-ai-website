@@ -540,9 +540,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <span class="font-geist text-xl tracking-tight text-stone-900">Stellah AI</span>
  </a>
  <nav class="flex items-center gap-4 sm:gap-8">
- <a href="#breakthrough" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Process</a>
- <a href="#results" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Results</a>
- <a href="#faq" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">FAQ</a>
+ <a href="#breakthrough" onclick="if(typeof trackNavLinkClick === 'function') trackNavLinkClick('Process', '#breakthrough');" class="transition hover:text-stone-900 text-xs sm:text-sm text-stone-600">Process</a>
+ <a href="#results" onclick="if(typeof trackNavLinkClick === 'function') trackNavLinkClick('Results', '#results');" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">Results</a>
+ <a href="#faq" onclick="if(typeof trackNavLinkClick === 'function') trackNavLinkClick('FAQ', '#faq');" class="text-xs sm:text-sm transition text-stone-600 hover:text-stone-900">FAQ</a>
  </nav>
  <div class="hidden lg:block">
  <span class="text-xs text-orange-600 font-medium">Only 2 spots remaining this month</span>
@@ -20182,7 +20182,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  </div>
  </div>
  <div class="flex items-center justify-center mt-8">
- <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal(); return false;" class="inline-flex items-center justify-center sm:text-base transition text-sm font-semibold tracking-tight text-white rounded-full pt-3 pr-5 pb-3 pl-5 shadow-sm" style="background-color: #ff7d00;" onmouseover="this.style.backgroundColor='#e67000'" onmouseout="this.style.backgroundColor='#ff7d00'">BOOK A LIVE DEMO</a>
+ <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal('Hero Section'); return false;" class="inline-flex items-center justify-center sm:text-base transition text-sm font-semibold tracking-tight text-white rounded-full pt-3 pr-5 pb-3 pl-5 shadow-sm" style="background-color: #ff7d00;" onmouseover="this.style.backgroundColor='#e67000'" onmouseout="this.style.backgroundColor='#ff7d00'">BOOK A LIVE DEMO</a>
  </div>
  </div>
  </div>
@@ -21313,7 +21313,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 See how Stellah handles real patient conversations — no flowcharts, no scripts, just intelligent automation.
             </p>
             <div class="flex justify-center">
-                <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal(); return false;" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center">
+                <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal('Middle CTA - Watch AI'); return false;" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center">
                     Watch AI in Action
                 </a>
             </div>
@@ -22286,7 +22286,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  <p class="mt-6 text-stone-700">Your competitor (that chain expanding aggressively?) inquired yesterday.</p>
  <p class="mt-2 font-medium text-stone-900">If they implement first, they'll have an operational advantage you can't match without doubling your payroll.</p>
  <div class="mt-8">
- <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal(); return false;" class="inline-flex items-center justify-center transition text-lg font-semibold tracking-tight text-white rounded-full pt-4 pr-8 pb-4 pl-8 shadow-sm" style="background-color: #ff7d00;" onmouseover="this.style.backgroundColor='#e67000'" onmouseout="this.style.backgroundColor='#ff7d00'">BOOK A LIVE DEMO</a>
+ <a href="https://api.leadconnectorhq.com/widget/form/sbDZ68KbvhNSNVgdlYAI" onclick="openBookDemoModal('Final CTA - Operations Directors'); return false;" class="inline-flex items-center justify-center transition text-lg font-semibold tracking-tight text-white rounded-full pt-4 pr-8 pb-4 pl-8 shadow-sm" style="background-color: #ff7d00;" onmouseover="this.style.backgroundColor='#e67000'" onmouseout="this.style.backgroundColor='#ff7d00'">BOOK A LIVE DEMO</a>
  <p class="mt-3 text-sm text-stone-600 italic">For Operations Directors ready to transform their team's potential</p>
  </div>
  <div class="mt-8 border-t pt-6 border-stone-200"></div>
@@ -22540,10 +22540,10 @@ function toggleAccordion(button) {
  const content = button.nextElementSibling;
  const chevron = button.querySelector('[data-lucide="chevron-down"]');
  if (content.classList.contains('hidden')) {
- // Track accordion open
+ // Track FAQ accordion open with specific question
  const questionText = button.querySelector('h3')?.textContent || button.textContent;
- if (typeof trackAccordionOpen === 'function') {
-   trackAccordionOpen(questionText);
+ if (typeof trackButtonClick === 'function') {
+   trackButtonClick('FAQ: ' + questionText.substring(0, 50), 'FAQ Section', 'accordion');
  }
  content.classList.remove('hidden');
  chevron.style.transform = 'rotate(180deg)';
@@ -22560,6 +22560,11 @@ function toggleMoreFAQs() {
  const buttonText = button.querySelector('span');
 
  if (moreFAQs.classList.contains('hidden')) {
+  // Track Show More FAQ button click
+  if (typeof trackButtonClick === 'function') {
+    trackButtonClick('Show More FAQ', 'FAQ Section', 'interaction');
+  }
+
   // Show more FAQs
   moreFAQs.classList.remove('hidden');
   buttonText.textContent = 'Show Less FAQs';
@@ -23022,13 +23027,15 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===================================
 
 // Open modal function
-function openBookDemoModal() {
-  // Track modal open and CTA click
+function openBookDemoModal(buttonLocation) {
+  // Track Book Demo button click with specific location
+  if (typeof trackButtonClick === 'function') {
+    trackButtonClick('Book Demo', buttonLocation || 'Unknown Location', 'cta');
+  }
+
+  // Track modal open
   if (typeof trackModalInteraction === 'function') {
     trackModalInteraction('Book Demo Modal', 'open');
-  }
-  if (typeof trackFormLoad === 'function') {
-    trackFormLoad();
   }
 
   const modal = document.getElementById('bookDemoModal');
