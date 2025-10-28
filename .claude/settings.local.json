@@ -57,7 +57,8 @@
       "Bash(node -c /home/runner/workspace/index.html)",
       "Bash(netstat:*)",
       "Bash(ss:*)",
-      "Bash(node -c:*)"
+      "Bash(node -c:*)",
+      "Bash(git remote:*)"
     ],
     "deny": [],
     "ask": []
