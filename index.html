@@ -22540,6 +22540,11 @@ function toggleAccordion(button) {
  const content = button.nextElementSibling;
  const chevron = button.querySelector('[data-lucide="chevron-down"]');
  if (content.classList.contains('hidden')) {
+ // Track accordion open
+ const questionText = button.querySelector('h3')?.textContent || button.textContent;
+ if (typeof trackAccordionOpen === 'function') {
+   trackAccordionOpen(questionText);
+ }
  content.classList.remove('hidden');
  chevron.style.transform = 'rotate(180deg)';
  } else {
@@ -22584,10 +22589,23 @@ function toggleMoreFAQs() {
 }
 
 function showDashboard() {
+ // Track dashboard CTA click
+ if (typeof trackDashboardClick === 'function') {
+   trackDashboardClick();
+ }
+ if (typeof trackModalInteraction === 'function') {
+   trackModalInteraction('Dashboard Modal', 'open');
+ }
+
  document.getElementById('dashboard-modal').classList.remove('hidden');
  document.body.style.overflow = 'hidden';
 }
 function hideDashboard() {
+ // Track dashboard close
+ if (typeof trackModalInteraction === 'function') {
+   trackModalInteraction('Dashboard Modal', 'close');
+ }
+
  document.getElementById('dashboard-modal').classList.add('hidden');
  document.body.style.overflow = 'auto';
 }
@@ -22919,6 +22937,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Progressive Card Toggle Function
 function toggleCard(card) {
  if (window.innerWidth < 1024) { // Only for mobile/tablet
+ // Track card expansion if it's being expanded (not collapsed)
+ if (!card.classList.contains('expanded')) {
+   const cardTitle = card.querySelector('h3')?.textContent || 'Unknown Card';
+   if (typeof trackCardExpansion === 'function') {
+     trackCardExpansion(cardTitle);
+   }
+ }
  card.classList.toggle('expanded');
  }
 }
@@ -22998,6 +23023,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Open modal function
 function openBookDemoModal() {
+  // Track modal open and CTA click
+  if (typeof trackModalInteraction === 'function') {
+    trackModalInteraction('Book Demo Modal', 'open');
+  }
+  if (typeof trackFormLoad === 'function') {
+    trackFormLoad();
+  }
+
   const modal = document.getElementById('bookDemoModal');
   if (!modal) return;
 
@@ -23019,6 +23052,11 @@ function openBookDemoModal() {
 
 // Close modal function
 function closeBookDemoModal() {
+  // Track modal close
+  if (typeof trackModalInteraction === 'function') {
+    trackModalInteraction('Book Demo Modal', 'close');
+  }
+
   const modal = document.getElementById('bookDemoModal');
   if (!modal) return;
 
@@ -23258,5 +23296,8 @@ window.addEventListener('load', function() {
   });
 })();
 </script>
+
+<!-- GTM Custom Event Tracking -->
+<script src="gtm-events.js"></script>
 
 </body></html>
