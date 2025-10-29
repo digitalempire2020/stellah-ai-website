@@ -187,7 +187,7 @@ Configure tracking inside LeadConnector's dashboard:
 - **gtm-events.js** - Core funnel tracking script
 - **quiz-before-demo/index.html** - Added tracking script
 - **calendar/index.html** - Added tracking script
-- **booking-successful/index.html** - Added tracking script
+- **successful-booking/index.html** - Added tracking script
 
 All scripts reference: `../gtm-events.js`
 

@@ -448,7 +448,7 @@ After setup, verify everything works:
 3. Check: `button_name` parameter shows "Book Demo" ✅
 
 **Test 3: Conversion Tracking**
-1. Visit `/booking-successful` page
+1. Visit `/successful-booking` page
 2. Check GA4 Real-time: See `demo_booked` event ✅
 3. Go to GA4 → Conversions: See count increase ✅
 

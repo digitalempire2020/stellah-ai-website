@@ -156,13 +156,13 @@ GTM Preview shows:
 ```
 
 ```
-Visit: /booking-successful
+Visit: /successful-booking
 GTM Preview shows:
   Event: funnel_step
   funnel_name: "Demo Booking Funnel"
   step_number: 4
   step_name: "Booking Completed"
-  page_path: "/booking-successful"
+  page_path: "/successful-booking"
 
 PLUS:
   Event: conversion
@@ -205,7 +205,7 @@ PLUS:
 2. Look for: `funnel_step` with `step_number: 2`
 3. Visit: `/calendar`
 4. Look for: `funnel_step` with `step_number: 3`
-5. Visit: `/booking-successful`
+5. Visit: `/successful-booking`
 6. Look for: TWO events: `funnel_step` (step 4) + `conversion`
 
 ---

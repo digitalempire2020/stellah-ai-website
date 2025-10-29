@@ -58,7 +58,15 @@
       "Bash(netstat:*)",
       "Bash(ss:*)",
       "Bash(node -c:*)",
-      "Bash(git remote:*)"
+      "Bash(git remote:*)",
+      "Bash(for file in ./successful-booking/index.html ./calendar/index.html ./quiz-before-demo/index.html ./sales-dashboard/index.html ./404.html)",
+      "Bash(do echo \"\")",
+      "Bash(if grep -q \"GTM-PNJW4X5S\" \"$file\")",
+      "Bash(then echo \"✅ GTM Found\")",
+      "Bash(else echo \"❌ GTM Missing\")",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []

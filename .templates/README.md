@@ -24,7 +24,7 @@ grep -q "GTM-PNJW4X5S" your-page.html && echo "✅ GTM Found" || echo "❌ GTM M
 ### Current Pages with GTM Installed
 
 ✅ `index.html` (main site)
-✅ `booking-successful/index.html` (thank you page)
+✅ `successful-booking/index.html` (thank you page)
 ✅ `calendar/index.html` (booking calendar)
 ✅ `quiz-before-demo/index.html` (pre-demo quiz)
 ✅ `sales-dashboard/index.html` (demo dashboard)

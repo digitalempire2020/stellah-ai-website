@@ -71,7 +71,7 @@
         }
 
         // Step 4: Thank You Page - CONVERSION
-        else if (path.includes('/booking-successful') || path.includes('/thank-you')) {
+        else if (path.includes('/successful-booking') || path.includes('/thank-you')) {
             trackFunnelStep(4, 'Booking Completed', path);
             trackConversion('demo_booked');
             console.log('✅ Funnel: Conversion - Thank you page reached!');
